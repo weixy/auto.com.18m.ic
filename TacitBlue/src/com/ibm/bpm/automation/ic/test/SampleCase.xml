@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testCase>
+	<title>SampleTest01</title>
+	<description></description>
+	<action>
+		<name>BPMConfigure</name>
+		<option></option>
+		<value></value>
+		<option></option>
+		<value></value>
+	</action>
+	<action>
+		<name>Validation</name>
+		<option></option>
+		<value></value>
+	</action>
+</testCase>
