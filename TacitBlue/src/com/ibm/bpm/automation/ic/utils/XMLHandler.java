@@ -11,11 +11,16 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.ibm.bpm.automation.ic.AutoException;
+import com.ibm.bpm.automation.ic.TestCase;
 
 public class XMLHandler extends DefaultHandler {
 
+	private TestCase testCase;
+	private StringBuffer textBuffer;
 	
 	public XMLHandler(String filename, HashMap<String, Object> configuration) throws AutoException{
+		
+		testCase = new TestCase();
 		
 		XMLReader reader;
 		// Initialize reader
@@ -52,9 +57,30 @@ public class XMLHandler extends DefaultHandler {
 	}
 
 	@Override
+	public void characters(char[] ch, int start, int length)
+			throws SAXException {
+		String s = new String(ch, start, length);
+		if(null == textBuffer) {
+			textBuffer = new StringBuffer(s);
+		} else {
+			textBuffer.append(s);
+		}
+	}
+
+	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
-		// TODO Auto-generated method stub
+		String elemntName = localName;
+		
+		String txt = (" " + textBuffer).trim();
+		textBuffer = null;
+		
+		if (TestCase.TESTCASE_TITLE.equals(elemntName)) {
+			testCase.setTitle(txt);
+		} else if (TestCase.TESTCASE_DESCRIPTION.equals(elemntName)) {
+			testCase.setDescription(txt);
+		}
+		
 		System.out.println("...");
 	}
 
@@ -63,6 +89,10 @@ public class XMLHandler extends DefaultHandler {
 			Attributes attributes) throws SAXException {
 		// TODO Auto-generated method stub
 		System.out.println("Find element 'Local Name':"+ localName + ", 'QName':" + qName);
+	}
+
+	public TestCase getTestCase() {
+		return testCase;
 	}
 	
 	

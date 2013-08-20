@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testCase>
 	<title>SampleTest01</title>
-	<description></description>
+	<description>This is just a simple test case for IC automation. </description>
 	<action>
 		<name>BPMConfigure</name>
 		<option></option>

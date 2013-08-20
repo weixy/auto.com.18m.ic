@@ -7,5 +7,7 @@ public class LogUtil extends Logger {
 	protected LogUtil(String name, String resourceBundleName) {
 		super(name, resourceBundleName);
 	}
+	
+	
 
 }
