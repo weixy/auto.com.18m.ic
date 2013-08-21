@@ -9,10 +9,13 @@ import java.util.Set;
 
 public class ActionMapping {
 	
+	private static HashMap<String, String> mapping;
 
-	public static HashMap<String, Object> getMapping() throws AutoException{
+	public static HashMap<String, String> getMapping() throws AutoException{
 		
 		if (null == mapping) {
+			
+			mapping = new HashMap<String, String>();
 			
 			Properties prop = new Properties();
 			ActionMapping mappingInst = new ActionMapping();
@@ -22,15 +25,17 @@ public class ActionMapping {
 				Set keys = prop.keySet();
 				for (Iterator it = keys.iterator(); it.hasNext();) {
 					String key = (String)it.next();
-					Object cls = prop.getProperty(key);
-					System.out.println(key + ":" + cls);
+					String value = prop.getProperty(key);
+					//System.out.println(key + ":" + value);
+					
+					mapping.put(key, value);
 				}
 				
 			} catch (FileNotFoundException e) {
 				throw new AutoException("Can't find the mapping file", e);
 			} catch (IOException e) {
 				throw new AutoException("Can't load the mapping file", e);
-			}
+			} 
 		}
 		
 		return mapping;
