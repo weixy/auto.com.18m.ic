@@ -3,6 +3,7 @@ package com.ibm.bpm.automation.ic.utils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -21,7 +22,7 @@ public class XMLHandler extends DefaultHandler {
 	private StringBuffer textBuffer;
 	private boolean bActionElementStart;
 	private HashMap<String, String> actionInfo;
-	private HashMap<String, Object> actionMapping;
+	private HashMap<String, String> actionMapping;
 	
 	public XMLHandler(String filename, HashMap<String, Object> configuration) throws AutoException{
 		
@@ -55,12 +56,14 @@ public class XMLHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {
 		// TODO Auto-generated method stub
 		System.out.println("Finished parsing XML ...");
+		System.out.println(testCase.getActions());
 	}
 
 	@Override
 	public void startDocument() throws SAXException {
 		// TODO Auto-generated method stub
 		System.out.println("Start to parse XML ...");
+		System.out.println(testCase.getActions());
 	}
 
 	@Override
@@ -86,10 +89,34 @@ public class XMLHandler extends DefaultHandler {
 			testCase.setTitle(txt);
 		} else if (TestCase.TESTCASE_DESCRIPTION.equals(elemntName)) {
 			testCase.setDescription(txt);
+		} else if (TestCase.TESTCASE_ACTION_NAME.equals(elemntName) 
+				|| TestCase.TESTCASE_ACTION_OPTION.equals(elemntName)
+				|| TestCase.TESTCASE_ACTION_VALUE.equals(elemntName)) {
+			actionInfo.put(elemntName, txt);
 		} else if (TestCase.TESTCASE_ACTION.equals(elemntName)) {
 			bActionElementStart = false;
-		} else if (TestCase.TESTCASE_ACTION_NAME.equals(elemntName)) {
-			
+			String actionName = actionInfo.get(TestCase.TESTCASE_ACTION_NAME);
+			String actionClassName = actionMapping.get(actionName);
+			try {
+				Class<?> aClass = Class.forName(actionClassName);
+				Object anObj = aClass.newInstance();
+				if(anObj instanceof Action) {
+					testCase.addAction((Action)anObj);
+				} else {
+					
+				}
+				
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		System.out.println("...");
@@ -109,8 +136,6 @@ public class XMLHandler extends DefaultHandler {
 			}
 		}
 		
-		//Action anAction = new Action();
-
 		System.out.println("Find element 'Local Name':"+ localName + ", 'QName':" + qName);
 	}
 

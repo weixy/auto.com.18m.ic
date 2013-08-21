@@ -9,7 +9,6 @@ import java.util.Set;
 
 public class ActionMapping {
 	
-	private static HashMap<String, Object> mapping;
 
 	public static HashMap<String, Object> getMapping() throws AutoException{
 		
