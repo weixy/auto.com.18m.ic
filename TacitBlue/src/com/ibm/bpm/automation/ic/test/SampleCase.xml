@@ -6,11 +6,9 @@
 		<name>BPMConfigure</name>
 		<option></option>
 		<value></value>
-		<option></option>
-		<value></value>
 	</action>
 	<action>
-		<name>Validation</name>
+		<name>ValidateBPMConfigLog</name>
 		<option></option>
 		<value></value>
 	</action>
