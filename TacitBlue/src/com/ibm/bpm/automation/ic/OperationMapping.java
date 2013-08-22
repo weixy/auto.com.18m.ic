@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 
-public class ActionMapping {
+public class OperationMapping {
 	
 	private static HashMap<String, String> mapping;
 
@@ -18,10 +18,10 @@ public class ActionMapping {
 			mapping = new HashMap<String, String>();
 			
 			Properties prop = new Properties();
-			ActionMapping mappingInst = new ActionMapping();
+			OperationMapping mappingInst = new OperationMapping();
 			
 			try {
-				prop.load(mappingInst.getClass().getResourceAsStream("ActionMapping.properties"));
+				prop.load(mappingInst.getClass().getResourceAsStream("OperationMapping.properties"));
 				Set keys = prop.keySet();
 				for (Iterator it = keys.iterator(); it.hasNext();) {
 					String key = (String)it.next();

@@ -2,14 +2,17 @@
 <testCase>
 	<title>SampleTest01</title>
 	<description>This is just a simple test case for IC automation. </description>
-	<action>
+	<operation>
 		<name>BPMConfigure</name>
+		<points>10</points>
+		<action>-create</action>
+		<type>-de</type>
 		<option></option>
-		<value></value>
-	</action>
-	<action>
+		<propertiesFile>c:/ibm/abc.xml</propertiesFile>
+	</operation>
+	<operation>
 		<name>ValidateBPMConfigLog</name>
+		<action></action>
 		<option></option>
-		<value></value>
-	</action>
+	</operation>
 </testCase>

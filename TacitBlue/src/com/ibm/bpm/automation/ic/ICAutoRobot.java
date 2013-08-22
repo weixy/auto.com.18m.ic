@@ -1,6 +1,9 @@
 package com.ibm.bpm.automation.ic;
 
-public class ICAutoRobot {
+import com.ibm.bpm.automation.tap.adapter.AutomationService;
+import com.ibm.bpm.automation.tap.adapter.IScenarioStarter;
+
+public class ICAutoRobot implements IScenarioStarter{
 
 	/**
 	 * @param args
@@ -9,5 +12,13 @@ public class ICAutoRobot {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void start(AutomationService arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }
