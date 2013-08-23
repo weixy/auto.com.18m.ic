@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -18,6 +20,9 @@ import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.operations.BaseOperation;
 
 public class XMLHandler extends DefaultHandler {
+	
+	private static final String CLASSNAME = XMLHandler.class.getName();
+	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 
 	private TestCase testCase;
 	private StringBuffer textBuffer;
@@ -45,11 +50,17 @@ public class XMLHandler extends DefaultHandler {
 		try {
 			reader.parse(filename);
 		} catch (FileNotFoundException e) {
-			throw new AutoException("Can't find the file you specified", e);
+			//throw new AutoException("Can't find the file you specified: '" + filename + "'", e);
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			testCase = null;
 		} catch (IOException e) {
-			throw new AutoException("Got File IO Exception", e);
+			//throw new AutoException("Got File IO Exception", e);
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			testCase = null;
 		} catch (SAXException e) {
-			throw new AutoException("Got SAX Exception", e);
+			//throw new AutoException("Got SAX Exception", e);
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			testCase = null;
 		}
 	}
 
@@ -87,8 +98,7 @@ public class XMLHandler extends DefaultHandler {
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
+	public void endElement(String uri, String localName, String qName) {
 		String elemntName = localName;
 		
 		String txt = (" " + textBuffer).trim();
@@ -131,14 +141,11 @@ public class XMLHandler extends DefaultHandler {
 				
 				
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 		

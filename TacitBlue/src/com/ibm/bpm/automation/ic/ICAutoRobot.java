@@ -5,6 +5,9 @@ import com.ibm.bpm.automation.tap.adapter.IScenarioStarter;
 
 public class ICAutoRobot implements IScenarioStarter{
 
+	public static String ICAUTO_TESTCASE_PATH = "test";
+	public static String ICAUTO_LOG_PATH = "logs";
+	
 	/**
 	 * @param args
 	 */
