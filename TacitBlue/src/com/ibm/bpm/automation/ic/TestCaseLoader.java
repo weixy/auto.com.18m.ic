@@ -7,10 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import com.ibm.bpm.automation.ic.utils.ICAutoLogLevel;
+import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.XMLHandler;
 
 public class TestCaseLoader {
+	
+	private static final String CLASSNAME = TestCaseLoader.class.getName();
+	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
 	private TestCaseLoader() {
 		
@@ -22,7 +28,7 @@ public class TestCaseLoader {
 	}
 	
 	public static List<TestCase> loadTestCases (String folderPath) throws AutoException{
-		List<TestCase> caseList = new ArrayList<TestCase>();
+		List<TestCase> caseList = null;
 		
 		File testFolder = new File(folderPath);
 		
@@ -33,6 +39,9 @@ public class TestCaseLoader {
 			throw new AutoException("The '" + testFolder.getAbsolutePath() + "' is not a directory but a file, please check it!");
 		}
 		if (testFolder.isDirectory()) {
+			
+			caseList = new ArrayList<TestCase>();
+			
 			File indexFile = new File(testFolder.getAbsolutePath() + File.separator + "index.txt");
 			
 			if (indexFile == null || !indexFile.exists()) { // no index file, then load the cases without specific order
@@ -65,15 +74,18 @@ public class TestCaseLoader {
 					}
 					
 				} catch (FileNotFoundException e) {
-					throw new AutoException(e);
+					//throw new AutoException(e);
+					logger.log(ICAutoLogLevel.ERROR, "Can't find the file 'index.txt' while creating FileReader for it", e);
 				} catch (IOException e) {
-					throw new AutoException(e);
+					//throw new AutoException(e);
+					logger.log(ICAutoLogLevel.ERROR, "Got IO Exception while reading line from file 'index.txt'.", e);
 				} finally {
 					try {
 						br.close();
 						fr.close();
 					} catch (IOException e) {
-						throw new AutoException(e);
+						//throw new AutoException(e);
+						logger.log(ICAutoLogLevel.ERROR, "Got IO Exception while closing File/Buffer reader of file 'index.txt'.", e);
 					}
 				}
 			}

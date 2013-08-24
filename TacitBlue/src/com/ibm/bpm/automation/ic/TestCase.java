@@ -1,11 +1,17 @@
 package com.ibm.bpm.automation.ic;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.operations.BaseOperation;
+import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public class TestCase {
+	
+	private static final String CLASSNAME = TestCase.class.getName();
+	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 
 	public static final String TESTCASE_TITLE  = "title";
 	public static final String TESTCASE_DESCRIPTION = "description";
@@ -43,5 +49,16 @@ public class TestCase {
 	public void addOperations(BaseOperation oper) {
 		operations.add(oper);
 	}
-		
+	
+	public void execute() {
+		for(Iterator<BaseOperation> it = operations.iterator(); it.hasNext();) {
+			BaseOperation oper = it.next();
+			try {
+				oper.run();
+			} catch (AutoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }

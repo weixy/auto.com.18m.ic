@@ -11,8 +11,18 @@
 		<propertiesFile>c:/ibm/abc.xml</propertiesFile>
 	</operation>
 	<operation>
-		<name>ValidateBPMConfigLog</name>
-		<action></action>
-		<option></option>
+		<name>ValidateLog</name>
+		<points>5</points>
+		<action>check</action>
+		<option>BPMConfigLog</option>
+	</operation>
+	<operation>
+		<name>ValidateLog</name>
+		<points>5</points>
+		<action>check</action>
+		<option>BPMServerLog</option>
+	</operation>
+	<operation>
+		<name>TestException</name>
 	</operation>
 </testCase>

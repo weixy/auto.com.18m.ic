@@ -13,14 +13,15 @@ public class ICAutoLogFormatter extends Formatter {
 	public String format(LogRecord record) {
 		
 		StringBuilder sb = new StringBuilder();
+		if(ICAutoLogLevel.ASSERT.equals(record.getLevel())){
+        	sb.append(">");
+        }
 		sb.append("[").append(MessageFormat.format("{0,date,MM/dd/yyyy} {0, time,HH:mm:ss zzz}", 
 				new Object[] {new Date(record.getMillis())})).append("]\t");
 		sb.append(record.getSourceClassName()).append("\t");
 		sb.append(record.getLevel().getName().charAt(0)).append("\t");
 		sb.append(record.getMessage()).append(System.getProperty("line.separator"));
-		//if(Level.SEVERE.equals(record.getLevel())){
-        //	sb.append(System.getProperty("line.separator"));
-        //}
+		
 		//sb.append(formatMessage(record)).append(System.getProperty("line.separator"));
 		
 		if (null != record.getThrown()) {
@@ -41,6 +42,11 @@ public class ICAutoLogFormatter extends Formatter {
                 }
             }
 		}
+		
+		if(ICAutoLogLevel.ERROR.equals(record.getLevel()) ||
+				ICAutoLogLevel.ASSERT.equals(record.getLevel())){
+        	sb.append(System.getProperty("line.separator"));
+        }
 		
 		return sb.toString();
 	}

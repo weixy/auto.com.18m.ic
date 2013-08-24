@@ -25,6 +25,7 @@ public class XMLHandler extends DefaultHandler {
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 
 	private TestCase testCase;
+	private String fileName;
 	private StringBuffer textBuffer;
 	private boolean bActionElementStart;
 	private HashMap<String, String> operationInfo;
@@ -33,6 +34,7 @@ public class XMLHandler extends DefaultHandler {
 	public XMLHandler(String filename, HashMap<String, Object> configuration) throws AutoException{
 		
 		testCase = new TestCase();
+		fileName = filename;
 		
 		operationMapping = OperationMapping.getMapping();
 		
@@ -41,7 +43,6 @@ public class XMLHandler extends DefaultHandler {
 		try {
 			 reader = XMLReaderFactory.createXMLReader();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new AutoException("Can't create XMLReader", e);
 		}
 		reader.setContentHandler(this);
@@ -50,30 +51,25 @@ public class XMLHandler extends DefaultHandler {
 		try {
 			reader.parse(filename);
 		} catch (FileNotFoundException e) {
-			//throw new AutoException("Can't find the file you specified: '" + filename + "'", e);
 			logger.log(ICAutoLogLevel.ERROR, "Can't find the file '" + filename + "'", e);
 			testCase = null;
 		} catch (IOException e) {
-			//throw new AutoException("Got File IO Exception", e);
-			logger.log(ICAutoLogLevel.ERROR, e.getMessage(), e);
+			logger.log(ICAutoLogLevel.ERROR, "Got IO Exception while open file '" + filename + "'", e);
 			testCase = null;
 		} catch (SAXException e) {
-			//throw new AutoException("Got SAX Exception", e);
-			logger.log(ICAutoLogLevel.ERROR, e.getMessage(), e);
+			logger.log(ICAutoLogLevel.ERROR, "Got SAX Exception while parsing file '" + filename + "'", e);
 			testCase = null;
 		}
 	}
 
 	@Override
 	public void endDocument() throws SAXException {
-		// TODO Auto-generated method stub
-		logger.log(ICAutoLogLevel.INFO, "Finished parsing test case '" + testCase.getTitle() + "'");
+		logger.log(ICAutoLogLevel.INFO, "Finished parsing test case '" + testCase.getTitle() + "' (" + fileName + ").");
 	}
 
 	@Override
 	public void startDocument() throws SAXException {
-		// TODO Auto-generated method stub
-		System.out.println("Start to parse XML ...");
+		logger.log(ICAutoLogLevel.INFO, "Start to parse test case from file '" + fileName + "'");
 	}
 
 	@Override
@@ -109,37 +105,39 @@ public class XMLHandler extends DefaultHandler {
 			bActionElementStart = false;
 			String operationName = operationInfo.get(TestCase.TESTCASE_OPERATION_NAME);
 			String operationClassName = operationMapping.get(operationName);
-			try {
-				Class<?> aClass = Class.forName(operationClassName);
-				Object anObj = aClass.newInstance();
-				if(anObj instanceof BaseOperation) {
-					//hard-code here, if BaseOperation add/remove sub-elements, please modify following codes correspondingly.
-					((BaseOperation) anObj).setName(operationInfo.get(TestCase.TESTCASE_OPERATION_NAME));
+			if (null == operationClassName) {
+				logger.log(ICAutoLogLevel.ERROR, "Failed to find the corresponding class name for operation '" + operationName + "'.");
+			} else {
+				try {
+					Class<?> aClass = Class.forName(operationClassName);
+					Object anObj = aClass.newInstance();
+					if(anObj instanceof BaseOperation) {
+						//hard-code here, if BaseOperation add/remove sub-elements, please modify following codes correspondingly.
+						((BaseOperation) anObj).setName(operationInfo.get(TestCase.TESTCASE_OPERATION_NAME));
+						
+						String points = operationInfo.get(TestCase.TESTCASE_OPERATION_POINTS);
+						((BaseOperation) anObj).setPoints(Integer.parseInt(points!=null?points:"0"));
+						
+						((BaseOperation) anObj).setAction(operationInfo.get(TestCase.TESTCASE_OPERATION_ACTION));
+						((BaseOperation) anObj).setType(operationInfo.get(TestCase.TESTCASE_OPERATION_TYPE));
+						((BaseOperation) anObj).setOption(operationInfo.get(TestCase.TESTCASE_OPERATION_OPTION));
+						((BaseOperation) anObj).setPropFile(operationInfo.get(TestCase.TESTCASE_OPERATION_PROPFILE));
+						
+						testCase.addOperations((BaseOperation)anObj);
+					} else {
+						//Error
+					}
 					
-					String points = operationInfo.get(TestCase.TESTCASE_OPERATION_POINTS);
-					((BaseOperation) anObj).setPoints(Integer.parseInt(points!=null?points:"0"));
 					
-					((BaseOperation) anObj).setAction(operationInfo.get(TestCase.TESTCASE_OPERATION_ACTION));
-					((BaseOperation) anObj).setType(operationInfo.get(TestCase.TESTCASE_OPERATION_TYPE));
-					((BaseOperation) anObj).setOption(operationInfo.get(TestCase.TESTCASE_OPERATION_OPTION));
-					((BaseOperation) anObj).setPropFile(operationInfo.get(TestCase.TESTCASE_OPERATION_PROPFILE));
-					
-					testCase.addOperations((BaseOperation)anObj);
-				} else {
-					//Error
+				} catch (ClassNotFoundException e) {
+					logger.log(ICAutoLogLevel.ERROR, "Class '" + operationClassName + "' can't be resolved.", e);
+				} catch (InstantiationException e) {
+					logger.log(ICAutoLogLevel.ERROR, "Can't create an instance for class '" + operationClassName + "'.", e);
+				} catch (IllegalAccessException e) {
+					logger.log(ICAutoLogLevel.ERROR, "Has no legal access while instantating class '" + operationClassName + "'", e);
 				}
-				
-				
-			} catch (ClassNotFoundException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
-			} catch (InstantiationException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
-			} catch (IllegalAccessException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
-		
-		System.out.println("...");
 	}
 
 	@Override
@@ -156,7 +154,7 @@ public class XMLHandler extends DefaultHandler {
 			}
 		}
 		
-		System.out.println("Find element 'Local Name':"+ localName + ", 'QName':" + qName);
+		//System.out.println("Find element 'Local Name':"+ localName + ", 'QName':" + qName);
 	}
 
 	public TestCase getTestCase() {

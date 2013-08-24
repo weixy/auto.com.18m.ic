@@ -1,6 +1,9 @@
 package com.ibm.bpm.automation.ic.operations;
 
+import java.util.logging.Logger;
+
 import com.ibm.bpm.automation.ic.AutoException;
+import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public abstract class BaseOperation {
 	
@@ -58,8 +61,5 @@ public abstract class BaseOperation {
 	}
 	public void setValue(String value) {
 		this.propFile = value;
-	}
-	
-	
-	
+	}	
 }

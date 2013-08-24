@@ -9,6 +9,7 @@ import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.TestCaseLoader;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.XMLHandler;
+import com.ibm.bpm.automation.tap.adapter.AutomationService;
 
 public class TestExecution {
 
@@ -17,8 +18,8 @@ public class TestExecution {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(System.getProperty("user.dir"));
-		try {
+		//System.out.println(System.getProperty("user.dir"));
+		/*try {
 			LogUtil.init(System.getProperty("user.dir") + File.separator + ICAutoRobot.ICAUTO_LOG_PATH);
 			//XMLHandler xmlHnd = new XMLHandler("./test/SampleCase.xml", null);
 			//TestCase tstCase = xmlHnd.getTestCase();
@@ -34,7 +35,10 @@ public class TestExecution {
 			
 		} catch (AutoException e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
+		
+		ICAutoRobot icAutoRobot = new ICAutoRobot();
+		icAutoRobot.start(null);
 		
 	}
 

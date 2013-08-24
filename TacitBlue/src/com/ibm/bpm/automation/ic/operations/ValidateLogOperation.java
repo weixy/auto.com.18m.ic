@@ -5,18 +5,14 @@ import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.utils.ICAutoLogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
-public class BPMConfigureOperation extends BaseOperation {
+public class ValidateLogOperation extends BaseOperation {
 	
-	private static final String CLASSNAME = BPMConfigureOperation.class.getName();
+	private static final String CLASSNAME = ValidateLogOperation.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 
 	@Override
 	public void run() throws AutoException {
-		// TODO Auto-generated method stub
-		logger.log(ICAutoLogLevel.ASSERT, "Executed!");
-		
+		logger.log(ICAutoLogLevel.ASSERT, "Executed!");		
 	}
 
-	
-	
 }
