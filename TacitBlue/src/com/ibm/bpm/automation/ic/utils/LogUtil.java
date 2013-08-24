@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import com.ibm.bpm.automation.ic.AutoException;
 
@@ -25,7 +24,7 @@ public class LogUtil extends Logger {
 			if (!logFolder.exists()) {
 				throw new AutoException("Can't create log folder '" + logFolder.getAbsolutePath() +"'.");
 			}
-		} 
+		}
 		
 		String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut.log";
 		File outLogFile = new File(outLogPath);
@@ -44,7 +43,7 @@ public class LogUtil extends Logger {
 			logger.setUseParentHandlers(false);
 			
 			fHandler.setLevel(Level.INFO);
-			fHandler.setFormatter(new SimpleFormatter());
+			fHandler.setFormatter(new ICAutoLogFormatter());
 			logger.addHandler(fHandler);
 			
 		} catch (SecurityException e) {

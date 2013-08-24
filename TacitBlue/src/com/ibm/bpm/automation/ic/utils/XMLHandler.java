@@ -51,15 +51,15 @@ public class XMLHandler extends DefaultHandler {
 			reader.parse(filename);
 		} catch (FileNotFoundException e) {
 			//throw new AutoException("Can't find the file you specified: '" + filename + "'", e);
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			logger.log(ICAutoLogLevel.ERROR, "Can't find the file '" + filename + "'", e);
 			testCase = null;
 		} catch (IOException e) {
 			//throw new AutoException("Got File IO Exception", e);
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			logger.log(ICAutoLogLevel.ERROR, e.getMessage(), e);
 			testCase = null;
 		} catch (SAXException e) {
 			//throw new AutoException("Got SAX Exception", e);
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			logger.log(ICAutoLogLevel.ERROR, e.getMessage(), e);
 			testCase = null;
 		}
 	}
@@ -67,17 +67,7 @@ public class XMLHandler extends DefaultHandler {
 	@Override
 	public void endDocument() throws SAXException {
 		// TODO Auto-generated method stub
-		System.out.println("Finished parsing XML ...");
-		List<BaseOperation> list = testCase.getOperations();
-		for(int i=0; i < list.size(); i++) {
-			BaseOperation it = list.get(i);
-			System.out.print(">" + it.getName());
-			System.out.print(">" + it.getPoints());
-			System.out.print(">" + it.getAction());
-			System.out.print(">" + it.getType());
-			System.out.print(">" + it.getOption());
-			System.out.print(">" + it.getPropFile() + "\n");
-		}
+		logger.log(ICAutoLogLevel.INFO, "Finished parsing test case '" + testCase.getTitle() + "'");
 	}
 
 	@Override
