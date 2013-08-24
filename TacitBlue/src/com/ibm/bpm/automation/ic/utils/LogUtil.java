@@ -26,39 +26,37 @@ public class LogUtil extends Logger {
 				throw new AutoException("Can't create log folder '" + logFolder.getAbsolutePath() +"'.");
 			}
 		} 
-		else {
-			String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut.log";
-			File outLogFile = new File(outLogPath);
-			if (!outLogFile.exists()) {
-				try {
-					outLogFile.createNewFile();
-				} catch (IOException e) {
-					throw new AutoException("Can't create log file '" + outLogFile.getAbsolutePath() + "'.", e);
-				}
-			}
-			
-			FileHandler fHandler = null;
+		
+		String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut.log";
+		File outLogFile = new File(outLogPath);
+		if (!outLogFile.exists()) {
 			try {
-				fHandler = new FileHandler(outLogPath, 0, 1, true);
-				
-				logger.setUseParentHandlers(false);
-				
-				fHandler.setLevel(Level.INFO);
-				fHandler.setFormatter(new SimpleFormatter());
-				logger.addHandler(fHandler);
-				
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				outLogFile.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new AutoException("Can't create log file '" + outLogFile.getAbsolutePath() + "'.", e);
 			}
-			
-			//String errLogPath = logFolder.getAbsolutePath() + File.separator + "SystemErr.log";
-			//File errLogFile = new File(errLogPath);
-			
 		}
+			
+		FileHandler fHandler = null;
+		try {
+			fHandler = new FileHandler(outLogPath, 0, 1, true);
+			
+			logger.setUseParentHandlers(false);
+			
+			fHandler.setLevel(Level.INFO);
+			fHandler.setFormatter(new SimpleFormatter());
+			logger.addHandler(fHandler);
+			
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		//String errLogPath = logFolder.getAbsolutePath() + File.separator + "SystemErr.log";
+		//File errLogFile = new File(errLogPath);
 		
 	}
 	
