@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.ibm.bpm.automation.ic.AutoException;
-import com.ibm.bpm.automation.ic.ICAutoRobot;
+import com.ibm.bpm.automation.ic.TestRobot;
 import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.TestCaseLoader;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
@@ -37,7 +37,7 @@ public class TestExecution {
 			System.out.println(e.getMessage());
 		}*/
 		
-		ICAutoRobot icAutoRobot = new ICAutoRobot();
+		TestRobot icAutoRobot = new TestRobot();
 		icAutoRobot.start(null);
 		
 	}

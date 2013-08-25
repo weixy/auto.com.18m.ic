@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.operations.BaseOperation;
+import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public class TestCase {
@@ -51,6 +52,7 @@ public class TestCase {
 	}
 	
 	public void execute() {
+		logger.log(LogLevel.INFO, "Start to execute case '" + title + "'");
 		for(Iterator<BaseOperation> it = operations.iterator(); it.hasNext();) {
 			BaseOperation oper = it.next();
 			try {

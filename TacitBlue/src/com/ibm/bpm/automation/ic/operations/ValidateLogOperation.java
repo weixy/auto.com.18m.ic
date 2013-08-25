@@ -2,7 +2,7 @@ package com.ibm.bpm.automation.ic.operations;
 
 import java.util.logging.Logger;
 import com.ibm.bpm.automation.ic.AutoException;
-import com.ibm.bpm.automation.ic.utils.ICAutoLogLevel;
+import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public class ValidateLogOperation extends BaseOperation {
@@ -12,7 +12,7 @@ public class ValidateLogOperation extends BaseOperation {
 
 	@Override
 	public void run() throws AutoException {
-		logger.log(ICAutoLogLevel.ASSERT, "Executed!");		
+		logger.log(LogLevel.INFO, "Invoke operation '" + ValidateLogOperation.class.getSimpleName() + "'");		
 	}
 
 }

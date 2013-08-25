@@ -1,19 +1,22 @@
 package com.ibm.bpm.automation.ic;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.ibm.bpm.automation.ic.utils.ICAutoLogLevel;
+import org.apache.xerces.util.MessageFormatter;
+
+import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.automation.tap.adapter.IScenarioStarter;
 import com.ibm.bpm.automation.tap.automationobjects.Environment;
 
-public class ICAutoRobot implements IScenarioStarter{
+public class TestRobot implements IScenarioStarter{
 
-	private static final String CLASSNAME = ICAutoRobot.class.getName();
+	private static final String CLASSNAME = TestRobot.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
 	public static String ICAUTO_TESTCASE_PATH = "test";
@@ -33,8 +36,21 @@ public class ICAutoRobot implements IScenarioStarter{
 		try {
 			LogUtil.init(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH);
 		} catch (AutoException e) {
-			logger.log(ICAutoLogLevel.ERROR, "Failed to initiate the LogUtil.", e);
+			logger.log(LogLevel.ERROR, "Failed to initiate the LogUtil.", e);
 		}
+		
+		String executionInfo = MessageFormat.format("ExecutionSet:{0}\tRelease:{1}\tBuild:{2}" +
+				System.getProperty("line.separator") + "Environment:{3}\t", 
+				//TODO use real info when apply to field.
+				/*new Object[] {
+					autoService.getCurrentExecutionSet().getName(),
+					autoService.getCurrentRelease(),
+					autoService.getCurrentBuildLevel(),
+					autoService.getCurrentEnvironment().getEnvironmentName()
+				});*/
+				new Object[] {"ConfigureSTD_SingleCLusterDE", "8550", "20130829","STDSingleClusterDE"});
+		
+		logger.log(LogLevel.HEADER, executionInfo);
 		
 		List<TestCase> caseList = null;
 		
@@ -43,7 +59,7 @@ public class ICAutoRobot implements IScenarioStarter{
 					+ File.separator 
 					+ ICAUTO_TESTCASE_PATH);
 		} catch (AutoException e) {
-			logger.log(ICAutoLogLevel.ERROR, "Failed to load test cases.", e);
+			logger.log(LogLevel.ERROR, "Failed to load test cases.", e);
 		}
 		
 		if (null != caseList) {
@@ -53,8 +69,7 @@ public class ICAutoRobot implements IScenarioStarter{
 			String regScriptName = "";
 			
 			if (null == regScriptName || "".equals(regScriptName)) {
-				logger.log(ICAutoLogLevel.WARNING, "The script(step) name registed in TAP is empty.");
-				logger.log(ICAutoLogLevel.INFO, "All existing cases will be executed.");
+				logger.log(LogLevel.WARNING, "The script(step) name registered in TAP is empty. Will execute existing any cases.");
 			}
 			
 			//Environment curEnv = autoService.getCurrentEnvironment();
@@ -76,7 +91,7 @@ public class ICAutoRobot implements IScenarioStarter{
 			}
 		}
 		else {
-			logger.log(ICAutoLogLevel.WARNING, "No cases has been loaded.");
+			logger.log(LogLevel.WARNING, "No cases has been loaded.");
 			//Submit the fail execution result
 		}
 	}

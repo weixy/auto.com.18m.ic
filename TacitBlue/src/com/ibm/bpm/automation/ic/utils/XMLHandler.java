@@ -51,25 +51,25 @@ public class XMLHandler extends DefaultHandler {
 		try {
 			reader.parse(filename);
 		} catch (FileNotFoundException e) {
-			logger.log(ICAutoLogLevel.ERROR, "Can't find the file '" + filename + "'", e);
+			logger.log(LogLevel.ERROR, "Can't find the file '" + filename + "'", e);
 			testCase = null;
 		} catch (IOException e) {
-			logger.log(ICAutoLogLevel.ERROR, "Got IO Exception while open file '" + filename + "'", e);
+			logger.log(LogLevel.ERROR, "Got IO Exception while open file '" + filename + "'", e);
 			testCase = null;
 		} catch (SAXException e) {
-			logger.log(ICAutoLogLevel.ERROR, "Got SAX Exception while parsing file '" + filename + "'", e);
+			logger.log(LogLevel.ERROR, "Got SAX Exception while parsing file '" + filename + "'", e);
 			testCase = null;
 		}
 	}
 
 	@Override
 	public void endDocument() throws SAXException {
-		logger.log(ICAutoLogLevel.INFO, "Finished parsing test case '" + testCase.getTitle() + "' (" + fileName + ").");
+		logger.log(LogLevel.INFO, "Finished parsing test case '" + testCase.getTitle() + "' (" + fileName + ").");
 	}
 
 	@Override
 	public void startDocument() throws SAXException {
-		logger.log(ICAutoLogLevel.INFO, "Start to parse test case from file '" + fileName + "'");
+		logger.log(LogLevel.INFO, "Start to parse test case from file '" + fileName + "'");
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class XMLHandler extends DefaultHandler {
 			String operationName = operationInfo.get(TestCase.TESTCASE_OPERATION_NAME);
 			String operationClassName = operationMapping.get(operationName);
 			if (null == operationClassName) {
-				logger.log(ICAutoLogLevel.ERROR, "Failed to find the corresponding class name for operation '" + operationName + "'.");
+				logger.log(LogLevel.ERROR, "Failed to find the corresponding class name for operation '" + operationName + "'.");
 			} else {
 				try {
 					Class<?> aClass = Class.forName(operationClassName);
@@ -130,11 +130,11 @@ public class XMLHandler extends DefaultHandler {
 					
 					
 				} catch (ClassNotFoundException e) {
-					logger.log(ICAutoLogLevel.ERROR, "Class '" + operationClassName + "' can't be resolved.", e);
+					logger.log(LogLevel.ERROR, "Class '" + operationClassName + "' can't be resolved.", e);
 				} catch (InstantiationException e) {
-					logger.log(ICAutoLogLevel.ERROR, "Can't create an instance for class '" + operationClassName + "'.", e);
+					logger.log(LogLevel.ERROR, "Can't create an instance for class '" + operationClassName + "'.", e);
 				} catch (IllegalAccessException e) {
-					logger.log(ICAutoLogLevel.ERROR, "Has no legal access while instantating class '" + operationClassName + "'", e);
+					logger.log(LogLevel.ERROR, "Has no legal access while instantating class '" + operationClassName + "'", e);
 				}
 			}
 		}

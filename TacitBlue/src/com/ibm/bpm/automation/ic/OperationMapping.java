@@ -22,8 +22,8 @@ public class OperationMapping {
 			
 			try {
 				prop.load(mappingInst.getClass().getResourceAsStream("OperationMapping.properties"));
-				Set keys = prop.keySet();
-				for (Iterator it = keys.iterator(); it.hasNext();) {
+				Set<Object> keys = prop.keySet();
+				for (Iterator<Object> it = keys.iterator(); it.hasNext();) {
 					String key = (String)it.next();
 					String value = prop.getProperty(key);
 					//System.out.println(key + ":" + value);

@@ -2,6 +2,7 @@ package com.ibm.bpm.automation.ic.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,9 +43,14 @@ public class LogUtil extends Logger {
 			
 			logger.setUseParentHandlers(false);
 			
-			fHandler.setLevel(Level.INFO);
-			fHandler.setFormatter(new ICAutoLogFormatter());
+			fHandler.setLevel(LogLevel.INFO);
+			fHandler.setFormatter(new LogFormatter());
 			logger.addHandler(fHandler);
+			
+			ConsoleHandler cHandler = new ConsoleHandler();
+			cHandler.setLevel(LogLevel.WARNING);
+			cHandler.setFormatter(new LogFormatter());
+			logger.addHandler(cHandler);
 			
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block

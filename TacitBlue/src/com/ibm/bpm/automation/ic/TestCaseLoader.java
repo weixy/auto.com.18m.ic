@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.ibm.bpm.automation.ic.utils.ICAutoLogLevel;
+import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.XMLHandler;
 
@@ -45,6 +45,7 @@ public class TestCaseLoader {
 			File indexFile = new File(testFolder.getAbsolutePath() + File.separator + "index.txt");
 			
 			if (indexFile == null || !indexFile.exists()) { // no index file, then load the cases without specific order
+				logger.log(LogLevel.INFO, "No 'index.txt' found, will load all existing test cases.");
 				for (File item : testFolder.listFiles()) {
 					if (item.isFile() && item.getAbsolutePath().endsWith(".xml")) {
 						TestCase testCase = loadTestCase(item.getAbsolutePath());
@@ -75,17 +76,17 @@ public class TestCaseLoader {
 					
 				} catch (FileNotFoundException e) {
 					//throw new AutoException(e);
-					logger.log(ICAutoLogLevel.ERROR, "Can't find the file 'index.txt' while creating FileReader for it", e);
+					logger.log(LogLevel.ERROR, "Can't find the file 'index.txt' while creating FileReader for it", e);
 				} catch (IOException e) {
 					//throw new AutoException(e);
-					logger.log(ICAutoLogLevel.ERROR, "Got IO Exception while reading line from file 'index.txt'.", e);
+					logger.log(LogLevel.ERROR, "Got IO Exception while reading line from file 'index.txt'.", e);
 				} finally {
 					try {
 						br.close();
 						fr.close();
 					} catch (IOException e) {
 						//throw new AutoException(e);
-						logger.log(ICAutoLogLevel.ERROR, "Got IO Exception while closing File/Buffer reader of file 'index.txt'.", e);
+						logger.log(LogLevel.ERROR, "Got IO Exception while closing File/Buffer reader of file 'index.txt'.", e);
 					}
 				}
 			}
