@@ -2,12 +2,14 @@ package com.ibm.bpm.automation.ic;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.apache.xerces.util.MessageFormatter;
 
+import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
@@ -72,7 +74,15 @@ public class TestRobot implements IScenarioStarter{
 				logger.log(LogLevel.WARNING, "The script(step) name registered in TAP is empty. Will execute existing any cases.");
 			}
 			
+			//TODO Construct Configuration with Environment info via autoSerivce.
+			HashMap<String, String> config = new HashMap<String, String>();
 			//Environment curEnv = autoService.getCurrentEnvironment();
+			
+			//TODO Stub for config hash map
+			config.put(Configurations.BPMPATH.getKey(), "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer");
+			config.put(Configurations.CEUSERNAME.getKey(), "admin");
+			config.put(Configurations.CEUSERPWD.getKey(), "admin");
+			
 			int caseIndex = 0;
 			for (int i=0; i<caseList.size(); i++) {
 				if (caseList.get(i).getTitle().equals(regScriptName)) {
@@ -82,12 +92,12 @@ public class TestRobot implements IScenarioStarter{
 			}
 			if (runAllCases) {
 				for (Iterator<TestCase> it = caseList.iterator(); it.hasNext();) {
-					it.next().execute();
+					it.next().execute(config);
 				}
 			}
 			else {
 				TestCase testCase = caseList.get(caseIndex);
-				testCase.execute();
+				testCase.execute(config);
 			}
 		}
 		else {

@@ -38,6 +38,7 @@ public class TestExecution {
 		}*/
 		
 		TestRobot icAutoRobot = new TestRobot();
+		
 		icAutoRobot.start(null);
 		
 	}

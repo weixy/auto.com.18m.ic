@@ -1,6 +1,7 @@
 package com.ibm.bpm.automation.ic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -51,12 +52,12 @@ public class TestCase {
 		operations.add(oper);
 	}
 	
-	public void execute() {
+	public void execute(HashMap<String, String> config) {
 		logger.log(LogLevel.INFO, "Start to execute case '" + title + "'");
 		for(Iterator<BaseOperation> it = operations.iterator(); it.hasNext();) {
 			BaseOperation oper = it.next();
 			try {
-				oper.run();
+				oper.run(config);
 			} catch (AutoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

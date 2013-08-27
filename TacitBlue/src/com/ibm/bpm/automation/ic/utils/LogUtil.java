@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.AutoException;
@@ -47,10 +46,10 @@ public class LogUtil extends Logger {
 			fHandler.setFormatter(new LogFormatter());
 			logger.addHandler(fHandler);
 			
-			ConsoleHandler cHandler = new ConsoleHandler();
+			/*ConsoleHandler cHandler = new ConsoleHandler();
 			cHandler.setLevel(LogLevel.WARNING);
 			cHandler.setFormatter(new LogFormatter());
-			logger.addHandler(cHandler);
+			logger.addHandler(cHandler);*/
 			
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -59,7 +58,7 @@ public class LogUtil extends Logger {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
+		
 		//String errLogPath = logFolder.getAbsolutePath() + File.separator + "SystemErr.log";
 		//File errLogFile = new File(errLogPath);
 		

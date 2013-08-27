@@ -1,9 +1,7 @@
 package com.ibm.bpm.automation.ic.operations;
 
-import java.util.logging.Logger;
-
+import java.util.HashMap;
 import com.ibm.bpm.automation.ic.AutoException;
-import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public abstract class BaseOperation {
 	
@@ -13,9 +11,10 @@ public abstract class BaseOperation {
 	private String type;
 	private String option;
 	private String propFile;
+	protected String command;
 	
 	
-	public abstract void run() throws AutoException;
+	public abstract void run(HashMap<String, String> config) throws AutoException;
 	
 	public String getName() {
 		return name;
@@ -61,5 +60,7 @@ public abstract class BaseOperation {
 	}
 	public void setValue(String value) {
 		this.propFile = value;
-	}	
+	}
+	
+	public abstract String getCommand();
 }
