@@ -21,8 +21,8 @@ public class TestRobot implements IScenarioStarter{
 	private static final String CLASSNAME = TestRobot.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
-	public static String ICAUTO_TESTCASE_PATH = "test";
-	public static String ICAUTO_LOG_PATH = "logs";
+	public static String ICAUTO_TESTCASE_PATH = "./test";
+	public static String ICAUTO_LOG_PATH = "./logs";
 	
 	/**
 	 * @param args

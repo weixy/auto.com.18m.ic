@@ -48,7 +48,7 @@ public class CommandUtil {
 			StringBuffer result = new StringBuffer("");
 			String line;
 			while(null != (line = reader.readLine())) {
-				result.append(line + "\n");
+				result.append(line + System.getProperty("line.separator"));
 			}
 			p.waitFor();
 			reader.close();

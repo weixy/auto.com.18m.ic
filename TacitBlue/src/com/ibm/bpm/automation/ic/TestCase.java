@@ -59,8 +59,7 @@ public class TestCase {
 			try {
 				oper.run(config);
 			} catch (AutoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(LogLevel.ERROR, "Failed to execute test case '" + this.getTitle() + "'", e);
 			}
 		}
 	}

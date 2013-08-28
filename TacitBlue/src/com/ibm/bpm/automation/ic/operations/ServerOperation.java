@@ -26,7 +26,7 @@ public class ServerOperation extends BaseOperation {
 	
 	@Override
 	public void run(HashMap<String, String> config) throws AutoException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub **************
 		logger.log(LogLevel.INFO, "Invoke operation '" + ServerOperation.class.getSimpleName() + "'");
 	}
 

@@ -7,7 +7,8 @@ public enum Configurations {
 	DEUSERPWD("deUserPwd"), 
 	CEUSERNAME("ceUserName"),
 	CEUSERPWD("ceUserPwd"),
-	DMGRPROF("dmgrProfile");
+	DMGRPROF("dmgrProfile"),
+	BPMCONFLOG("bpmConfLog");
 	
 	private Configurations(String k) {
 		key = k;

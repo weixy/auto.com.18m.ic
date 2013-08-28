@@ -3,6 +3,9 @@ package com.ibm.bpm.automation.ic.operations;
 import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.constants.OperationCommand;
@@ -22,6 +25,8 @@ public class BPMConfigureOperation extends BaseOperation {
 	
 	@Override
 	public void run(HashMap<String, String> config) throws AutoException {
+		logger.log(LogLevel.INFO, "Invoke operation '" + BPMConfigureOperation.class.getSimpleName() + "'");
+		
 		//prepare for execute the command in test environment
 		String osName = System.getProperty("os.name").toLowerCase();
 		String workingFolder = config.get(Configurations.BPMPATH.getKey()) + File.separator + "bin";
@@ -30,10 +35,22 @@ public class BPMConfigureOperation extends BaseOperation {
 				((this.getType()!=null) ? this.getType() + " " : "") + 
 				((this.getPropFile()!=null) ? this.getPropFile() : "");
 		
+		//execute operation
 		String result = CommandUtil.executeCommnd(command, workingFolder, parameters);
-		System.out.println(result);
-		// TODO Auto-generated method stub
-		logger.log(LogLevel.INFO, "Invoke operation '" + BPMConfigureOperation.class.getSimpleName() + "'");
+		
+		//save log path
+		Pattern pattern = Pattern.compile("\\s[^\\s]+BPMConfig_[0-9]{8}\\-[0-9]{6}.log");
+		Matcher matcher = pattern.matcher(result);
+		if (matcher.find()) {
+			config.put(Configurations.BPMCONFLOG.getKey(), matcher.group().trim());
+		}
+		else {
+			logger.log(LogLevel.WARNING, "Failed to find BPMConfig log file's name in returned strings");
+		}
+		
+		//TODO parse result to get its success or failure
+		
+		//TODO submitExecute
 		
 	}
 

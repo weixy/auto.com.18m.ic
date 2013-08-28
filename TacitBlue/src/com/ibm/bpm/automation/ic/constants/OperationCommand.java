@@ -3,6 +3,8 @@ package com.ibm.bpm.automation.ic.constants;
 public enum OperationCommand {
 	
 	BPMCONFIG("BPMConfig"),
+	BPMCONFLOG("BPMConfigLog"),
+	BPMSERVLOG("BPMServerLog"),
 	STARTSERV("startServer"),
 	STOPSERV("stopServer");
 	
