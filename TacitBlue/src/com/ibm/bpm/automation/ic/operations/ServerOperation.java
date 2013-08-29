@@ -14,20 +14,15 @@ public class ServerOperation extends BaseOperation {
 	private static final String CLASSNAME = ServerOperation.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
-	public ServerOperation() {
-		if ("start".equals(this.getAction().toLowerCase())) {
-			command = OperationCommand.STARTSERV.getCommand();
-		} else if ("stop".equals(this.getAction().toLowerCase())) {
-			command = OperationCommand.STOPSERV.getCommand();
-		} else {
-			command = null;
-		}
-	}
-	
 	@Override
 	public void run(HashMap<String, String> config) throws AutoException {
 		// TODO Auto-generated method stub **************
 		logger.log(LogLevel.INFO, "Invoke operation '" + ServerOperation.class.getSimpleName() + "'");
+		if ("start".equals(this.getAction().toLowerCase())) {
+			command = OperationCommand.STARTSERV.getCommand();
+		} else if ("stop".equals(this.getAction().toLowerCase())) {
+			command = OperationCommand.STOPSERV.getCommand();
+		}
 	}
 
 	@Override

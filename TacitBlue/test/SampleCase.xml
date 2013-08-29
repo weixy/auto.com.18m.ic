@@ -11,16 +11,21 @@
 		<propertiesFile>c:/ibm/abc.xml</propertiesFile>
 	</operation>
 	<operation>
-		<name>ValidateLog</name>
+		<name>HandleLog</name>
 		<points>5</points>
 		<action>check</action>
 		<option>BPMConfigLog</option>
 	</operation>
 	<operation>
-		<name>ValidateLog</name>
+		<name>HandleLog</name>
 		<points>5</points>
 		<action>check</action>
 		<option>BPMServerLog</option>
+	</operation>
+	<operation>
+		<name>BPMServer</name>
+		<points>1</points>
+		<action>start</action>
 	</operation>
 	<operation>
 		<name>TestException</name>

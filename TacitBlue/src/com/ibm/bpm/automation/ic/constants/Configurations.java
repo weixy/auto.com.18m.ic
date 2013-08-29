@@ -8,6 +8,8 @@ public enum Configurations {
 	CEUSERNAME("ceUserName"),
 	CEUSERPWD("ceUserPwd"),
 	DMGRPROF("dmgrProfile"),
+	TOPTYPE("topologyType"),
+	APPSEVNAME("appServerName"),
 	BPMCONFLOG("bpmConfLog");
 	
 	private Configurations(String k) {

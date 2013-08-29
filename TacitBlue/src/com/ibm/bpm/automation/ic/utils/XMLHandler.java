@@ -105,6 +105,8 @@ public class XMLHandler extends DefaultHandler {
 			bActionElementStart = false;
 			String operationName = operationInfo.get(TestCase.TESTCASE_OPERATION_NAME);
 			String operationClassName = operationMapping.get(operationName);
+			//System.out.println(operationClassName);
+			//System.out.println(operationInfo.get(TestCase.TESTCASE_OPERATION_ACTION));
 			if (null == operationClassName) {
 				logger.log(LogLevel.ERROR, "Failed to find the corresponding class name for operation '" + operationName + "'.");
 			} else {

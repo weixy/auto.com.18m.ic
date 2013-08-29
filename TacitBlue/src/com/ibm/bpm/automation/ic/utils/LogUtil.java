@@ -16,24 +16,36 @@ public class LogUtil extends Logger {
 		super(name, resourceBundleName);
 	}
 	
-	public static void init(String folderPath) throws AutoException{
+	public static void init(String folderPath) {
 		
 		File logFolder = new File(folderPath);
 		if (!logFolder.exists()) {
 			logFolder.mkdir();
 			if (!logFolder.exists()) {
-				throw new AutoException("Can't create log folder '" + logFolder.getAbsolutePath() +"'.");
+				logFolder.mkdir();
+				//no exception
+				//throw new AutoException("Can't create log folder '" + logFolder.getAbsolutePath() +"'.");
 			}
 		}
 		
 		String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut.log";
 		File outLogFile = new File(outLogPath);
-		if (!outLogFile.exists()) {
+		/*if (!outLogFile.exists()) {
 			try {
 				outLogFile.createNewFile();
 			} catch (IOException e) {
 				throw new AutoException("Can't create log file '" + outLogFile.getAbsolutePath() + "'.", e);
 			}
+		}*/
+		// Clean the log file every initiation
+		if (outLogFile.exists()) {
+			outLogFile.delete();
+		}
+		try {
+			outLogFile.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+			//throw new AutoException("Can't create log file '" + outLogFile.getAbsolutePath() + "'.", e);
 		}
 			
 		FileHandler fHandler = null;

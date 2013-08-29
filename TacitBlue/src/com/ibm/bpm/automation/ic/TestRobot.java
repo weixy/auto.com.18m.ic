@@ -15,6 +15,7 @@ import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.automation.tap.adapter.IScenarioStarter;
 import com.ibm.bpm.automation.tap.automationobjects.Environment;
+import com.ibm.bpm.qa.automation.newobject.type.TopologyType;
 
 public class TestRobot implements IScenarioStarter{
 
@@ -35,11 +36,12 @@ public class TestRobot implements IScenarioStarter{
 	@Override
 	public void start(AutomationService autoService) {
 		
-		try {
+		/*try {
 			LogUtil.init(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH);
 		} catch (AutoException e) {
 			logger.log(LogLevel.ERROR, "Failed to initiate the LogUtil.", e);
-		}
+		}*/
+		LogUtil.init(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH);
 		
 		String executionInfo = MessageFormat.format("ExecutionSet:{0}\tRelease:{1}\tBuild:{2}" +
 				System.getProperty("line.separator") + "Environment:{3}\t", 
@@ -82,6 +84,8 @@ public class TestRobot implements IScenarioStarter{
 			config.put(Configurations.BPMPATH.getKey(), "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer");
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");
+			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());
+			
 			
 			int caseIndex = 0;
 			for (int i=0; i<caseList.size(); i++) {
