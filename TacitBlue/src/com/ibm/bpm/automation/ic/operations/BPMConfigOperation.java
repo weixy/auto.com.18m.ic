@@ -26,7 +26,7 @@ public class BPMConfigOperation extends BaseOperation {
 	}
 	
 	@Override
-	public void run(HashMap<String, String> config) throws AutoException {
+	public void run(HashMap<String, Object> config) throws AutoException {
 		logger.log(LogLevel.INFO, "Invoke operation '" + BPMConfigOperation.class.getSimpleName() + "'");
 		
 		//prepare for execute the command in test environment
@@ -75,15 +75,5 @@ public class BPMConfigOperation extends BaseOperation {
 			//TODO code problem?
 			logger.log(LogLevel.WARNING, "Can't determine if the operation '" + this.getName() + "' succeeded or failed!");
 		}
-	}
-
-	@Override
-	public String getCommand() {
-		// TODO Auto-generated method stub
-		return command;
-	}
-
-	
-	
-	
+	}	
 }

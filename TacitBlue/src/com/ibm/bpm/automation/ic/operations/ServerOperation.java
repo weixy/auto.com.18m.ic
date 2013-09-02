@@ -15,7 +15,7 @@ public class ServerOperation extends BaseOperation {
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
 	@Override
-	public void run(HashMap<String, String> config) throws AutoException {
+	public void run(HashMap<String, Object> config) throws AutoException {
 		// TODO Auto-generated method stub **************
 		logger.log(LogLevel.INFO, "Invoke operation '" + ServerOperation.class.getSimpleName() + "'");
 		if ("start".equals(this.getAction().toLowerCase())) {
@@ -24,11 +24,4 @@ public class ServerOperation extends BaseOperation {
 			command = OperationCommand.STOPSERV.getCommand();
 		}
 	}
-
-	@Override
-	public String getCommand() {
-		// TODO Auto-generated method stub
-		return command;
-	}
-
 }

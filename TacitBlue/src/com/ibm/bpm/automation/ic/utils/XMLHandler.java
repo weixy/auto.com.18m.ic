@@ -120,6 +120,7 @@ public class XMLHandler extends DefaultHandler {
 						String points = operationInfo.get(TestCase.TESTCASE_OPERATION_POINTS);
 						((BaseOperation) anObj).setPoints(Integer.parseInt(points!=null?points:"0"));
 						
+						((BaseOperation) anObj).setStep(operationInfo.get(TestCase.TESTCASE_OPERATION_STEP));
 						((BaseOperation) anObj).setAction(operationInfo.get(TestCase.TESTCASE_OPERATION_ACTION));
 						((BaseOperation) anObj).setType(operationInfo.get(TestCase.TESTCASE_OPERATION_TYPE));
 						((BaseOperation) anObj).setOption(operationInfo.get(TestCase.TESTCASE_OPERATION_OPTION));
@@ -151,6 +152,12 @@ public class XMLHandler extends DefaultHandler {
 			bActionElementStart = true;
 			if(operationInfo != null) {
 				operationInfo.clear();
+				for (int i=0; i<attributes.getLength(); i++) {
+					if (TestCase.TESTCASE_OPERATION_STEP.equals(attributes.getLocalName(i))) {
+						operationInfo.put(TestCase.TESTCASE_OPERATION_STEP, attributes.getValue(i));
+						break;
+					}
+				}
 			} else {
 				operationInfo = new HashMap<String, String>();
 			}

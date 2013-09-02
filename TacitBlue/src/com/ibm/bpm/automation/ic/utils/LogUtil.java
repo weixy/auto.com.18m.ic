@@ -28,16 +28,9 @@ public class LogUtil extends Logger {
 			}
 		}
 		
-		String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut.log";
+		String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut_icauto.log";
 		File outLogFile = new File(outLogPath);
-		/*if (!outLogFile.exists()) {
-			try {
-				outLogFile.createNewFile();
-			} catch (IOException e) {
-				throw new AutoException("Can't create log file '" + outLogFile.getAbsolutePath() + "'.", e);
-			}
-		}*/
-		// Clean the log file every initiation
+		
 		if (outLogFile.exists()) {
 			outLogFile.delete();
 		}

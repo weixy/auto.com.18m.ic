@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.List;
 
 import com.ibm.bpm.automation.ic.AutoException;
-import com.ibm.bpm.automation.ic.TestRobot;
 import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.TestCaseLoader;
+import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.XMLHandler;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;

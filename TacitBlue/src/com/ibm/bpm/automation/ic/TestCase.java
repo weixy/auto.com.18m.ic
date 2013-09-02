@@ -18,6 +18,7 @@ public class TestCase {
 	public static final String TESTCASE_TITLE  = "title";
 	public static final String TESTCASE_DESCRIPTION = "description";
 	public static final String TESTCASE_OPERATION = "operation";
+	public static final String TESTCASE_OPERATION_STEP = "step";
 	public static final String TESTCASE_OPERATION_NAME = "name";
 	public static final String TESTCASE_OPERATION_POINTS = "points";
 	public static final String TESTCASE_OPERATION_ACTION = "action";
@@ -52,7 +53,7 @@ public class TestCase {
 		operations.add(oper);
 	}
 	
-	public void execute(HashMap<String, String> config) {
+	public void execute(HashMap<String, Object> config) {
 		logger.log(LogLevel.INFO, "Start to execute case '" + title + "'");
 		for(Iterator<BaseOperation> it = operations.iterator(); it.hasNext();) {
 			BaseOperation oper = it.next();

@@ -8,8 +8,12 @@ public enum Configurations {
 	CEUSERNAME("ceUserName"),
 	CEUSERPWD("ceUserPwd"),
 	DMGRPROF("dmgrProfile"),
+	NODEPROF("nodeProfile"),
 	TOPTYPE("topologyType"),
 	APPSEVNAME("appServerName"),
+	LOGFOLDER("autoLogFolder"), //ic auto mation log folder
+	BPMLOGFDR("bpmLogFolder"), //will also retrieve all BPM server logs under this folder
+	BPMLOGSAV("bpmLogSavePathes"),
 	BPMCONFLOG("bpmConfLog");
 	
 	private Configurations(String k) {

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testCase>
+	<title>SampleTest02</title>
+	<description>This is just a simple test case for IC automation log analysis. </description>
+	<operation step="Check BPMConfig Log">
+		<name>HandleLog</name>
+		<points>5</points>
+		<action>check</action>
+		<type>BPMConfigLog</type>
+	</operation>
+	<operation step="Check BPM Server Log">
+		<name>HandleLog</name>
+		<points>5</points>
+		<action>check</action>
+		<type>BPMServerLog</type>
+	</operation>
+	<operation step="Check BPM Server Log">
+		<name>HandleLog</name>
+		<points>5</points>
+		<action>check</action>
+		<type>BPMServerLog</type>
+		<option>ServerLog</option>
+	</operation>
+	<operation step="Check BPM Server Log">
+		<name>HandleLog</name>
+		<points>5</points>
+		<action>check</action>
+		<type>BPMServerLog</type>
+		<option>FFDCLog</option>
+	</operation>
+	<operation step="Start BPM Server">
+		<name>BPMServer</name>
+		<points>1</points>
+		<action>start</action>
+	</operation>
+	<operation step ="Test Exception">
+		<name>TestException</name>
+	</operation>
+</testCase>

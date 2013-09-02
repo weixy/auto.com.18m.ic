@@ -14,13 +14,7 @@
 		<name>HandleLog</name>
 		<points>5</points>
 		<action>check</action>
-		<option>BPMConfigLog</option>
-	</operation>
-	<operation>
-		<name>HandleLog</name>
-		<points>5</points>
-		<action>check</action>
-		<option>BPMServerLog</option>
+		<type>BPMConfigLog</type>
 	</operation>
 	<operation>
 		<name>BPMServer</name>

@@ -5,6 +5,7 @@ import com.ibm.bpm.automation.ic.AutoException;
 
 public abstract class BaseOperation {
 	
+	private String step;
 	private String name;
 	private int points;
 	private String action;
@@ -14,8 +15,16 @@ public abstract class BaseOperation {
 	protected String command;
 	
 	
-	public abstract void run(HashMap<String, String> config) throws AutoException;
+	public abstract void run(HashMap<String, Object> config) throws AutoException;
 	
+	public String getStep() {
+		return step;
+	}
+
+	public void setStep(String step) {
+		this.step = step;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -62,5 +71,5 @@ public abstract class BaseOperation {
 		this.propFile = value;
 	}
 	
-	public abstract String getCommand();
+	//public abstract String getCommand();
 }
