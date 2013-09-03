@@ -12,9 +12,9 @@ public class TestOperation implements IScenarioStarter {
 
 	@Override
 	public void start(AutomationService autoService) {
-		// TODO Auto-generated method stub
+		
 		Environment curEnv = autoService.getCurrentEnvironment();
-		autoService.retriveAllLogs(curEnv, System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH + File.separator + "bmp");
+		autoService.retriveAllLogs(curEnv, System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH + File.separator + "bpm");
 		
 		//autoService.su
 		

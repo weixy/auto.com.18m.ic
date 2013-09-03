@@ -1,7 +1,11 @@
 package com.ibm.bpm.automation.ic.operations;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
+
 import com.ibm.bpm.automation.ic.AutoException;
+import com.ibm.bpm.automation.ic.utils.LogLevel;
+import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public abstract class BaseOperation {
 	
@@ -12,6 +16,9 @@ public abstract class BaseOperation {
 	private String type;
 	private String option;
 	private String propFile;
+	protected int failedPoints = 0;
+	protected int successPoints = 0;
+	protected boolean isFailed = false;
 	protected String command;
 	
 	

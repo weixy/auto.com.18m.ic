@@ -8,32 +8,29 @@
 		<action>check</action>
 		<type>BPMConfigLog</type>
 	</operation>
-	<operation step="Check BPM Server Log">
+	<operation step="Check All BPM Server Log">
 		<name>HandleLog</name>
 		<points>5</points>
 		<action>check</action>
-		<type>BPMServerLog</type>
+		<type>BPMLog</type>
 	</operation>
 	<operation step="Check BPM Server Log">
 		<name>HandleLog</name>
 		<points>5</points>
 		<action>check</action>
-		<type>BPMServerLog</type>
-		<option>ServerLog</option>
+		<type>BPMLog</type>
+		<option>BPMNodeServerLog</option>
 	</operation>
-	<operation step="Check BPM Server Log">
+	<operation step="Check BPM Server FFDC">
 		<name>HandleLog</name>
 		<points>5</points>
 		<action>check</action>
-		<type>BPMServerLog</type>
-		<option>FFDCLog</option>
+		<type>BPMLog</type>
+		<option>BPMNodeFFDCLog</option>
 	</operation>
 	<operation step="Start BPM Server">
 		<name>BPMServer</name>
 		<points>1</points>
 		<action>start</action>
-	</operation>
-	<operation step ="Test Exception">
-		<name>TestException</name>
 	</operation>
 </testCase>

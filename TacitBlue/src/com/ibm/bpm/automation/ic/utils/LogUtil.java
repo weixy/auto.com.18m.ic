@@ -56,12 +56,8 @@ public class LogUtil extends Logger {
 			cHandler.setFormatter(new LogFormatter());
 			logger.addHandler(cHandler);*/
 			
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.log(LogLevel.ERROR, "Met problems while init Log utility ...", e);
 		}
 		
 		//String errLogPath = logFolder.getAbsolutePath() + File.separator + "SystemErr.log";

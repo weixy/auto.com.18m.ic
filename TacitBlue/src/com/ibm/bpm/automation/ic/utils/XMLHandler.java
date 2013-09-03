@@ -152,14 +152,14 @@ public class XMLHandler extends DefaultHandler {
 			bActionElementStart = true;
 			if(operationInfo != null) {
 				operationInfo.clear();
-				for (int i=0; i<attributes.getLength(); i++) {
-					if (TestCase.TESTCASE_OPERATION_STEP.equals(attributes.getLocalName(i))) {
-						operationInfo.put(TestCase.TESTCASE_OPERATION_STEP, attributes.getValue(i));
-						break;
-					}
-				}
 			} else {
 				operationInfo = new HashMap<String, String>();
+			}
+			for (int i=0; i<attributes.getLength(); i++) {
+				if (TestCase.TESTCASE_OPERATION_STEP.equals(attributes.getLocalName(i))) {
+					operationInfo.put(TestCase.TESTCASE_OPERATION_STEP, attributes.getValue(i));
+					break;
+				}
 			}
 		}
 		

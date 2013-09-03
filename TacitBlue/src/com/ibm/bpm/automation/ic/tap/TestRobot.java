@@ -28,35 +28,31 @@ public class TestRobot implements IScenarioStarter{
 	
 	public static String ICAUTO_TESTCASE_PATH = "test";
 	public static String ICAUTO_LOG_PATH = "logs";
+	public static String ICAUTO_OUTPUT_PATH = "outputs";
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void start(AutomationService autoService) {
 		
-		/*try {
-			LogUtil.init(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH);
-		} catch (AutoException e) {
-			logger.log(LogLevel.ERROR, "Failed to initiate the LogUtil.", e);
-		}*/
 		LogUtil.init(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH);
 		
 		String executionInfo = MessageFormat.format("ExecutionSet:{0}\tRelease:{1}\tBuild:{2}" +
 				System.getProperty("line.separator") + "Environment:{3}\t", 
 				//TODO use real info when apply to field.
-				/*new Object[] {
+				new Object[] {
 					autoService.getCurrentExecutionSet().getName(),
 					autoService.getCurrentRelease(),
 					autoService.getCurrentBuildLevel(),
 					autoService.getCurrentEnvironment().getEnvironmentName()
-				});*/
-				new Object[] {"ConfigureSTD_SingleCLusterDE", "8550", "20130829","STDSingleClusterDE"});
+				});
+				//new Object[] {"ConfigureSTD_SingleCLusterDE", "8550", "20130829","STDSingleClusterDE"});
 		
 		logger.log(LogLevel.HEADER, executionInfo);
 		
@@ -73,25 +69,25 @@ public class TestRobot implements IScenarioStarter{
 		if (null != caseList) {
 			boolean runAllCases = true;
 			
-			//String regScriptName = autoService.getCurrentTestScript().getName();
-			//TODO replace this with above line. ********
-			String regScriptName = "";
+			String regScriptName = autoService.getCurrentTestScript().getName();
 			
 			if (null == regScriptName || "".equals(regScriptName)) {
 				logger.log(LogLevel.WARNING, "The script(step) name registered in TAP is empty. Will execute existing any cases.");
 			}
 			
-			//TODO Construct Configuration with Environment info via autoSerivce.
+			//Construct Configuration with Environment info via autoSerivce.
 			HashMap<String, Object> config = new HashMap<String, Object>();
 			String bpmLogFolder = System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH + File.separator + "bpm";
 			config.put(Configurations.LOGFOLDER.getKey(), ICAUTO_LOG_PATH);
 			config.put(Configurations.BPMLOGFDR.getKey(), bpmLogFolder);
-			//Environment curEnv = autoService.getCurrentEnvironment();
-			//config.put(Configurations.BPMLOGSAV.getKey(), ExecutionContext.getBPMServerLogPath(curEnv));
-			//autoService.retriveAllLogs(curEnv, bpmLogFolder);
-			//ExecutionContext.getExecutionContext().setAutomationService(autoService);
+			Environment curEnv = autoService.getCurrentEnvironment();
+			config.put(Configurations.BPMLOGSAV.getKey(), ExecutionContext.getBPMServerLogPath(curEnv));
+			config.put(Configurations.BPMPATH.getKey(), autoService.getCurrentMachine().getBpmHome());
+			autoService.retriveAllLogs(curEnv, bpmLogFolder);
+			ExecutionContext.getExecutionContext().setAutomationService(autoService);
 			
-			//TODO Stub for config hash map
+			//Stub for config hash map
+			/*config.put(Configurations.BPMLOGFDR.getKey(), "e:\\tmp\\outputs\\logs\\bpm");
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			List<String> nodeLogSavePathes = new ArrayList<String>();
 			nodeLogSavePathes.add("custom_logs\\9.110.191.189_Custom01\\SingleClusterMember2");
@@ -101,21 +97,19 @@ public class TestRobot implements IScenarioStarter{
 			nodeFFDCSavePathes.add("custom_logs\\9.110.191.188_Custom02\\ffdc");
 			List<String> nodeAgentSavePathes = new ArrayList<String>();
 			nodeAgentSavePathes.add("custom_logs\\9.110.191.189_Custom01\\nodeagent");
-			nodeAgentSavePathes.add("custom_logs\\9.110.191.188_Custom02\\nodeagent");
-			
+			nodeAgentSavePathes.add("custom_logs\\9.110.191.188_Custom02\\nodeagent");			
 			m.put(ExecutionContext.COLLECTED_DMGR_SERVLOGPATH, "dmgr_logs\\dmgr");
 			m.put(ExecutionContext.COLLECTED_DMGR_FFDCLOGPATH, "dmgr_logs\\ffdc");
 			m.put(ExecutionContext.COLLECTED_NODE_AGENTLOGPATH, nodeAgentSavePathes);
 			m.put(ExecutionContext.COLLECTED_NODE_FFDCLOGPATH, nodeFFDCSavePathes);
-			m.put(ExecutionContext.COLLECTED_NODE_SERVLOGPATH, nodeLogSavePathes);
-			
-			config.put(Configurations.BPMLOGSAV.getKey(), m);
-			config.put(Configurations.BPMPATH.getKey(), "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer");
+			m.put(ExecutionContext.COLLECTED_NODE_SERVLOGPATH, nodeLogSavePathes);			
+			config.put(Configurations.BPMLOGSAV.getKey(), m);*/
+			/*config.put(Configurations.BPMPATH.getKey(), "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer");
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");
-			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());
-			config.put(Configurations.DMGRPROF.getKey(), "dmgr");
+			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());*/
 			
+			config.put(Configurations.DMGRPROF.getKey(), "dmgr");
 			config.put(Configurations.APPSEVNAME.getKey(), "server1");
 			
 			int caseIndex = 0;
@@ -138,6 +132,8 @@ public class TestRobot implements IScenarioStarter{
 		else {
 			logger.log(LogLevel.WARNING, "No cases has been loaded.");
 			//Submit the fail execution result
+			String logUrl = autoService.uploadFile(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH + File.separator + "SystemOut_icauto.log");
+			ExecutionContext.getExecutionContext().submitExecutionResult(ExecutionContext.ER_STATUS_FAILED, 0, 0, logUrl, "No cases has been loaded.");
 		}
 	}
 	
