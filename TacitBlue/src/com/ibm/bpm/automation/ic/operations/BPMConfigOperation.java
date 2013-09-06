@@ -10,12 +10,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.ibm.bpm.automation.ic.AutoException;
+import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.constants.Configurations;
-import com.ibm.bpm.automation.ic.constants.OperationCommand;
+import com.ibm.bpm.automation.ic.constants.OperationParameters;
 import com.ibm.bpm.automation.ic.constants.OperationSystem;
 import com.ibm.bpm.automation.ic.tap.ExecutionContext;
+import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.CommandUtil;
-import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public class BPMConfigOperation extends BaseOperation {
@@ -24,20 +25,16 @@ public class BPMConfigOperation extends BaseOperation {
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 
 	public BPMConfigOperation() {
-		command = OperationCommand.BPMCONFIG.getCommand();
+		command = OperationParameters.BPMCONFIG.getCommand();
 	}
 	
 	@Override
-	public void run(HashMap<String, Object> config) throws AutoException {
+	public void run(HashMap<String, Object> config) {
+		super.run(config);
 		logger.log(LogLevel.INFO, "Invoke operation '" + BPMConfigOperation.class.getSimpleName() + "'");
-		Date startTime = new Date();
 		//prepare for execute the command in test environment
-		String osName = System.getProperty("os.name").toLowerCase();
+		//String osName = System.getProperty("os.name").toLowerCase();
 		String workingFolder = config.get(Configurations.BPMPATH.getKey()) + File.separator + "bin";
-		
-		/*String parameters = ((this.getAction()!=null) ? this.getAction() + " " : "") + 
-				((this.getType()!=null) ? this.getType() + " " : "") + 
-				((this.getPropFile()!=null) ? this.getPropFile() : "");*/
 		
 		List<String> cmds = new ArrayList<String>();
 		cmds.add(workingFolder + File.separator + CommandUtil.getCommandByOS(command));
@@ -47,8 +44,8 @@ public class BPMConfigOperation extends BaseOperation {
 		if (null != getType()) {
 			cmds.add(getType());
 		}
-		if (null != getPropFile()) {
-			cmds.add(getPropFile());
+		if (null != getData()) {
+			cmds.add(getData());
 		}
 		//execute operation
 		String result = CommandUtil.executeCommnd(cmds, workingFolder);
@@ -80,24 +77,6 @@ public class BPMConfigOperation extends BaseOperation {
 			logger.log(LogLevel.WARNING, "Can't determine if the operation '" + this.getName() + "' succeeded or failed!");
 		}
 		
-		Date endTime = new Date();
-		
-		if (failedPoints != 0) {
-			logger.log(LogLevel.ERROR, "Step '" + getStep() + "' failed with points [" + failedPoints +"]!");
-			if (null != ExecutionContext.getExecutionContext().getAutomationService()) {
-				ExecutionContext.getExecutionContext().submitExeuctionResultWithNewER(
-						getStep(), getPoints(), ExecutionContext.ER_STATUS_FAILED, successPoints, startTime, endTime, "", result.toString());
-			}
-		}
-		else {
-			if (successPoints == 0) {
-				successPoints = getPoints();
-			}
-			logger.log(LogLevel.INFO, "Step '" + getStep() + "' Succeeded with points [" + successPoints +"]!");
-			if (null != ExecutionContext.getExecutionContext().getAutomationService()) {
-				ExecutionContext.getExecutionContext().submitExeuctionResultWithNewER(
-						getStep(), getPoints(), ExecutionContext.ER_STATUS_SUCCESSFUL, successPoints, startTime, endTime, "", result.toString());
-			}
-		}		
+		submit(result, logger);
 	}	
 }

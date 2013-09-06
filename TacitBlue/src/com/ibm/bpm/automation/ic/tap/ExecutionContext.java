@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
-import com.ibm.bpm.automation.ic.utils.LogLevel;
+
+import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.automation.tap.automationobjects.Environment;

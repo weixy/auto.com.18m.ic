@@ -1,4 +1,4 @@
-package com.ibm.bpm.automation.ic.utils;
+package com.ibm.bpm.automation.ic;
 
 import java.util.logging.Level;
 

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.operations.BaseOperation;
-import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
 public class TestCase {
@@ -24,7 +23,8 @@ public class TestCase {
 	public static final String TESTCASE_OPERATION_ACTION = "action";
 	public static final String TESTCASE_OPERATION_TYPE = "type";
 	public static final String TESTCASE_OPERATION_OPTION = "option";
-	public static final String TESTCASE_OPERATION_PROPFILE = "propertiesFile";
+	public static final String TESTCASE_OPERATION_DATA = "data";
+	//public static final String TESTCASE_OPERATION_PROPFILE = "propertiesFile";
 	
 	private String title;
 	private String description;
@@ -57,11 +57,8 @@ public class TestCase {
 		logger.log(LogLevel.INFO, "Start to execute case '" + title + "'");
 		for(Iterator<BaseOperation> it = operations.iterator(); it.hasNext();) {
 			BaseOperation oper = it.next();
-			try {
-				oper.run(config);
-			} catch (AutoException e) {
-				logger.log(LogLevel.ERROR, "Failed to execute test case '" + this.getTitle() + "'", e);
-			}
+			oper.run(config);
+			
 		}
 	}
 }

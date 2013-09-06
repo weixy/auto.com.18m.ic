@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testCase>
+	<title>SampleTest03</title>
+	<description>This is a test case of BPMConfig for IC automation. </description>
+	<operation step="Create BPM DE with BPMConfig">
+		<name>ConfigBPM</name>
+		<points>10</points>
+		<action>create</action>
+		<type>de</type>
+		<data>MyStdSingleCluster.prop</data>
+	</operation>
+	<operation step="Update BPM Context root">
+		<name>ConfigBPM</name>
+		<points>5</points>
+		<action>update</action>
+		<type>contextRootPrefix</type>
+		<data>weixy</data>
+	</operation>
+	<operation step="Check BPM Config">
+		<name>ManagerConfig</name>
+		<points>2</points>
+		<action>valid</action>
+		<type>ContextRoot</type>
+		<data>weixy</data>
+	</operation>
+	<operation>
+		<name>TestException</name>
+	</operation>
+</testCase>

@@ -14,6 +14,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.OperationMapping;
 import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.TestCase;
@@ -99,7 +100,7 @@ public class XMLHandler extends DefaultHandler {
 				|| TestCase.TESTCASE_OPERATION_POINTS.equals(elemntName)
 				|| TestCase.TESTCASE_OPERATION_TYPE.equals(elemntName)
 				|| TestCase.TESTCASE_OPERATION_OPTION.equals(elemntName)
-				|| TestCase.TESTCASE_OPERATION_PROPFILE.equals(elemntName)) {
+				|| TestCase.TESTCASE_OPERATION_DATA.equals(elemntName)) {
 			operationInfo.put(elemntName, txt);
 		} else if (TestCase.TESTCASE_OPERATION.equals(elemntName)) {
 			bActionElementStart = false;
@@ -124,7 +125,7 @@ public class XMLHandler extends DefaultHandler {
 						((BaseOperation) anObj).setAction(operationInfo.get(TestCase.TESTCASE_OPERATION_ACTION));
 						((BaseOperation) anObj).setType(operationInfo.get(TestCase.TESTCASE_OPERATION_TYPE));
 						((BaseOperation) anObj).setOption(operationInfo.get(TestCase.TESTCASE_OPERATION_OPTION));
-						((BaseOperation) anObj).setPropFile(operationInfo.get(TestCase.TESTCASE_OPERATION_PROPFILE));
+						((BaseOperation) anObj).setData(operationInfo.get(TestCase.TESTCASE_OPERATION_DATA));
 						
 						testCase.addOperations((BaseOperation)anObj);
 					} else {

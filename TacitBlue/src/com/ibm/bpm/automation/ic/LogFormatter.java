@@ -1,4 +1,4 @@
-package com.ibm.bpm.automation.ic.utils;
+package com.ibm.bpm.automation.ic;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -6,6 +6,7 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
+
 
 public class LogFormatter extends Formatter {
 
@@ -19,7 +20,7 @@ public class LogFormatter extends Formatter {
 			sb.append(System.getProperty("line.separator"));
 			sb.append(record.getMessage());
 			sb.append(System.getProperty("line.separator"));
-			sb.append("************ End Display Current Execution ************");
+			sb.append("************ End  Display Current Execution ************");
 			sb.append(System.getProperty("line.separator"));
 		}
 		else {
@@ -28,7 +29,12 @@ public class LogFormatter extends Formatter {
 	        }
 			sb.append("[").append(MessageFormat.format("{0,date,MM/dd/yyyy} {0, time,HH:mm:ss zzz}", 
 					new Object[] {new Date(record.getMillis())})).append("]\t");
-			sb.append(record.getSourceClassName()).append("\t");
+			try {
+				Class<?> aClass = Class.forName(record.getSourceClassName());
+				sb.append(aClass.getSimpleName()).append(".").append(record.getSourceMethodName()).append("\t");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			sb.append(record.getLevel().getName().charAt(0)).append("\t");
 			sb.append(record.getMessage()).append(System.getProperty("line.separator"));
 			

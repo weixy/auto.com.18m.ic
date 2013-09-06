@@ -7,10 +7,13 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.AutoException;
+import com.ibm.bpm.automation.ic.LogFormatter;
+import com.ibm.bpm.automation.ic.LogLevel;
 
 public class LogUtil extends Logger {
 	
 	private static Logger logger = Logger.getLogger("global");
+	public static String AutoLogName = "SystemOut_icauto.log";
 	
 	protected LogUtil(String name, String resourceBundleName) {
 		super(name, resourceBundleName);
@@ -28,7 +31,7 @@ public class LogUtil extends Logger {
 			}
 		}
 		
-		String outLogPath = logFolder.getAbsolutePath() + File.separator + "SystemOut_icauto.log";
+		String outLogPath = logFolder.getAbsolutePath() + File.separator + AutoLogName;
 		File outLogFile = new File(outLogPath);
 		
 		if (outLogFile.exists()) {

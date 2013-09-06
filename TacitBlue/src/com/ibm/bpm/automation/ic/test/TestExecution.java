@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.AutoException;
+import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.TestCaseLoader;
 import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.tap.ExecutionContext;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
-import com.ibm.bpm.automation.ic.utils.LogLevel;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.XMLHandler;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
@@ -39,10 +39,11 @@ public class TestExecution {
 		
 		LogUtil.init(System.getProperty("user.dir") + File.separator + ICAUTO_LOG_PATH);
 		
-		String executionInfo = MessageFormat.format("ExecutionSet:{0}\tRelease:{1}\tBuild:{2}" +
-				System.getProperty("line.separator") + "Environment:{3}\t", 
+		String executionInfo = MessageFormat.format("Release: {0}\tBuild: {1}\tTopology: {2}" + System.getProperty("line.separator")
+				+ "Environment: {3}\tMachine: {4}" + System.getProperty("line.separator")
+				+ "ExecutionSet: {5}\tPackage: {6}", 
 				
-				new Object[] {"ConfigureSTD_SingleCLusterDE", "8550", "20130829","STDSingleClusterDE"});
+				new Object[] {"8550", "20130829", "SingleCluster", "STDSingleClusterDE", "9.110.191.189", "ConfigureSTD_SingleCLusterDE", "MyICAutoPackage"});
 		
 		logger.log(LogLevel.HEADER, executionInfo);
 		
@@ -64,7 +65,7 @@ public class TestExecution {
 			String regScriptName = "";
 			
 			if (null == regScriptName || "".equals(regScriptName)) {
-				logger.log(LogLevel.WARNING, "The script(step) name registered in TAP is empty. Will execute existing any cases.");
+				logger.log(LogLevel.WARNING, "The script(step) name registered in TAP is empty. Will execute any existing cases.");
 			}
 			
 			//Construct Configuration with Environment info via autoSerivce.
@@ -101,7 +102,8 @@ public class TestExecution {
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");
 			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());
-			config.put(Configurations.DMGRPROF.getKey(), "dmgr");
+			config.put(Configurations.DENAME.getKey(), "deicauto");
+			config.put(Configurations.DMGRPROF.getKey(), "Dmgr01");
 			
 			config.put(Configurations.APPSEVNAME.getKey(), "server1");
 			

@@ -3,26 +3,26 @@
 	<title>SampleTest02</title>
 	<description>This is just a simple test case for IC automation log analysis. </description>
 	<operation step="Check BPMConfig Log">
-		<name>HandleLog</name>
+		<name>CheckLog</name>
 		<points>5</points>
 		<action>check</action>
 		<type>BPMConfigLog</type>
 	</operation>
 	<operation step="Check All BPM Server Log">
-		<name>HandleLog</name>
+		<name>CheckLog</name>
 		<points>5</points>
 		<action>check</action>
 		<type>BPMLog</type>
 	</operation>
 	<operation step="Check BPM Server Log">
-		<name>HandleLog</name>
+		<name>CheckLog</name>
 		<points>5</points>
 		<action>check</action>
 		<type>BPMLog</type>
 		<option>BPMNodeServerLog</option>
 	</operation>
 	<operation step="Check BPM Server FFDC">
-		<name>HandleLog</name>
+		<name>CheckLog</name>
 		<points>5</points>
 		<action>check</action>
 		<type>BPMLog</type>

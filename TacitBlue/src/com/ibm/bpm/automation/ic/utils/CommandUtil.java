@@ -8,6 +8,8 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
+
+import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.constants.OperationSystem;
 
 public class CommandUtil {

@@ -2,7 +2,7 @@
 <testCase>
 	<title>SampleTest01</title>
 	<description>This is just a simple test case for IC automation. </description>
-	<operation>
+	<operation step="Config BPM">
 		<name>BPMConfigure</name>
 		<points>10</points>
 		<action>-create</action>
@@ -10,13 +10,13 @@
 		<option></option>
 		<propertiesFile>c:/ibm/abc.xml</propertiesFile>
 	</operation>
-	<operation>
-		<name>HandleLog</name>
-		<points>5</points>
-		<action>check</action>
-		<type>BPMConfigLog</type>
+	<operation step="Check BPM Config properties">
+		<name>CheckConfig</name>
+		<points>2</points>
+		<type>ContextRoot</type>
+		<option>All</option>
 	</operation>
-	<operation>
+	<operation step="Start BPM server">
 		<name>BPMServer</name>
 		<points>1</points>
 		<action>start</action>

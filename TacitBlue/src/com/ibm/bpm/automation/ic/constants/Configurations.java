@@ -2,11 +2,12 @@ package com.ibm.bpm.automation.ic.constants;
 
 public enum Configurations {
 
-	BPMPATH("bpmPath"), 
+	BPMPATH("bpmPath"),
+	DENAME("deName"),
 	DEUSERNAME("deUserName"), 
 	DEUSERPWD("deUserPwd"), 
-	CEUSERNAME("ceUserName"),
-	CEUSERPWD("ceUserPwd"),
+	CEUSERNAME("cellUserName"),
+	CEUSERPWD("cellUserPwd"),
 	DMGRPROF("dmgrProfile"),
 	NODEPROF("nodeProfile"),
 	TOPTYPE("topologyType"),
