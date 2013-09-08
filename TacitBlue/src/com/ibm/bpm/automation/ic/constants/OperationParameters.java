@@ -8,15 +8,11 @@ public enum OperationParameters {
 	BPMCONFIG_TYP_DE("de"),
 	BPMCONFIG_TYP_CONTXTRT("contextRootPrefix"),
 	
+	WSADMIN("wsadmin"),
+	
 	BPMCONFLOG("BPMConfigLog"),
 	STARTSERV("startServer"),
 	STOPSERV("stopServer"),
-	
-	WSADMIN("wsadmin"),
-	
-	CHKCONF("CheckConfig"),
-	CHKCONF_TYP_CONTEXTROOT("CheckContextRoot"),
-	CHKCONF_OPT_ALL("All"),
 	
 	BPMLOG("BPMLog"),
 	//options of BPMLog

@@ -56,6 +56,7 @@ public class ConfigBPMOperation extends BaseOperation {
 				result.append("Unsupported BPMConfig action found, please check it: '" + action + "'.");
 			}
 			
+			//
 			result.append(BPMConfigUtil.executeCommnd(cmds, workingFolder));
 		}
 		else {

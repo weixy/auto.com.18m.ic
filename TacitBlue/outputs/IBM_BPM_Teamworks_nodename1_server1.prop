@@ -1,0 +1,1747 @@
+
+#
+# Configuration properties file for cells/nodename1Node01Cell/applications/IBM_BPM_Teamworks_nodename1_server1.ear/deployments/IBM_BPM_Teamworks_nodename1_server1|deployment.xml#
+# Extracted on Mon Sep 09 06:56:23 CST 2013
+#
+
+#
+# Section 1.0 ## Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145
+#
+
+#
+# SubSection 1.0 # Application Section. 
+#
+ResourceType=ApplicationDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145
+#
+
+#
+#Properties
+#
+recycleOnUpdate=PARTIAL #ENUM(PARTIAL|NONE|FULL),default(PARTIAL)
+standaloneModule=false #boolean,default(false)
+allowDispatchRemoteInclude=false #boolean,default(false)
+autoLink=false #boolean,default(false)
+expandSynchronously=false #boolean,default(false)
+zeroBinaryCopy=false #boolean,default(false)
+allowServiceRemoteInclude=false #boolean,default(false)
+warClassLoaderPolicy=SINGLE #ENUM(MULTIPLE|SINGLE),required,default(MULTIPLE)
+asyncRequestDispatchType=DISABLED #ENUM(CLIENT_SIDE|DISABLED|SERVER_SIDE),default(DISABLED)
+filePermission=".*\.dll=755#.*\.so=755#.*\.a=755#.*\.sl=755"
+enableDistribution=true #boolean,default(true)
+deploymentId=0 #required
+startingWeight=1 #integer,required,default(1)
+zeroEarCopy=false #boolean,default(false)
+backgroundApplication=false #boolean,default(false)
+reloadInterval=3 #long,default(3)
+useMetadataFromBinaries=false #boolean,default(false)
+reloadEnabled=false #boolean,default(true)
+createMBeansForResources=true #boolean,default(false)
+appContextIDForSecurity="href:nodename1Node01Cell/IBM_BPM_Teamworks_nodename1_server1"
+enableClientModule=false #boolean,default(false)
+binariesURL="$(APP_INSTALL_ROOT)/nodename1Node01Cell/IBM_BPM_Teamworks_nodename1_server1.ear" #required
+startOnDistribute=false #boolean,default(false)
+name=null
+
+
+#
+# SubSection 1.0.4 # Application Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:Classloader=ID#Classloader_1374814802145
+#
+
+#
+#Properties
+#
+mode=PARENT_LAST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.4.0 # Classloader LibraryRef
+#
+ResourceType=LibraryRef
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:Classloader=ID#Classloader_1374814802145:LibraryRef=ID#LibraryRef_1374814802709
+#
+
+#
+#Properties
+#
+libraryName=IBM_BPM_Process_Server_Shared_Library
+sharedClassloader=true #boolean,default(true)
+
+
+#
+# SubSection 1.0.0 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802145
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=teamworks.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.0.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802145:Classloader=ID#Classloader_1374814802146
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.1 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802146
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=bpmwebservices.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.1.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802146:Classloader=ID#Classloader_1374814802147
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.2 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802147
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=teamworks-legacy.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.2.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802147:Classloader=ID#Classloader_1374814802148
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.3 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802148
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=eventmgr.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.3.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802148:Classloader=ID#Classloader_1374814802149
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.4 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802149
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=bpmrepo-services.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.4.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802149:Classloader=ID#Classloader_1374814802150
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.5 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802150
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=bpmrest.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.5.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802150:Classloader=ID#Classloader_1374814802151
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.6 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802151
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=bpmfds-services.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.6.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802151:Classloader=ID#Classloader_1374814802152
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.7 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802152
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=bpmrest-ui.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.7.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802152:Classloader=ID#Classloader_1374814802153
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.8 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802153
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=webviewer.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.8.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802153:Classloader=ID#Classloader_1374814802154
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.9 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802154
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=bpmasset.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.9.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:WebModuleDeployment=ID#WebModuleDeployment_1374814802154:Classloader=ID#Classloader_1374814802155
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.6.0 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802145
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=twcore-ejb.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.1 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802146
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=twprocess-ejb.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.2 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802147
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=twtask-ejb.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.3 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802148
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=office-ejb.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.4 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802149
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=SCAStartupBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.5 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802150
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=PALStartupBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.6 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802151
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=BPMSearchStartupBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.7 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802152
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=ServerCommandStartupBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.8 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802153
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=SharingNotificationBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.9 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802154
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=EmbeddedECMStartupBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.6.10 # EJBModuleDeployment
+#
+ResourceType=EJBModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145:EJBModuleDeployment=ID#EJBModuleDeployment_1374814802155
+#
+
+#
+#Properties
+#
+deploymentId=1 #required
+startingWeight=5000 #integer,required,default(1)
+name=null
+altDD=null
+uri=AtRiskTrackingBean.jar #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145 #ObjectName(ApplicationDeployment),readonly
+
+
+#
+# SubSection 1.0.7 # Application properties
+#
+ResourceType=ApplicationDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814802145
+AttributeInfo=properties(name,value)
+#
+
+#
+#Properties
+#
+metadata.complete=false
+
+
+#
+# SubSection 1.0.1 # AppDeploymentOptions Section. taskName and row0 should not be edited. row0 contains column names for the task. 
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=AppDeploymentOptions
+row1={$(APP_INSTALL_ROOT)/nodename1Node01Cell AppDeploymentOption.Yes AppDeploymentOption.No AppDeploymentOption.Yes AppDeploymentOption.No "" off .*\.dll=755#.*\.so=755#.*\.a=755#.*\.sl=755 "Development Build" AppDeploymentOption.No AppDeploymentOption.No DISABLED AppDeploymentOption.No}
+mutables={true true true true true true true true false true true true true} #readonly
+row0={installed.ear.destination distributeApp useMetaDataFromBinary createMBeansForResources reloadEnabled reloadInterval validateinstall filepermission buildVersion allowDispatchRemoteInclude allowServiceRemoteInclude asyncRequestDispatchType useAutoLink} #readonly
+
+
+#
+# SubSection 1.0.2 # MapModulesToServers Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapModulesToServers
+row19={"BPM REST API Tester" bpmrest-ui.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 24 moduletype.web "Web Module"}
+row18={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 25 moduletype.web "Web Module"}
+row17={"WLE REST API" bpmrest.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 24 moduletype.web "Web Module"}
+row16={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 25 moduletype.web "Web Module"}
+mutables={false false true false false false} #readonly
+row15={"Event Manager HTTP Listener Interface" eventmgr.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 22 moduletype.web "Web Module"}
+row14={"Lombardi Software Teamworks Web Interface (Legacy)" teamworks-legacy.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 24 moduletype.web "Web Module"}
+row13={"BPM Web Services Web App" bpmwebservices.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 30 moduletype.web "Web Module"}
+row12={"Lombardi Software Teamworks Web Interface" teamworks.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 24 moduletype.web "Web Module"}
+row11={AtRiskTrackingBean AtRiskTrackingBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row10={embedded-ecm-event-handler EmbeddedECMStartupBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 31 moduletype.ejb "EJB Module"}
+row9={SchedulerSinkBean SharingNotificationBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row21={bpmasset bpmasset.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 30 moduletype.web "Web Module"}
+row8={ServerCommandStartupBean ServerCommandStartupBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row20={web-viewer webviewer.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 25 moduletype.web "Web Module"}
+row7={BPMSearchStartupBean BPMSearchStartupBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row6={PALStartupBean PALStartupBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row5={SCAStartupBean SCAStartupBean.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row4={"Lombardi for Office Beans" office-ejb.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row3={"TeamWorks Task Beans" twtask-ejb.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row2={"TeamWorks Process Beans" twprocess-ejb.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row1={"Teamworks Core" twcore-ejb.jar,META-INF/ejb-jar.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 20 moduletype.ejb "EJB Module"}
+row0={module uri server ModuleVersion moduletype moduletypeDisplay} #readonly
+
+
+#
+# SubSection 1.0.3 # MapRolesToUsers Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapRolesToUsers
+row9={twinternal AppDeploymentOption.No AppDeploymentOption.No "" "" AppDeploymentOption.No "" ""}
+row8={twmisc AppDeploymentOption.No AppDeploymentOption.No "" "" AppDeploymentOption.No "" ""}
+row7={user AppDeploymentOption.No AppDeploymentOption.No "" "" AppDeploymentOption.No "" ""}
+row6={httpeventsenders AppDeploymentOption.Yes AppDeploymentOption.No "" "" AppDeploymentOption.No "" ""}
+row5={twem AppDeploymentOption.No AppDeploymentOption.No tw_admin "" AppDeploymentOption.No " " ""}
+row4={twuser AppDeploymentOption.No AppDeploymentOption.Yes "" "" AppDeploymentOption.No "" ""}
+row3={twauthors AppDeploymentOption.No AppDeploymentOption.No tw_admin "" AppDeploymentOption.No " " ""}
+row2={twadmins AppDeploymentOption.No AppDeploymentOption.No tw_admin "" AppDeploymentOption.No " " ""}
+row1={twauthor AppDeploymentOption.No AppDeploymentOption.No tw_admin "" AppDeploymentOption.No " " ""}
+mutables={false true true true true true true true} #readonly
+row10={TWSecurityProviderUsers AppDeploymentOption.No AppDeploymentOption.No "" "" AppDeploymentOption.No "" ""}
+row0={role role.everyone role.all.auth.user role.user role.group role.all.auth.realms role.user.access.ids role.group.access.ids} #readonly
+
+
+#
+# SubSection 1.0.4 # BindJndiForEJBNonMessageBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+row40={"Teamworks Core" ParticipantGroups twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ParticipantGroups 20 "" ""}
+row41={"Teamworks Core" InternalGroups twcore-ejb.jar,META-INF/ejb-jar.xml ejb/InternalGroups 20 "" ""}
+row42={"Teamworks Core" AuthorizationService twcore-ejb.jar,META-INF/ejb-jar.xml ejb/AuthorizationService 20 "" ""}
+row43={"Teamworks Core" UserStatusServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/UserStatusServices 20 "" ""}
+row44={"Teamworks Core" BlueprintManager twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BlueprintManager 20 "" ""}
+mutables={false false false true false true true} #readonly
+row45={"Teamworks Core" IBMInterchangeImpExpService twcore-ejb.jar,META-INF/ejb-jar.xml ejb/IBMInterchangeImpExpService 20 "" ""}
+row46={"Teamworks Core" PALServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/PALServices 20 "" ""}
+row47={"Teamworks Core" RepositoryLog twcore-ejb.jar,META-INF/ejb-jar.xml ejb/RepositoryLog 20 "" ""}
+row48={"Teamworks Core" ProcessCenterActions twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ProcessCenterActions 20 "" ""}
+row49={"Teamworks Core" ProcessCenterSharing twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ProcessCenterSharing 20 "" ""}
+row0={EJBModule EJB uri JNDI ModuleVersion localHomeJndi remoteHomeJndi} #readonly
+row1={"Teamworks Core" SchedulerInitializer twcore-ejb.jar,META-INF/ejb-jar.xml ejb/SchedulerInitializerStartupBean 20 "" ""}
+row2={"Teamworks Core" SocialBusStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml ejb/SocialBusStartupBean 20 "" ""}
+row3={"Teamworks Core" EJBWorkflowManager twcore-ejb.jar,META-INF/ejb-jar.xml ejb/EJBWorkflowManager 20 "" ""}
+row4={"Teamworks Core" BPDEngineServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BPDEngineServices 20 "" ""}
+row5={"Teamworks Core" EventMgr twcore-ejb.jar,META-INF/ejb-jar.xml ejb/EventMgr 20 "" ""}
+row6={"Teamworks Core" PersistenceServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/PersistenceServices 20 "" ""}
+row7={"Teamworks Core" LogWatch twcore-ejb.jar,META-INF/ejb-jar.xml ejb/LogWatch 20 "" ""}
+row8={"Teamworks Core" PKGenerator twcore-ejb.jar,META-INF/ejb-jar.xml ejb/PKGenerator 20 "" ""}
+row9={"Teamworks Core" ReflectionServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ReflectionServices 20 "" ""}
+row50={"Teamworks Core" OSLCServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/OSLCServices 20 "" ""}
+row51={"Teamworks Core" LinkageServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/LinkageServices 20 "" ""}
+row52={"Teamworks Core" TestServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/TestServices 20 "" ""}
+row53={"Teamworks Core" NotificationListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml ejb/NotificationListenerRegistrationStartupBean 20 "" ""}
+row54={"Teamworks Core" TaskListListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml ejb/TaskListListenerRegistrationStartupBean 20 "" ""}
+row55={"Teamworks Core" SearchListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml ejb/SearchListenerRegistrationStartupBean 20 "" ""}
+row56={"Teamworks Core" GovernanceEventService twcore-ejb.jar,META-INF/ejb-jar.xml ejb/GovernanceEventService 20 "" ""}
+row57={"TeamWorks Process Beans" EventQueueManager twprocess-ejb.jar,META-INF/ejb-jar.xml ejb/EventQueueManager 20 "" ""}
+row58={"TeamWorks Process Beans" ExportImportService twprocess-ejb.jar,META-INF/ejb-jar.xml ejb/ExportImportService 20 "" ""}
+row59={"TeamWorks Task Beans" Task twtask-ejb.jar,META-INF/ejb-jar.xml ejb/Task 20 "" ""}
+row60={"TeamWorks Task Beans" TaskServices twtask-ejb.jar,META-INF/ejb-jar.xml ejb/TaskServices 20 "" ""}
+row61={"Lombardi for Office Beans" OfficeServices office-ejb.jar,META-INF/ejb-jar.xml ejb/OfficeServices 20 "" ""}
+row62={SCAStartupBean SCAStartupBean SCAStartupBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/websphere/startupservice/AppStartUpHomeSCA 20 "" ""}
+row63={PALStartupBean PALStartupBean PALStartupBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/websphere/startupservice/AppStartUpHomePAL 20 "" ""}
+row64={BPMSearchStartupBean BPMSearchStartupBean BPMSearchStartupBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/websphere/startupservice/AppStartUpBPMSearch 20 "" ""}
+row65={BPMSearchStartupBean ProcessSearchStartupBean BPMSearchStartupBean.jar,META-INF/ejb-jar.xml ejb/ProcessSearchStartupBean 20 "" ""}
+row66={ServerCommandStartupBean ServerCommandStartupBean ServerCommandStartupBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/websphere/startupservice/AppStartUpServerCommand 20 "" ""}
+row67={SchedulerSinkBean Sink SharingNotificationBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/bpm/pcshare/scheduler/NotificationSinkHome 20 "" ""}
+row68={SchedulerSinkBean Handler SharingNotificationBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/bpm/pcshare/scheduler/NotificationHandlerHome 20 "" ""}
+row69={SchedulerSinkBean PCShareStartupBean SharingNotificationBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/websphere/startupservice/AppStartUpHomePCShare 20 "" ""}
+row70={embedded-ecm-event-handler EmbeddedECMEventHandlerStartupBean EmbeddedECMStartupBean.jar,META-INF/ejb-jar.xml "" 31 "" ""}
+row71={AtRiskTrackingBean AtRiskTrackingHandler AtRiskTrackingBean.jar,META-INF/ejb-jar.xml ejb/com/lombardisoftware/bpd/runtime/tracking/ejb/AtRiskTrackingHandlerHome 20 "" ""}
+row72={AtRiskTrackingBean AtRiskTrackingStartupBean AtRiskTrackingBean.jar,META-INF/ejb-jar.xml ejb/com/ibm/websphere/startupservice/AppStartUpHomeAtRisk 20 "" ""}
+row10={"Teamworks Core" ClientServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ClientServices 20 "" ""}
+row11={"Teamworks Core" CommonServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/CommonServices 20 "" ""}
+row12={"Teamworks Core" RepositoryServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/RepositoryServices 20 "" ""}
+row13={"Teamworks Core" Security twcore-ejb.jar,META-INF/ejb-jar.xml ejb/Security 20 "" ""}
+row14={"Teamworks Core" ProcDataRetrieval twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ProcDataRetrieval 20 "" ""}
+row15={"Teamworks Core" ScoreboardAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ScoreboardAPI 20 "" ""}
+row16={"Teamworks Core" ReportAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ReportAPI 20 "" ""}
+row17={"Teamworks Core" BPDAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BPDAPI 20 "" ""}
+row18={"Teamworks Core" BPDInstanceAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BPDInstanceAPI 20 "" ""}
+row19={"Teamworks Core" BPDInstanceCommentAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BPDInstanceCommentAPI 20 "" ""}
+taskName=BindJndiForEJBNonMessageBinding
+row20={"Teamworks Core" BPDInstanceDocumentAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BPDInstanceDocumentAPI 20 "" ""}
+row21={"Teamworks Core" BPDDocumentAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/BPDDocumentAPI 20 "" ""}
+row22={"Teamworks Core" RemoteDocumentAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/RemoteDocumentAPI 20 "" ""}
+row23={"Teamworks Core" RuntimeErrorAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/RuntimeErrorAPI 20 "" ""}
+row24={"Teamworks Core" TaskAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/TaskAPI 20 "" ""}
+row25={"Teamworks Core" AuthorizationAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/AuthorizationAPI 20 "" ""}
+row26={"Teamworks Core" AuthorizationAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/AuthorizationAPIFacade 20 "" ""}
+row27={"Teamworks Core" ProcessAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ProcessAPIFacade 20 "" ""}
+row28={"Teamworks Core" TaskAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/TaskAPIFacade 20 "" ""}
+row29={"Teamworks Core" SearchAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/SearchAPIFacade 20 "" ""}
+row30={"Teamworks Core" UserGroupAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/UserGroupAPIFacade 20 "" ""}
+row31={"Teamworks Core" ServerInfoAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ServerInfoAPIFacade 20 "" ""}
+row32={"Teamworks Core" RoutingAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml ejb/RoutingAPIFacade 20 "" ""}
+row33={"Teamworks Core" ProcessSearchAPI twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ProcessSearchAPI 20 "" ""}
+row34={"Teamworks Core" ExternalClientServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/ExternalClientServices 20 "" ""}
+row35={"Teamworks Core" EnvironmentServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/EnvironmentServices 20 "" ""}
+row36={"Teamworks Core" RuntimeServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/RuntimeServices 20 "" ""}
+row37={"Teamworks Core" SecurityProvider twcore-ejb.jar,META-INF/ejb-jar.xml ejb/SecurityProvider 20 "" ""}
+row38={"Teamworks Core" TemporaryGroups twcore-ejb.jar,META-INF/ejb-jar.xml ejb/TemporaryGroups 20 "" ""}
+row39={"Teamworks Core" DynamicGroups twcore-ejb.jar,META-INF/ejb-jar.xml ejb/DynamicGroups 20 "" ""}
+
+
+#
+# SubSection 1.0.5 # MapEJBRefToEJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapEJBRefToEJB
+row5={"Lombardi for Office Beans" OfficeServices office-ejb.jar,META-INF/ejb-jar.xml ejb/BPDEngineServices com.lombardisoftware.server.ejb.bpd.BPDEngineServices ejb/BPDEngineServices 20 13 "" twcore-ejb.jar#BPDEngineServices}
+row4={"TeamWorks Task Beans" TaskServices twtask-ejb.jar,META-INF/ejb-jar.xml ejb/PKGenerator com.lombardisoftware.server.ejb.pk.PKGeneratorInterface ejb/PKGenerator 20 13 "" twcore-ejb.jar#PKGenerator}
+row3={"TeamWorks Task Beans" Task twtask-ejb.jar,META-INF/ejb-jar.xml ejb/PKGenerator com.lombardisoftware.server.ejb.pk.PKGeneratorInterface ejb/PKGenerator 20 13 "" twcore-ejb.jar#PKGenerator}
+row2={"Teamworks Core" PersistenceServices twcore-ejb.jar,META-INF/ejb-jar.xml ejb/PKGenerator com.lombardisoftware.server.ejb.pk.PKGeneratorInterface ejb/PKGenerator 20 13 "" PKGenerator}
+row1={"Teamworks Core" EventMgr twcore-ejb.jar,META-INF/ejb-jar.xml ejb/PKGenerator com.lombardisoftware.server.ejb.pk.PKGeneratorInterface ejb/PKGenerator 20 13 "" PKGenerator}
+mutables={false false false false false true false false false false} #readonly
+row0={module EJB uri referenceBinding class JNDI ModuleVersion module.j2ee.version lookup.name ejb.link} #readonly
+
+
+#
+# SubSection 1.0.6 # DataSourceFor20EJBModules Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor20EJBModules
+mutables={false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.7 # DataSourceFor20CMPBeans Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor20CMPBeans
+mutables={false false false false false true true true true} #readonly
+
+
+#
+# SubSection 1.0.8 # MapWebModToVH Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapWebModToVH
+row9={web-viewer webviewer.war,WEB-INF/web.xml default_host}
+row8={"BPM REST API Tester" bpmrest-ui.war,WEB-INF/web.xml default_host}
+row7={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml default_host}
+row6={"WLE REST API" bpmrest.war,WEB-INF/web.xml default_host}
+row5={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml default_host}
+row4={"Event Manager HTTP Listener Interface" eventmgr.war,WEB-INF/web.xml default_host}
+row3={"Lombardi Software Teamworks Web Interface (Legacy)" teamworks-legacy.war,WEB-INF/web.xml default_host}
+row2={"BPM Web Services Web App" bpmwebservices.war,WEB-INF/web.xml default_host}
+row1={"Lombardi Software Teamworks Web Interface" teamworks.war,WEB-INF/web.xml default_host}
+mutables={false false true} #readonly
+row10={bpmasset bpmasset.war,WEB-INF/web.xml default_host}
+row0={webModule uri virtualHost} #readonly
+
+
+#
+# SubSection 1.0.9 # CtxRootForWebMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=CtxRootForWebMod
+row9={web-viewer webviewer.war,WEB-INF/web.xml WebViewer}
+row8={"BPM REST API Tester" bpmrest-ui.war,WEB-INF/web.xml bpmrest-ui}
+row7={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml bpm/fds}
+row6={"WLE REST API" bpmrest.war,WEB-INF/web.xml rest/bpm/wle}
+row5={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml bpm/repo}
+row4={"Event Manager HTTP Listener Interface" eventmgr.war,WEB-INF/web.xml eventmgr}
+row3={"Lombardi Software Teamworks Web Interface (Legacy)" teamworks-legacy.war,WEB-INF/web.xml teamworks.legacy}
+row2={"BPM Web Services Web App" bpmwebservices.war,WEB-INF/web.xml teamworks/webservices}
+row1={"Lombardi Software Teamworks Web Interface" teamworks.war,WEB-INF/web.xml teamworks}
+mutables={false false true} #readonly
+row10={bpmasset bpmasset.war,WEB-INF/web.xml bpmasset}
+row0={webModule uri web.contextroot} #readonly
+
+
+#
+# SubSection 1.0.10 # MapSharedLibForMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapSharedLibForMod
+row9={"BPM REST API Tester" bpmrest-ui.war,WEB-INF/web.xml "" false ""}
+row8={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml "" false ""}
+row7={"WLE REST API" bpmrest.war,WEB-INF/web.xml "" false ""}
+row6={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml "" false ""}
+row5={"Event Manager HTTP Listener Interface" eventmgr.war,WEB-INF/web.xml "" false ""}
+row4={"Lombardi Software Teamworks Web Interface (Legacy)" teamworks-legacy.war,WEB-INF/web.xml "" false ""}
+row3={"BPM Web Services Web App" bpmwebservices.war,WEB-INF/web.xml "" false ""}
+row2={"Lombardi Software Teamworks Web Interface" teamworks.war,WEB-INF/web.xml "" false ""}
+row11={bpmasset bpmasset.war,WEB-INF/web.xml "" false ""}
+row1={IBM_BPM_Teamworks_nodename1_server1 META-INF/application.xml WebSphere:name=IBM_BPM_Process_Server_Shared_Library,isSharedClassloader=true false WebSphere:name=IBM_BPM_Process_Server_Shared_Library,isSharedClassloader=true}
+mutables={false false true false false} #readonly
+row10={web-viewer webviewer.war,WEB-INF/web.xml "" false ""}
+row0={module uri sharedLibName prcess.embedded.config sharedlib.in.process.embdded.config} #readonly
+
+
+#
+# SubSection 1.0.11 # JSPReloadForWebMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=JSPReloadForWebMod
+row9={web-viewer webviewer.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row8={"BPM REST API Tester" bpmrest-ui.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row7={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row6={"WLE REST API" bpmrest.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row5={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row4={"Event Manager HTTP Listener Interface" eventmgr.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row3={"Lombardi Software Teamworks Web Interface (Legacy)" teamworks-legacy.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row2={"BPM Web Services Web App" bpmwebservices.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row1={"Lombardi Software Teamworks Web Interface" teamworks.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+mutables={false false true true} #readonly
+row10={bpmasset bpmasset.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row0={webModule uri jspReloadEnabled jspReloadInterval} #readonly
+
+
+#
+# SubSection 1.0.12 # EJBDeployOptions Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EJBDeployOptions
+mutables={true true true true true true true} #readonly
+
+
+#
+# SubSection 1.0.13 # BackendIdSelection Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=BackendIdSelection
+mutables={false false false false false true} #readonly
+
+
+#
+# SubSection 1.0.14 # BindJndiForEJBMessageBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=BindJndiForEJBMessageBinding
+row6={PALStartupBean FDSServiceMDB PALStartupBean.jar,META-INF/ejb-jar.xml "" bpm/pal/service/deployActivationSpec 13 20 bpm/pal/service/deployDestination "" ""}
+row5={"TeamWorks Process Beans" CacheRequestListener twprocess-ejb.jar,META-INF/ejb-jar.xml "" eis/cacheMessageActivationSpec 13 20 "" "" ""}
+row4={"Teamworks Core" InterServerMessageListener twcore-ejb.jar,META-INF/ejb-jar.xml "" eis/InterServerActivationSpec 13 20 "" "" ""}
+row3={"Teamworks Core" SchedulerMessageListener twcore-ejb.jar,META-INF/ejb-jar.xml "" eis/EventMgrControlActivationSpec 13 20 "" "" ""}
+row2={"Teamworks Core" BPDDocumentMigrationMessageListener twcore-ejb.jar,META-INF/ejb-jar.xml "" bpm/BPDDocMig/service/deployActivationSpec 13 20 bpm/BPDDocMig/service/deployDestination "" ""}
+mutables={false false false true true false false true true false} #readonly
+row1={"Teamworks Core" EventMgrMessageListener twcore-ejb.jar,META-INF/ejb-jar.xml "" eis/EventMgrMessageActivationSpec 13 20 "" "" ""}
+row0={EJBModule EJB uri listenerPort JNDI AppVersion ModuleVersion jndi.dest actspec.auth messagingType} #readonly
+
+
+#
+# SubSection 1.0.15 # CorrectOracleIsolationLevel Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=CorrectOracleIsolationLevel
+mutables={false false false true} #readonly
+
+
+#
+# SubSection 1.0.16 # CorrectUseSystemIdentity Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=CorrectUseSystemIdentity
+mutables={false false false false true true true} #readonly
+
+
+#
+# SubSection 1.0.17 # DataSourceFor10CMPBeans Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor10CMPBeans
+mutables={false false false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.18 # DataSourceFor10EJBModules Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor10EJBModules
+mutables={false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.19 # DataSourceFor20EJBModules Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor20EJBModules
+mutables={false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.20 # EnsureMethodProtectionFor10EJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EnsureMethodProtectionFor10EJB
+mutables={false false true} #readonly
+
+
+#
+# SubSection 1.0.21 # EnsureMethodProtectionFor20EJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EnsureMethodProtectionFor20EJB
+mutables={false false true} #readonly
+
+
+#
+# SubSection 1.0.22 # MapResRefToEJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+row19={13 20 "Teamworks Core" AuthorizationAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row50={13 20 "Teamworks Core" Security twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row51={13 24 "Lombardi Software Teamworks Web Interface" "" teamworks.war,WEB-INF/web.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row52={13 24 "Lombardi Software Teamworks Web Interface" "" teamworks.war,WEB-INF/web.xml jdbc/PerformanceDB javax.sql.DataSource AppDeploymentOption.No jdbc/PerformanceDB "" "" Container "" false ""}
+row20={13 20 "Teamworks Core" AuthorizationAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row21={13 20 "Teamworks Core" ProcessAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row22={13 20 "Teamworks Core" TaskAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row23={13 20 "Teamworks Core" SearchAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row24={13 20 "Teamworks Core" UserGroupAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row25={13 20 "Teamworks Core" ServerInfoAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row26={13 20 "Teamworks Core" RoutingAPIFacade twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+mutables={false false false false false false false true true true true false true false false} #readonly
+row27={13 20 "Teamworks Core" ProcessSearchAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row28={13 20 "Teamworks Core" ExternalClientServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row29={13 20 "Teamworks Core" EnvironmentServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row0={AppVersion ModuleVersion module EJB uri referenceBinding resRef.type oracleRef JNDI login.config.name auth.props resAuth dataSourceProps injection.requested lookup.name} #readonly
+row1={13 20 BPMSearchStartupBean ProcessSearchStartupBean BPMSearchStartupBean.jar,META-INF/ejb-jar.xml wm/WorkManager com.ibm.websphere.asynchbeans.WorkManager AppDeploymentOption.No wm/default "" "" Container "" false ""}
+row2={13 20 "Teamworks Core" TaskListListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml jms/ConnectionFactory javax.jms.TopicConnectionFactory AppDeploymentOption.No jms/PortalWebMessagingTopicConnectionFactory "" "" Container "" false ""}
+row3={13 20 "Teamworks Core" SearchListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml jms/ConnectionFactory javax.jms.TopicConnectionFactory AppDeploymentOption.No jms/TaskChangeConnectionFactory "" "" Container "" false ""}
+row4={13 20 "Teamworks Core" SchedulerMessageListener twcore-ejb.jar,META-INF/ejb-jar.xml tw.jms.eventMgrMessageConnectionFactory javax.jms.TopicConnectionFactory AppDeploymentOption.No tw.jms.eventMgrMessageConnectionFactory "" "" Container "" false ""}
+row5={13 20 "Teamworks Core" InterServerMessageListener twcore-ejb.jar,META-INF/ejb-jar.xml tw.jms.eventMgrMessageConnectionFactory javax.jms.TopicConnectionFactory AppDeploymentOption.No tw.jms.eventMgrMessageConnectionFactory "" "" Container "" false ""}
+row6={13 20 "TeamWorks Process Beans" CacheRequestListener twprocess-ejb.jar,META-INF/ejb-jar.xml tw.jms.cacheMessageConnectionFactory javax.jms.TopicConnectionFactory AppDeploymentOption.No tw.jms.cacheMessageConnectionFactory "" "" Container "" false ""}
+taskName=MapResRefToEJB
+row7={13 20 "Teamworks Core" NotificationListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml jms/ConnectionFactory javax.jms.TopicConnectionFactory AppDeploymentOption.No jms/PortalWebMessagingTopicConnectionFactory "" "" Container "" false ""}
+row8={13 20 "Teamworks Core" ProcDataRetrieval twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row9={13 20 "Teamworks Core" ScoreboardAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row30={13 20 "Teamworks Core" RuntimeServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row31={13 20 "Teamworks Core" SecurityProvider twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row32={13 20 "Teamworks Core" TemporaryGroups twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row33={13 20 "Teamworks Core" DynamicGroups twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row34={13 20 "Teamworks Core" ParticipantGroups twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row35={13 20 "Teamworks Core" InternalGroups twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row36={13 20 "Teamworks Core" AuthorizationService twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row37={13 20 "Teamworks Core" UserStatusServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row38={13 20 "Teamworks Core" ProcessCenterActions twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row39={13 20 "Teamworks Core" EventMgr twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row40={13 20 "Teamworks Core" PersistenceServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row41={13 20 "Teamworks Core" PKGenerator twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row42={13 20 "Teamworks Core" ClientServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row10={13 20 "Teamworks Core" ReportAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row43={13 20 "Teamworks Core" ClientServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/PerformanceDB javax.sql.DataSource AppDeploymentOption.No jdbc/PerformanceDB "" "" Container "" false ""}
+row11={13 20 "Teamworks Core" BPDAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row44={13 20 "TeamWorks Process Beans" ExportImportService twprocess-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row12={13 20 "Teamworks Core" BPDInstanceAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row45={13 20 "TeamWorks Process Beans" CacheRequestListener twprocess-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row13={13 20 "Teamworks Core" BPDInstanceCommentAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row46={13 20 "Teamworks Core" RepositoryServices twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row14={13 20 "Teamworks Core" BPDInstanceDocumentAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row47={13 20 "TeamWorks Task Beans" Task twtask-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row15={13 20 "Teamworks Core" BPDDocumentAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row48={13 20 "TeamWorks Task Beans" TaskServices twtask-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row16={13 20 "Teamworks Core" RemoteDocumentAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row49={13 20 "Lombardi for Office Beans" OfficeServices office-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row17={13 20 "Teamworks Core" RuntimeErrorAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+row18={13 20 "Teamworks Core" TaskAPI twcore-ejb.jar,META-INF/ejb-jar.xml jdbc/TeamWorksDB javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+
+
+#
+# SubSection 1.0.23 # MapResEnvRefToRes Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapResEnvRefToRes
+row3={"Teamworks Core" SearchListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml jms/Topic javax.jms.Topic jms/TaskChangeTopic 13 20 false ""}
+row2={"Teamworks Core" TaskListListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml jms/Topic javax.jms.Topic jms/PortalWebMessagingTopic 13 20 false ""}
+row1={"Teamworks Core" NotificationListenerRegistrationStartupBean twcore-ejb.jar,META-INF/ejb-jar.xml jms/Topic javax.jms.Topic jms/PortalWebMessagingTopic 13 20 false ""}
+mutables={false false false false false true false false false false} #readonly
+row0={module EJB uri referenceBinding resEnvRef.type JNDI AppVersion ModuleVersion injection.requested lookup.name} #readonly
+
+
+#
+# SubSection 1.0.24 # MapRunAsRolesToUsers Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapRunAsRolesToUsers
+row2={twuser tw_admin tw_admin}
+row1={twem tw_admin tw_admin}
+mutables={false true true} #readonly
+row0={role userName password} #readonly
+
+
+#
+# SubSection 1.0.25 # DefaultBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.26 # DefaultBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.27 # MapMessageDestinationRefToEJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapMessageDestinationRefToEJB
+mutables={false false false false false false false false true false false} #readonly
+
+
+#
+# SubSection 1.0.28 # BindJndiForMDB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.29 # EmbeddedRar Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EmbeddedRar
+mutables={false false false false true true} #readonly
+
+
+#
+# SubSection 1.0.30 # FinderQueryForCMP1X Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.31 # ActSpecJNDI Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=ActSpecJNDI
+mutables={false false false true} #readonly
+
+
+#
+# SubSection 1.0.32 # MapEnvEntryForWebMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapEnvEntryForWebMod
+mutables={false false false false false true false false false false} #readonly
+
+
+#
+# SubSection 1.0.33 # MapInitParamForServlet Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapInitParamForServlet
+row5={bpmasset bpmasset.war,WEB-INF/web.xml AssetViewerServlet javax.ws.rs.Application "" com.ibm.bpm.viewasset.app.ViewAssetApplication}
+row4={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml BPMFDSApp foo "" bar}
+row3={"WLE REST API" bpmrest.war,WEB-INF/web.xml RestAPIServlet javax.ws.rs.Application "" com.ibm.bpm.rest.app.BPMRestApplication}
+row2={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml BPMRepoApp propertiesLocation "" META-INF/wink-handler.properties}
+row1={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml BPMRepoApp javax.ws.rs.Application "" com.ibm.ws.bpm.repo.services.RepoApp}
+mutables={false false false false false true} #readonly
+row0={webModule uri web.servlet prop.name prop.description prop.value} #readonly
+
+
+#
+# SubSection 1.0.34 # JSPCompileOptions Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=JSPCompileOptions
+mutables={false false true true true true} #readonly
+
+
+#
+# SubSection 1.0.35 # SharedLibRelationship Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=SharedLibRelationship
+row9={"BPM REST API Tester" bpmrest-ui.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row8={BPM_Federated_Deploy bpmfds-services.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row7={"WLE REST API" bpmrest.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row6={BPM_Repository_Server bpmrepo-services.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row5={"Event Manager HTTP Listener Interface" eventmgr.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row4={"Lombardi Software Teamworks Web Interface (Legacy)" teamworks-legacy.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row3={"BPM Web Services Web App" bpmwebservices.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row2={"Lombardi Software Teamworks Web Interface" teamworks.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row11={bpmasset bpmasset.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row1={IBM_BPM_Teamworks_nodename1_server1 META-INF/application.xml "" "" AppDeploymentOption.Yes "" false}
+mutables={false false true true true false false} #readonly
+row10={web-viewer webviewer.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row0={module uri relationship compUnitName matchTarget origRelationship prcess.embedded.config} #readonly
+
+
+#
+# Section 1.0_1 ## Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=AtRiskTrackingBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=AtRiskTrackingBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=bpmasset.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=bpmasset.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=bpmfds-services.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=bpmfds-services.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=bpmrepo-services.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=bpmrepo-services.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=bpmrest-ui.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=bpmrest-ui.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=bpmrest.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=bpmrest.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=BPMSearchStartupBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=BPMSearchStartupBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=bpmwebservices.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=bpmwebservices.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=EmbeddedECMStartupBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=EmbeddedECMStartupBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=eventmgr.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=eventmgr.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=office-ejb.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=office-ejb.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=PALStartupBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=PALStartupBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=SCAStartupBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=SCAStartupBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=ServerCommandStartupBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=ServerCommandStartupBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=SharingNotificationBean.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=SharingNotificationBean.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=teamworks-legacy.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=teamworks-legacy.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=teamworks.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=teamworks.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=twcore-ejb.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=twcore-ejb.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=twprocess-ejb.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=twprocess-ejb.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=twtask-ejb.jar
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=twtask-ejb.jar
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=webviewer.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=webviewer.war
+
+
+#
+# End of Section 1.0# Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+# End of Section 1.0_1# Cell=!{cellName}:Deployment=!{applicationName}
+#
+#
+#
+EnvironmentVariablesSection
+#
+#
+#Environment Variables
+applicationName=IBM_BPM_Teamworks_nodename1_server1
+cellName=nodename1Node01Cell
+serverName=server1
+nodeName=nodename1

@@ -10,4 +10,5 @@ public class RegularPatterns {
 	public static String REG_BPM_CONFIG_CMD_SUCC = "completed successfully";
 	public static String REG_BPM_CONFIG_CMD_FAIL = "failed";
 	public static String REG_BPM_CONFIG_CMD_USAGE = "Usage:\\sBPMConfig";
+	public static String REG_WSADMIN_ERR = "WASX[0-9]{4}E:";
 }

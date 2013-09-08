@@ -1,0 +1,761 @@
+
+#
+# Configuration properties file for cells/nodename1Node01Cell/applications/IBM_BPM_Portal_nodename1_server1.ear/deployments/IBM_BPM_Portal_nodename1_server1|deployment.xml#
+# Extracted on Mon Sep 09 06:55:17 CST 2013
+#
+
+#
+# Section 1.0 ## Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340
+#
+
+#
+# SubSection 1.0 # Application Section. 
+#
+ResourceType=ApplicationDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340
+#
+
+#
+#Properties
+#
+recycleOnUpdate=PARTIAL #ENUM(PARTIAL|NONE|FULL),default(PARTIAL)
+standaloneModule=false #boolean,default(false)
+allowDispatchRemoteInclude=false #boolean,default(false)
+autoLink=false #boolean,default(false)
+expandSynchronously=false #boolean,default(false)
+zeroBinaryCopy=false #boolean,default(false)
+allowServiceRemoteInclude=false #boolean,default(false)
+warClassLoaderPolicy=SINGLE #ENUM(MULTIPLE|SINGLE),required,default(MULTIPLE)
+asyncRequestDispatchType=DISABLED #ENUM(CLIENT_SIDE|DISABLED|SERVER_SIDE),default(DISABLED)
+filePermission=".*\.dll=755#.*\.so=755#.*\.a=755#.*\.sl=755"
+enableDistribution=true #boolean,default(true)
+deploymentId=0 #required
+startingWeight=1 #integer,required,default(1)
+zeroEarCopy=false #boolean,default(false)
+backgroundApplication=false #boolean,default(false)
+reloadInterval=3 #long,default(3)
+useMetadataFromBinaries=false #boolean,default(false)
+reloadEnabled=false #boolean,default(true)
+createMBeansForResources=true #boolean,default(false)
+appContextIDForSecurity="href:nodename1Node01Cell/IBM_BPM_Portal_nodename1_server1"
+enableClientModule=false #boolean,default(false)
+binariesURL="$(APP_INSTALL_ROOT)/nodename1Node01Cell/IBM_BPM_Portal_nodename1_server1.ear" #required
+startOnDistribute=false #boolean,default(false)
+name=null
+
+
+#
+# SubSection 1.0.4 # Application Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340:Classloader=ID#Classloader_1374814898340
+#
+
+#
+#Properties
+#
+mode=PARENT_LAST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.4.0 # Classloader LibraryRef
+#
+ResourceType=LibraryRef
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340:Classloader=ID#Classloader_1374814898340:LibraryRef=ID#LibraryRef_1374814899417
+#
+
+#
+#Properties
+#
+libraryName=IBM_BPM_Process_Server_Shared_Library
+sharedClassloader=true #boolean,default(true)
+
+
+#
+# SubSection 1.0.0 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340:WebModuleDeployment=ID#WebModuleDeployment_1374814898340
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=process-portal-support.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.0.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340:WebModuleDeployment=ID#WebModuleDeployment_1374814898340:Classloader=ID#Classloader_1374814898341
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.1 # WebModuleDeployment
+#
+ResourceType=WebModuleDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340:WebModuleDeployment=ID#WebModuleDeployment_1374814898341
+#
+
+#
+#Properties
+#
+containsEJBContent=0 #integer,default(0)
+deploymentId=1 #required
+startingWeight=10000 #integer,required,default(1)
+name=null
+altDD=null
+classloaderMode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+uri=process-portal.war #required
+applicationDeployment=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340 #ObjectName(ApplicationDeployment)
+
+
+#
+# SubSection 1.0.1.0 # WebModuleDeployment Classloader
+#
+ResourceType=Classloader
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340:WebModuleDeployment=ID#WebModuleDeployment_1374814898341:Classloader=ID#Classloader_1374814898342
+#
+
+#
+#Properties
+#
+mode=PARENT_FIRST #ENUM(PARENT_FIRST|PARENT_LAST),default(PARENT_FIRST)
+
+
+#
+# SubSection 1.0.7 # Application properties
+#
+ResourceType=ApplicationDeployment
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}:ApplicationDeployment=ID#ApplicationDeployment_1374814898340
+AttributeInfo=properties(name,value)
+#
+
+#
+#Properties
+#
+metadata.complete=true
+
+
+#
+# SubSection 1.0.1 # AppDeploymentOptions Section. taskName and row0 should not be edited. row0 contains column names for the task. 
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=AppDeploymentOptions
+row1={$(APP_INSTALL_ROOT)/nodename1Node01Cell AppDeploymentOption.Yes AppDeploymentOption.No AppDeploymentOption.Yes AppDeploymentOption.No "" off .*\.dll=755#.*\.so=755#.*\.a=755#.*\.sl=755 "Development Build" AppDeploymentOption.No AppDeploymentOption.No DISABLED AppDeploymentOption.No}
+mutables={true true true true true true true true false true true true true} #readonly
+row0={installed.ear.destination distributeApp useMetaDataFromBinary createMBeansForResources reloadEnabled reloadInterval validateinstall filepermission buildVersion allowDispatchRemoteInclude allowServiceRemoteInclude asyncRequestDispatchType useAutoLink} #readonly
+
+
+#
+# SubSection 1.0.2 # MapModulesToServers Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapModulesToServers
+row2={"Process Portal" process-portal.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 24 moduletype.web "Web Module"}
+row1={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml WebSphere:cell=!{cellName},node=!{nodeName},server=!{serverName} 24 moduletype.web "Web Module"}
+mutables={false false true false false false} #readonly
+row0={module uri server ModuleVersion moduletype moduletypeDisplay} #readonly
+
+
+#
+# SubSection 1.0.3 # MapRolesToUsers Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapRolesToUsers
+row2={tw_portal_admin AppDeploymentOption.No AppDeploymentOption.No "" "" AppDeploymentOption.No "" ""}
+row1={twuser AppDeploymentOption.No AppDeploymentOption.Yes "" "" AppDeploymentOption.No "" ""}
+mutables={false true true true true true true true} #readonly
+row0={role role.everyone role.all.auth.user role.user role.group role.all.auth.realms role.user.access.ids role.group.access.ids} #readonly
+
+
+#
+# SubSection 1.0.4 # BindJndiForEJBNonMessageBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=BindJndiForEJBNonMessageBinding
+mutables={false false false true false true true} #readonly
+
+
+#
+# SubSection 1.0.5 # MapEJBRefToEJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapEJBRefToEJB
+mutables={false false false false false true false false false false} #readonly
+
+
+#
+# SubSection 1.0.6 # DataSourceFor20EJBModules Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor20EJBModules
+mutables={false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.7 # DataSourceFor20CMPBeans Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor20CMPBeans
+mutables={false false false false false true true true true} #readonly
+
+
+#
+# SubSection 1.0.8 # MapWebModToVH Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapWebModToVH
+row2={"Process Portal" process-portal.war,WEB-INF/web.xml default_host}
+row1={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml default_host}
+mutables={false false true} #readonly
+row0={webModule uri virtualHost} #readonly
+
+
+#
+# SubSection 1.0.9 # CtxRootForWebMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=CtxRootForWebMod
+row2={"Process Portal" process-portal.war,WEB-INF/web.xml ProcessPortal}
+row1={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml portal}
+mutables={false false true} #readonly
+row0={webModule uri web.contextroot} #readonly
+
+
+#
+# SubSection 1.0.10 # MapSharedLibForMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapSharedLibForMod
+row3={"Process Portal" process-portal.war,WEB-INF/web.xml "" false ""}
+row2={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml "" false ""}
+row1={IBM_BPM_Portal_nodename1_server1 META-INF/application.xml WebSphere:name=IBM_BPM_Process_Server_Shared_Library,isSharedClassloader=true false WebSphere:name=IBM_BPM_Process_Server_Shared_Library,isSharedClassloader=true}
+mutables={false false true false false} #readonly
+row0={module uri sharedLibName prcess.embedded.config sharedlib.in.process.embdded.config} #readonly
+
+
+#
+# SubSection 1.0.11 # JSPReloadForWebMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=JSPReloadForWebMod
+row2={"Process Portal" process-portal.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+row1={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml AppDeploymentOption.Yes 10}
+mutables={false false true true} #readonly
+row0={webModule uri jspReloadEnabled jspReloadInterval} #readonly
+
+
+#
+# SubSection 1.0.12 # EJBDeployOptions Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EJBDeployOptions
+mutables={true true true true true true true} #readonly
+
+
+#
+# SubSection 1.0.13 # BackendIdSelection Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=BackendIdSelection
+mutables={false false false false false true} #readonly
+
+
+#
+# SubSection 1.0.14 # BindJndiForEJBMessageBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=BindJndiForEJBMessageBinding
+mutables={false false false true true false false true true false} #readonly
+
+
+#
+# SubSection 1.0.15 # CorrectOracleIsolationLevel Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=CorrectOracleIsolationLevel
+mutables={false false false true} #readonly
+
+
+#
+# SubSection 1.0.16 # CorrectUseSystemIdentity Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=CorrectUseSystemIdentity
+mutables={false false false false true true true} #readonly
+
+
+#
+# SubSection 1.0.17 # DataSourceFor10CMPBeans Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor10CMPBeans
+mutables={false false false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.18 # DataSourceFor10EJBModules Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor10EJBModules
+mutables={false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.19 # DataSourceFor20EJBModules Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=DataSourceFor20EJBModules
+mutables={false false false true true true true true} #readonly
+
+
+#
+# SubSection 1.0.20 # EnsureMethodProtectionFor10EJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EnsureMethodProtectionFor10EJB
+mutables={false false true} #readonly
+
+
+#
+# SubSection 1.0.21 # EnsureMethodProtectionFor20EJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EnsureMethodProtectionFor20EJB
+mutables={false false true} #readonly
+
+
+#
+# SubSection 1.0.22 # MapResRefToEJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapResRefToEJB
+row1={14 24 "Process Portal Support" "" process-portal-support.war,WEB-INF/web.xml jdbc/twDataSource javax.sql.DataSource AppDeploymentOption.No jdbc/TeamWorksDB "" "" Container "" false ""}
+mutables={false false false false false false false true true true true false true false false} #readonly
+row0={AppVersion ModuleVersion module EJB uri referenceBinding resRef.type oracleRef JNDI login.config.name auth.props resAuth dataSourceProps injection.requested lookup.name} #readonly
+
+
+#
+# SubSection 1.0.23 # MapResEnvRefToRes Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapResEnvRefToRes
+mutables={false false false false false true false false false false} #readonly
+
+
+#
+# SubSection 1.0.24 # MapRunAsRolesToUsers Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapRunAsRolesToUsers
+mutables={false true true} #readonly
+
+
+#
+# SubSection 1.0.25 # DefaultBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.26 # DefaultBinding Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.27 # MapMessageDestinationRefToEJB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapMessageDestinationRefToEJB
+mutables={false false false false false false false false true false false} #readonly
+
+
+#
+# SubSection 1.0.28 # BindJndiForMDB Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.29 # EmbeddedRar Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=EmbeddedRar
+mutables={false false false false true true} #readonly
+
+
+#
+# SubSection 1.0.30 # FinderQueryForCMP1X Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+
+
+#
+# SubSection 1.0.31 # ActSpecJNDI Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=ActSpecJNDI
+mutables={false false false true} #readonly
+
+
+#
+# SubSection 1.0.32 # MapEnvEntryForWebMod Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapEnvEntryForWebMod
+mutables={false false false false false true false false false false} #readonly
+
+
+#
+# SubSection 1.0.33 # MapInitParamForServlet Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=MapInitParamForServlet
+row4={"Process Portal" process-portal.war,WEB-INF/web.xml RestAPIServlet javax.ws.rs.Application "" com.ibm.bpm.social.app.SocialApplication}
+row3={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml action config "" /WEB-INF/struts-config.xml}
+row2={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml Portal encoding "" UTF-8}
+row1={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml Portal debug "" 6}
+mutables={false false false false false true} #readonly
+row0={webModule uri web.servlet prop.name prop.description prop.value} #readonly
+
+
+#
+# SubSection 1.0.34 # JSPCompileOptions Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=JSPCompileOptions
+mutables={false false true true true true} #readonly
+
+
+#
+# SubSection 1.0.35 # SharedLibRelationship Section. taskName and row0 should not be edited. row0 contains column names for the task.
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+#Properties
+#
+taskName=SharedLibRelationship
+row3={"Process Portal" process-portal.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row2={"Process Portal Support" process-portal-support.war,WEB-INF/web.xml "" "" AppDeploymentOption.Yes "" false}
+row1={IBM_BPM_Portal_nodename1_server1 META-INF/application.xml "" "" AppDeploymentOption.Yes "" false}
+mutables={false false true true true false false} #readonly
+row0={module uri relationship compUnitName matchTarget origRelationship prcess.embedded.config} #readonly
+
+
+#
+# Section 1.0_1 ## Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=process-portal-support.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=process-portal-support.war
+
+
+#
+# CWSAD0103I: URLPrefixMap Section: module=process-portal.war
+#
+ResourceType=Application
+ImplementingResourceType=Application
+ResourceId=Cell=!{cellName}:Deployment=!{applicationName}
+ExtensionId=ApplicationWebServicesExtension
+#
+
+#
+#Properties
+#
+module=process-portal.war
+
+
+#
+# End of Section 1.0# Cell=!{cellName}:Deployment=!{applicationName}
+#
+
+#
+# End of Section 1.0_1# Cell=!{cellName}:Deployment=!{applicationName}
+#
+#
+#
+EnvironmentVariablesSection
+#
+#
+#Environment Variables
+applicationName=IBM_BPM_Portal_nodename1_server1
+cellName=nodename1Node01Cell
+serverName=server1
+nodeName=nodename1
