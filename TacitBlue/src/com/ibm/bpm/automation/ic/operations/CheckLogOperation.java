@@ -1,3 +1,8 @@
+/**
+ * @author Wei,Xinyan (weixiny@cn.ibm.com)
+ * 
+ * "I'm bad, but that's good. I will never be good, but that's not bad." - Ralph
+ */
 package com.ibm.bpm.automation.ic.operations;
 
 import java.io.File;
@@ -73,7 +78,7 @@ public class CheckLogOperation extends BaseOperation {
 					logger.log(LogLevel.INFO, "Finished collecting the BPM logs from all machines.");
 				}
 				
-				boolean execAll = (null == option || OperationParameters.BPMLOG_OPT_ALL.getOption().toLowerCase().equals(option.toLowerCase()));
+				boolean execAll = (null == option || OperationParameters.BPMLOG_OPT_ALL.getOption().equalsIgnoreCase(option));
 				if (OperationParameters.BPMLOG_OPT_NODESERVER.getOption().equals(option) || execAll) {
 					List<String> listServLogPath = (List<String>)collectedPathes.get(ExecutionContext.COLLECTED_NODE_SERVLOGPATH);
 					for(Iterator<String> it = listServLogPath.iterator(); it.hasNext();) {

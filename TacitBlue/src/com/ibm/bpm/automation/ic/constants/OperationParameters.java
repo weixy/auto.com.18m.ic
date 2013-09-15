@@ -1,3 +1,8 @@
+/**
+ * @author Wei,Xinyan (weixiny@cn.ibm.com)
+ * 
+ * "I'm bad, but that's good. I will never be good, but that's not bad." - Ralph
+ */
 package com.ibm.bpm.automation.ic.constants;
 
 public enum OperationParameters {
@@ -21,7 +26,13 @@ public enum OperationParameters {
 	BPMLOG_OPT_DMGRFFDC("BPMDmgrFFDCLog"),
 	BPMLOG_OPT_NODESERVER("BPMNodeServerLog"),
 	BPMLOG_OPT_NODEAGENT("BPMNodeAgent"),
-	BPMLOG_OPT_NODEFFDC("BPMNodeFFDCLog");
+	BPMLOG_OPT_NODEFFDC("BPMNodeFFDCLog"),
+	
+	CHECKGUI("CheckGUI"),
+	CHECKGUI_TYP_PROCCENTER("ProcessCenter"),
+	CHECKGUI_TYP_PROCADMIN("ProcessAdmin"),
+	CHECKGUI_TYP_PROCPORTAL("ProcessPortal"),
+	CHECKGUI_TYP_WASADMIN("WASAdmin");
 	
 	private OperationParameters(String osCmd) {
 		key = osCmd;

@@ -1,3 +1,8 @@
+/**
+ * @author Wei,Xinyan (weixiny@cn.ibm.com)
+ * 
+ * "I'm bad, but that's good. I will never be good, but that's not bad." - Ralph
+ */
 package com.ibm.bpm.automation.ic.operations;
 
 import java.io.File;
@@ -36,10 +41,10 @@ public class ConfigBPMOperation extends BaseOperation {
 		if (null != action) {
 			
 			cmds.add("-" + action);
-			if (OperationParameters.BPMCONFIG_ACT_CREATE.getAction().equals(action.toLowerCase())) {
+			if (OperationParameters.BPMCONFIG_ACT_CREATE.getAction().equalsIgnoreCase(action)) {
 				cmds.add(type!=null?("-"+type):"");
 				cmds.add(data);
-			} else if (OperationParameters.BPMCONFIG_ACT_UPDATE.getAction().equals(action.toLowerCase())) {
+			} else if (OperationParameters.BPMCONFIG_ACT_UPDATE.getAction().equalsIgnoreCase(action)) {
 				if (OperationParameters.BPMCONFIG_TYP_CONTXTRT.getType().equals(type)) {
 					cmds.add("-contextRootPrefix");
 					cmds.add(data);

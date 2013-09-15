@@ -1,3 +1,8 @@
+/**
+ * @author Wei,Xinyan (weixiny@cn.ibm.com)
+ * 
+ * "I'm bad, but that's good. I will never be good, but that's not bad." - Ralph
+ */
 package com.ibm.bpm.automation.ic.operations;
 
 import java.io.BufferedReader;
@@ -47,7 +52,12 @@ public class ManagerConfigOperation extends BaseOperation {
 		logger.log(LogLevel.INFO, "Check the context root for applications.");
 		for (Iterator<Map.Entry<String, String>> it = propFilePathes.entrySet().iterator(); it.hasNext(); ) {
 			Map.Entry<String, String> entry = it.next();
-			result.append(checkAppContextRoot(entry.getKey(), entry.getValue(), getData()));
+			if (!entry.getKey().startsWith("REST Services Gateway")) {//has problem if extract config properties for REST Service Gateway, need another way to check it.
+				result.append(checkAppContextRoot(entry.getKey(), entry.getValue(), getData()));
+			}
+			else {
+				
+			}
 		}
 		
 		//System.out.println(result);
@@ -67,6 +77,15 @@ public class ManagerConfigOperation extends BaseOperation {
 	}
 	
 	public String configPropertyFileForApp(String fileFolder, String appName, String workingFolder) {
+		File folder = new File(fileFolder);
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+		else if (folder.isFile()){
+			folder.delete();
+			folder.mkdir();
+		}
+		
 		String appPropFilePath = fileFolder + File.separator + appName.trim().replace(" ",  "") + WSAdminUtil.CONF_PROPFILE_SUFFIX;
 		System.out.println(appPropFilePath);
 		File propFile = new File(appPropFilePath);
@@ -91,7 +110,7 @@ public class ManagerConfigOperation extends BaseOperation {
 		Pattern failPattern = Pattern.compile(RegularPatterns.REG_WSADMIN_ERR);
 		Matcher failMatcher = failPattern.matcher(result);
 		if (failMatcher.find()) {
-			logger.log(LogLevel.ERROR, "Failed to generate config propert file for Application: '" + appName + "'");
+			logger.log(LogLevel.ERROR, "Failed to generate config propert file for Application: '" + appName + "'." + System.getProperty("line.separator") + result);
 			//appPropFilePath = null;
 		}
 		return appPropFilePath;
@@ -100,7 +119,9 @@ public class ManagerConfigOperation extends BaseOperation {
 	public HashMap<String, String> configPropertyFileForApps(String fileFolder, List<String> apps, String workingFolder) {
 		HashMap<String, String> propFilePathes = new HashMap<String, String>();
 		for (String app : apps) {
-			propFilePathes.put(app, configPropertyFileForApp(fileFolder, app, workingFolder));
+			if (!app.startsWith("REST Services Gateway")) {//has problem if extract config properties for REST Service Gateway, need another way to check it.
+				propFilePathes.put(app, configPropertyFileForApp(fileFolder, app, workingFolder));
+			}
 		}
 		return propFilePathes;
 	}
@@ -142,7 +163,7 @@ public class ManagerConfigOperation extends BaseOperation {
 							context = row[2];
 						}
 						result.append("Web Module '" + webModule + "' has context root: <" + context + ">." + System.getProperty("line.separator"));
-						if (context.startsWith("/" + contextRoot)) {
+						if (context.startsWith("/" + contextRoot + "/")) {
 							result.append("Correct!" + System.getProperty("line.separator"));
 							logger.log(LogLevel.INFO, "Web Module '" + webModule 
 									+ "', Applicaiton '" + appName 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testCase>
+	<title>SampleTest03</title>
+	<description>This is a test case of BPMConfig for IC automation. </description>
+	<operation step="Verify ProcessControl page">
+		<name>CheckGUI</name>
+		<points>10</points>
+		<type>ProcessCenter</type>
+		<option>selenium.opt</option>
+	</operation>
+</testCase>

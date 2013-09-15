@@ -1,3 +1,8 @@
+/**
+ * @author Wei,Xinyan (weixiny@cn.ibm.com)
+ * 
+ * "I'm bad, but that's good. I will never be good, but that's not bad." - Ralph
+ */
 package com.ibm.bpm.automation.ic.tap;
 
 import java.io.File;
@@ -87,7 +92,7 @@ public class TestRobot implements IScenarioStarter{
 			config.put(Configurations.CEUSERNAME.getKey(), curEnv.getCellAdminUserName());
 			config.put(Configurations.CEUSERPWD.getKey(), curEnv.getCellAdminUserPwd());
 			config.put(Configurations.BPMPATH.getKey(), autoService.getCurrentMachine().getBpmHome());
-			//autoService.retriveAllLogs(curEnv, bpmLogFolder);
+			
 			ExecutionContext.getExecutionContext().setAutomationService(autoService);
 			
 			config.put(Configurations.DENAME.getKey(), curEnv.getTopology().getName());
