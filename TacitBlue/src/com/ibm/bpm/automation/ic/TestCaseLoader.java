@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.utils.LogUtil;
-import com.ibm.bpm.automation.ic.utils.XMLHandler;
+import com.ibm.bpm.automation.ic.utils.CaseXMLHandler;
 
 public class TestCaseLoader {
 	
@@ -27,7 +27,7 @@ public class TestCaseLoader {
 	}
 
 	public static TestCase loadTestCase (String filename) throws AutoException {
-		XMLHandler xmlHnd = new XMLHandler(filename, null);
+		CaseXMLHandler xmlHnd = new CaseXMLHandler(filename);
 		return xmlHnd.getTestCase();
 	}
 	

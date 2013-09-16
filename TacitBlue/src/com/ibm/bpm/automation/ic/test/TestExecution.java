@@ -21,7 +21,7 @@ import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.tap.ExecutionContext;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
-import com.ibm.bpm.automation.ic.utils.XMLHandler;
+import com.ibm.bpm.automation.ic.utils.CaseXMLHandler;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.qa.automation.newobject.type.TopologyType;
 
@@ -109,7 +109,10 @@ public class TestExecution {
 			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());
 			config.put(Configurations.DENAME.getKey(), "deicauto");
 			config.put(Configurations.DMGRPROF.getKey(), "Dmgr01");
-			
+			config.put(Configurations.CELLNAME.getKey(), "nodename1Node01Cell");
+			List<String> nodeNames = new ArrayList<String>();
+			nodeNames.add("nodename1");
+			config.put(Configurations.NODENAMES.getKey(), nodeNames);
 			config.put(Configurations.APPSEVNAME.getKey(), "server1");
 			
 			int caseIndex = 0;

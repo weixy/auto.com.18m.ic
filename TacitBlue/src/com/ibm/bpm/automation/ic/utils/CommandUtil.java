@@ -52,7 +52,7 @@ public class CommandUtil {
 			pb.redirectErrorStream(true);
 			pb.directory(new File(folder));
 			Process p = pb.start();
-			inheritIO(p.getInputStream(), System.out);
+			//inheritIO(p.getInputStream(), System.out);
 			//inheritIO(p.getErrorStream(), System.err);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			StringBuffer result = new StringBuffer("");

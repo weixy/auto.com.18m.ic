@@ -46,9 +46,12 @@ public class ManagerConfigOperation extends BaseOperation {
 		String propFileFolderPath = System.getProperty("user.dir") + File.separator + TestRobot.ICAUTO_OUTPUT_PATH;
 		
 		logger.log(LogLevel.INFO, "Get all application names.");
-		List<String> apps = getInstalledAppList(workingFolder);
+		List<String> apps = getInstalledAppList(workingFolder, result);
+		//System.out.println(result);
 		logger.log(LogLevel.INFO, "Generate property file for all applications.");
-		HashMap<String, String> propFilePathes = configPropertyFileForApps(propFileFolderPath, apps, workingFolder);
+		//System.out.println(apps.size());
+		HashMap<String, String> propFilePathes = configPropertyFileForApps(propFileFolderPath, apps, workingFolder, result);
+		//System.out.println(result);
 		logger.log(LogLevel.INFO, "Check the context root for applications.");
 		for (Iterator<Map.Entry<String, String>> it = propFilePathes.entrySet().iterator(); it.hasNext(); ) {
 			Map.Entry<String, String> entry = it.next();
@@ -64,19 +67,23 @@ public class ManagerConfigOperation extends BaseOperation {
 		submit(result.toString(), logger);
 	}
 	
-	public List<String> getInstalledAppList(String workingFolder) {
+	public List<String> getInstalledAppList(String workingFolder, StringBuffer result) {
 		List<String> apps = new ArrayList<String>();
 		List<String> cmds = WSAdminUtil.getCmdsForAppList();
-		String [] result = WSAdminUtil.executeCommnd(cmds, workingFolder).split("\r\n");
-		for (String app : result) {
+		result.append("Get App List by wsadmin command." + System.getProperty("line.separator"));
+		String rep = WSAdminUtil.executeCommnd(cmds, workingFolder);
+		result.append(rep);
+		String [] appList = rep.replace("\r", "").split("\n");
+		for (String app : appList) {
 			if (!app.startsWith("WASX7357I") && app.length()>0) {
 				apps.add(app);
 			}
 		}
+		
 		return apps;
 	}
 	
-	public String configPropertyFileForApp(String fileFolder, String appName, String workingFolder) {
+	public String configPropertyFileForApp(String fileFolder, String appName, String workingFolder, StringBuffer result) {
 		File folder = new File(fileFolder);
 		if (!folder.exists()) {
 			folder.mkdir();
@@ -87,12 +94,13 @@ public class ManagerConfigOperation extends BaseOperation {
 		}
 		
 		String appPropFilePath = fileFolder + File.separator + appName.trim().replace(" ",  "") + WSAdminUtil.CONF_PROPFILE_SUFFIX;
-		System.out.println(appPropFilePath);
+		//System.out.println(appPropFilePath);
 		File propFile = new File(appPropFilePath);
 		if (propFile.exists()) {
 			propFile.delete();
 		}
 		List<String> cmds = WSAdminUtil.getCmdsForExtractConfigProperties();
+		
 		for (String cmd : cmds) {
 			int index = cmds.indexOf(cmd);
 			if (cmd.indexOf(WSAdminUtil.CMD_PARAMETER_APPNAME) != -1) {
@@ -104,8 +112,8 @@ public class ManagerConfigOperation extends BaseOperation {
 			cmds.set(index, cmd);
 		}
 		
-		String result = WSAdminUtil.executeCommnd(cmds, workingFolder);
-		System.out.println(result + "\n");
+		result.append(WSAdminUtil.executeCommnd(cmds, workingFolder));
+		System.out.println("generate config prop file for '" + appName + "'\n" + result + "\n");
 
 		Pattern failPattern = Pattern.compile(RegularPatterns.REG_WSADMIN_ERR);
 		Matcher failMatcher = failPattern.matcher(result);
@@ -116,11 +124,11 @@ public class ManagerConfigOperation extends BaseOperation {
 		return appPropFilePath;
 	}
 	
-	public HashMap<String, String> configPropertyFileForApps(String fileFolder, List<String> apps, String workingFolder) {
+	public HashMap<String, String> configPropertyFileForApps(String fileFolder, List<String> apps, String workingFolder, StringBuffer result) {
 		HashMap<String, String> propFilePathes = new HashMap<String, String>();
 		for (String app : apps) {
 			if (!app.startsWith("REST Services Gateway")) {//has problem if extract config properties for REST Service Gateway, need another way to check it.
-				propFilePathes.put(app, configPropertyFileForApp(fileFolder, app, workingFolder));
+				propFilePathes.put(app, configPropertyFileForApp(fileFolder, app, workingFolder, result));
 			}
 		}
 		return propFilePathes;

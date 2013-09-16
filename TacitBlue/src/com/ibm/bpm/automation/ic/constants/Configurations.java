@@ -14,7 +14,9 @@ public enum Configurations {
 	CEUSERNAME("cellUserName"),
 	CEUSERPWD("cellUserPwd"),
 	DMGRPROF("dmgrProfile"),
+	CELLNAME("cellName"),
 	NODEPROF("nodeProfile"),
+	NODENAMES("nodeNames"),
 	TOPTYPE("topologyType"),
 	APPSEVNAME("appServerName"),
 	LOGFOLDER("autoLogFolder"), //ic auto mation log folder

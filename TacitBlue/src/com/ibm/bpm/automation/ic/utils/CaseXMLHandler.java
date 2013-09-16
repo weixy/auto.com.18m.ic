@@ -25,9 +25,9 @@ import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.operations.BaseOperation;
 
-public class XMLHandler extends DefaultHandler {
+public class CaseXMLHandler extends DefaultHandler {
 	
-	private static final String CLASSNAME = XMLHandler.class.getName();
+	private static final String CLASSNAME = CaseXMLHandler.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 
 	private TestCase testCase;
@@ -37,7 +37,7 @@ public class XMLHandler extends DefaultHandler {
 	private HashMap<String, String> operationInfo;
 	private HashMap<String, String> operationMapping;
 	
-	public XMLHandler(String filename, HashMap<String, Object> configuration) throws AutoException{
+	public CaseXMLHandler(String filename) throws AutoException{
 		
 		testCase = new TestCase();
 		fileName = filename;

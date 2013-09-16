@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testCase>
+	<title>SampleTest03</title>
+	<description>This is a test case of BPMConfig for IC automation. </description>
+	<operation step="Check BPM Config">
+		<name>ManagerConfig</name>
+		<points>2</points>
+		<action>valid</action>
+		<type>ContextRoot</type>
+		<data>weixy</data>
+	</operation>
+</testCase>

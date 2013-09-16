@@ -44,14 +44,14 @@ public class WSAdminUtil extends CommandUtil{
 	public static List<String> getCmdsForAppList() {
 		List<String> cmds = getCmdsForInitWSAdmin();
 		cmds.add("-c");
-		cmds.add("\"print AdminApp.list()\"");
+		cmds.add("print AdminApp.list()");
 		return cmds;
 	}
 	
 	public static List<String> getCmdsForExtractConfigProperties() {
 		List<String> cmds = getCmdsForInitWSAdmin();
 		cmds.add("-c");
-		cmds.add("\"AdminTask.extractConfigProperties('[-propertiesFileName " + CMD_PARAMETER_PROPFILE + " -configData Deployment=" + CMD_PARAMETER_APPNAME + "]')\"");
+		cmds.add("AdminTask.extractConfigProperties('[-propertiesFileName " + CMD_PARAMETER_PROPFILE + " -configData Deployment=" + CMD_PARAMETER_APPNAME + "]')");
 		return cmds;
 	}
 
