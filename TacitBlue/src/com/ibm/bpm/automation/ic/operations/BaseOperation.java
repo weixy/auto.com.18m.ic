@@ -32,6 +32,11 @@ public abstract class BaseOperation {
 	private String type;
 	private String option;
 	private String data;
+	private String host;
+	private String port;
+	private String securePort;
+	private String contextRoot;
+	private boolean checkAllNodes;
 	private Date startTime;
 	protected int failedPoints = 0;
 	protected int successPoints = 0;
@@ -90,14 +95,46 @@ public abstract class BaseOperation {
 	public void setOption(String option) {
 		this.option = option;
 	}
-	public String getValue() {
-		return data;
+	public String getHost() {
+		return host;
 	}
-	public void setValue(String value) {
-		this.data = value;
+
+	public void setHost(String host) {
+		this.host = host;
 	}
-	
-	
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public String getSecurePort() {
+		return securePort;
+	}
+
+	public void setSecurePort(String securePort) {
+		this.securePort = securePort;
+	}
+
+	public String getContextRoot() {
+		return contextRoot;
+	}
+
+	public void setContextRoot(String contextRoot) {
+		this.contextRoot = contextRoot;
+	}
+
+	public boolean isCheckAllNodes() {
+		return checkAllNodes;
+	}
+
+	public void setCheckAllNodes(boolean checkAllNodes) {
+		this.checkAllNodes = checkAllNodes;
+	}
+
 	public void submit(String result, Logger logger) {
 		String state = null;
 		if (failedPoints != 0) {

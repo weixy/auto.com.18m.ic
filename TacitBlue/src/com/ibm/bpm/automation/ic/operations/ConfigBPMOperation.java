@@ -52,6 +52,8 @@ public class ConfigBPMOperation extends BaseOperation {
 					cmds.add((String)config.get(Configurations.DENAME.getKey()));
 					cmds.add("-profile");
 					cmds.add((String)config.get(Configurations.DMGRPROF.getKey()));
+					//update context root to config in case following case will access web url, like PC, PA, Portal.
+					config.put(Configurations.CONTEXTROOT.getKey(), data);
 				} else {
 					logger.log(LogLevel.WARNING, "Unsupported BPMConfig type found, please check it: '" + type + "'.");
 					result.append("Unsupported BPMConfig type found, please check it: '" + type + "'.");

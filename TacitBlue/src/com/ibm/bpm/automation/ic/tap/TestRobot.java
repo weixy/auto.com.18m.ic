@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.apache.xerces.util.MessageFormatter;
@@ -24,6 +25,7 @@ import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.automation.tap.adapter.IScenarioStarter;
 import com.ibm.bpm.automation.tap.automationobjects.Environment;
+import com.ibm.bpm.automation.tap.automationobjects.Machine;
 import com.ibm.bpm.qa.automation.newobject.Node;
 import com.ibm.bpm.qa.automation.newobject.type.TopologyType;
 
@@ -35,7 +37,7 @@ public class TestRobot implements IScenarioStarter{
 	public static String ICAUTO_TESTCASE_PATH = "test";
 	public static String ICAUTO_LOG_PATH = "logs";
 	public static String ICAUTO_OUTPUT_PATH = "outputs";
-	
+	public static String ICAUTO_CONFIG_PATH = "config";
 	/**
 	 * @param args
 	 */
@@ -96,22 +98,25 @@ public class TestRobot implements IScenarioStarter{
 			
 			ExecutionContext.getExecutionContext().setAutomationService(autoService);
 			
+			config.put(Configurations.APPCLUSTER.getKey(), curEnv.getTopology().getAppCluster().getClusterName());
 			config.put(Configurations.DENAME.getKey(), curEnv.getTopology().getName());
 			config.put(Configurations.DMGRPROF.getKey(), curEnv.getManageProfileName());
-			config.put(Configurations.APPSEVNAME.getKey(), "server1");
 			config.put(Configurations.CELLNAME.getKey(), curEnv.getCellName());
-			List<String> nodeNames = new ArrayList<String>();
-			if (curEnv.isStandalone()) {
-				nodeNames.add(curEnv.getNodeName());
-			}
-			else {
-				Node [] nodes = curEnv.getTopology().getNodes();
-				for (Node node : nodes) {
-					nodeNames.add(node.getNodeName());
+			HashMap<String, String[]> nodes = new HashMap<String, String[]>();
+			if (!curEnv.isStandalone()) {
+				Node [] nds = curEnv.getTopology().getNodes();
+				for (Node node : nds) {
+					Machine machine = curEnv.getMachineByNode(node);
+					nodes.put(node.getNodeName(), new String [] {machine.getMachineIP(), machine.getHostname()});
 				}
 			}
-			config.put(Configurations.NODENAMES.getKey(), nodeNames);
+			else {
+				Machine machine = curEnv.getMachines()[0];
+				nodes.put(curEnv.getNodeName(), new String [] {machine.getMachineIP(), machine.getHostname()});
+			}
+			config.put(Configurations.NODES.getKey(), nodes);
 			
+			//execute cases
 			int caseIndex = 0;
 			for (int i=0; i<caseList.size(); i++) {
 				if (caseList.get(i).getTitle().equals(regScriptName)) {

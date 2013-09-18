@@ -11,24 +11,32 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.ibm.bpm.automation.ic.AutoException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.xml.sax.SAXException;
+
 import com.ibm.bpm.automation.ic.LogLevel;
+import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.constants.Configurations;
-import com.ibm.bpm.automation.ic.constants.OperationParameters;
 import com.ibm.bpm.automation.ic.constants.RegularPatterns;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
-import com.ibm.bpm.automation.ic.utils.CommandUtil;
+import com.ibm.bpm.automation.ic.utils.AutoFileFilter;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.WSAdminUtil;
+import com.ibm.bpm.automation.ic.wasconfig.Application;
 
 public class ManagerConfigOperation extends BaseOperation {
 	
@@ -40,142 +48,88 @@ public class ManagerConfigOperation extends BaseOperation {
 		// TODO Auto-generated method stub
 		super.run(config);
 		logger.log(LogLevel.INFO, "Invoke operation '" + ManagerConfigOperation.class.getSimpleName() + "'");
-		StringBuffer result = new StringBuffer();
-		
-		String workingFolder = config.get(Configurations.BPMPATH.getKey()) + File.separator + "bin";
-		String propFileFolderPath = System.getProperty("user.dir") + File.separator + TestRobot.ICAUTO_OUTPUT_PATH;
+		final StringBuffer result = new StringBuffer();
+		final String contextRoot = getData();
+		final String appsFolder = getAppFolderRootPath(config);
+		System.out.println(appsFolder);
+		System.out.println((String)config.get(Configurations.APPCLUSTER.getKey()));
 		
 		logger.log(LogLevel.INFO, "Get all application names.");
-		List<String> apps = getInstalledAppList(workingFolder, result);
-		//System.out.println(result);
-		logger.log(LogLevel.INFO, "Generate property file for all applications.");
-		//System.out.println(apps.size());
-		HashMap<String, String> propFilePathes = configPropertyFileForApps(propFileFolderPath, apps, workingFolder, result);
-		//System.out.println(result);
-		logger.log(LogLevel.INFO, "Check the context root for applications.");
-		for (Iterator<Map.Entry<String, String>> it = propFilePathes.entrySet().iterator(); it.hasNext(); ) {
-			Map.Entry<String, String> entry = it.next();
-			if (!entry.getKey().startsWith("REST Services Gateway")) {//has problem if extract config properties for REST Service Gateway, need another way to check it.
-				result.append(checkAppContextRoot(entry.getKey(), entry.getValue(), getData()));
-			}
-			else {
-				
+		final HashMap<String, String> appsMap = getInstalledAppList(appsFolder, (String)config.get(Configurations.APPCLUSTER.getKey()), result);
+		System.out.println(appsMap.size());		
+		
+		logger.log(LogLevel.INFO, "Get and sort application exempt list.");
+		HashMap<String, String> exemptMap = getExemptList();
+		Iterator<Map.Entry<String, String>> iter = exemptMap.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry<String, String> entry = (Map.Entry<String, String>)iter.next();
+			String appName = (String) entry.getKey() + "_" + (String)config.get(Configurations.APPCLUSTER.getKey()) + ".ear";
+			String filter = (String) entry.getValue();
+			if (appsMap.containsKey(appName)) {
+				if (filter.equals("*")) {
+					appsMap.remove(appName);
+				}
+				else {
+					appsMap.put(appName, filter);
+				}
 			}
 		}
 		
-		//System.out.println(result);
+		logger.log(LogLevel.INFO, "Check context root for apps.");
+		ExecutorService exec = Executors.newCachedThreadPool();
+		final CountDownLatch runningThreadNum = new CountDownLatch(appsMap.size());
+		Iterator<Map.Entry<String, String>> it = appsMap.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, String> entry = (Map.Entry<String, String>)it.next();
+			//String appName = (String) entry.getKey();
+			//String filter = (String) entry.getValue();
+			//result.append(checkAppCtxRoots(appsFolder, appName, filter));
+			final String appName = (String) entry.getKey();
+			final String filter = (String) entry.getValue();
+			Runnable run = new Runnable() {
+				public void run() {
+					result.append(checkAppCtxRoots(appsFolder, appName, filter));
+					runningThreadNum.countDown();
+				}
+			};
+			exec.execute(run);
+		}
+		exec.shutdown();
+		try {
+			runningThreadNum.await();
+		} catch (InterruptedException e) {
+			logger.log(LogLevel.ERROR, "Met exception when waiting sub thread complete.", e);
+		}
+		
+		System.out.println(result);
 		submit(result.toString(), logger);
 	}
 	
-	public List<String> getInstalledAppList(String workingFolder, StringBuffer result) {
-		List<String> apps = new ArrayList<String>();
-		List<String> cmds = WSAdminUtil.getCmdsForAppList();
-		result.append("Get App List by wsadmin command." + System.getProperty("line.separator"));
-		String rep = WSAdminUtil.executeCommnd(cmds, workingFolder);
-		result.append(rep);
-		String [] appList = rep.replace("\r", "").split("\n");
-		for (String app : appList) {
-			if (!app.startsWith("WASX7357I") && app.length()>0) {
-				apps.add(app);
-			}
-		}
-		
-		return apps;
-	}
-	
-	public String configPropertyFileForApp(String fileFolder, String appName, String workingFolder, StringBuffer result) {
-		File folder = new File(fileFolder);
-		if (!folder.exists()) {
-			folder.mkdir();
-		}
-		else if (folder.isFile()){
-			folder.delete();
-			folder.mkdir();
-		}
-		
-		String appPropFilePath = fileFolder + File.separator + appName.trim().replace(" ",  "") + WSAdminUtil.CONF_PROPFILE_SUFFIX;
-		//System.out.println(appPropFilePath);
-		File propFile = new File(appPropFilePath);
-		if (propFile.exists()) {
-			propFile.delete();
-		}
-		List<String> cmds = WSAdminUtil.getCmdsForExtractConfigProperties();
-		
-		for (String cmd : cmds) {
-			int index = cmds.indexOf(cmd);
-			if (cmd.indexOf(WSAdminUtil.CMD_PARAMETER_APPNAME) != -1) {
-				cmd = cmd.replaceAll(WSAdminUtil.CMD_PARAMETER_APPNAME, appName);
-			}
-			if (cmd.indexOf(WSAdminUtil.CMD_PARAMETER_PROPFILE) != -1) {
-				cmd = cmd.replaceAll(WSAdminUtil.CMD_PARAMETER_PROPFILE, appPropFilePath.replace('\\', '/'));
-			}
-			cmds.set(index, cmd);
-		}
-		
-		result.append(WSAdminUtil.executeCommnd(cmds, workingFolder));
-		System.out.println("generate config prop file for '" + appName + "'\n" + result + "\n");
-
-		Pattern failPattern = Pattern.compile(RegularPatterns.REG_WSADMIN_ERR);
-		Matcher failMatcher = failPattern.matcher(result);
-		if (failMatcher.find()) {
-			logger.log(LogLevel.ERROR, "Failed to generate config propert file for Application: '" + appName + "'." + System.getProperty("line.separator") + result);
-			//appPropFilePath = null;
-		}
-		return appPropFilePath;
-	}
-	
-	public HashMap<String, String> configPropertyFileForApps(String fileFolder, List<String> apps, String workingFolder, StringBuffer result) {
-		HashMap<String, String> propFilePathes = new HashMap<String, String>();
-		for (String app : apps) {
-			if (!app.startsWith("REST Services Gateway")) {//has problem if extract config properties for REST Service Gateway, need another way to check it.
-				propFilePathes.put(app, configPropertyFileForApp(fileFolder, app, workingFolder, result));
-			}
-		}
-		return propFilePathes;
-	}
-	
-	public String checkAppContextRoot(String appName, String propFilePath, String contextRoot) {
+	public String checkAppCtxRoots(String appFolderPath, String appName, String filter) {
 		StringBuffer result = new StringBuffer();
-		File propFile = new File(propFilePath);
-		result.append("Start to parse context root of application '" + appName + "'." + System.getProperty("line.separator"));
-		
-		FileReader fr = null;
-		BufferedReader br = null;
-		try {
-			fr = new FileReader(propFile);
-			br = new BufferedReader(fr);
-			String line = null;
-			boolean startRecord = false;
-			boolean foundContextRoot = false;
-			while ((line = br.readLine()) != null) {
-				line = line.trim();
-				if (!line.startsWith("#")) {
-					if (("taskName="+WSAdminUtil.CONF_PROP_CONTEXTROOT).equals(line)) {
-						result.append("Found context root section." + System.getProperty("line.separator"));
-						startRecord = true;
-						foundContextRoot = true;
-					}
-					if (line.startsWith("row0=")) {
-						startRecord = false;
-					}
-					if (startRecord && line.startsWith("row")) {
-						String webModule = null;
-						String context = null;
-						String record = line.substring(line.indexOf('{')+1, line.indexOf('}'));
-						if (record.startsWith("\"")) {
-							webModule = record.substring(1, record.lastIndexOf('\"'));
-							context = record.substring(record.lastIndexOf(' ') + 1);
-						} else {
-							String[] row = record.split("\\s");
-							webModule = row[0];
-							context = row[2];
-						}
-						result.append("Web Module '" + webModule + "' has context root: <" + context + ">." + System.getProperty("line.separator"));
-						if (context.startsWith("/" + contextRoot + "/")) {
+		if (filter.equals("*")) {
+			logger.log(LogLevel.WARNING, "The application '" + appName + "' won't be checked since all modules are filtered.");
+		}
+		else {
+			String appFileName = appFolderPath + File.separator
+					+ appName + File.separator
+					+ "deployments" + File.separator
+					+ appName.replace(".ear", "") + File.separator
+					+ "META-INF" + File.separator
+					+ "application.xml";
+			try {
+				HashMap<String, String> webModuleMap = Application.getWebModuleCtxRoot(appFileName, Application.XPATH_WEBMODULE);
+				Iterator<Map.Entry<String, String>> it = webModuleMap.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry<String, String> entry = (Map.Entry<String, String>)it.next();
+					String webModule = entry.getKey();
+					if (!webModule.equals(filter)) {
+						String ctxRoot = entry.getValue();
+						if (ctxRoot.startsWith("/" + this.getData() + "/")) {
 							result.append("Correct!" + System.getProperty("line.separator"));
 							logger.log(LogLevel.INFO, "Web Module '" + webModule 
 									+ "', Applicaiton '" + appName 
-									+ "', ContextRoot '" + context 
+									+ "', ContextRoot '" + ctxRoot 
 									+ "' is correct." + System.getProperty("line.separator"));
 							successPoints++;
 						}
@@ -183,34 +137,83 @@ public class ManagerConfigOperation extends BaseOperation {
 							result.append("Wrong!" + System.getProperty("line.separator"));
 							logger.log(LogLevel.ERROR, "Web Module '" + webModule 
 									+ "', Applicaiton '" + appName 
-									+ "', ContextRoot '" + context 
+									+ "', ContextRoot '" + ctxRoot 
 									+ "' is WRONG!" + System.getProperty("line.separator"));
 							failedPoints++;
 						}
 					}
 				}
+			} catch (Exception e) {
+				result.append("Failed to extract context root of application '" + appName + "'." + System.getProperty("line.separator"));
+				logger.log(LogLevel.ERROR, "Failed to extract context root of application '" + appName + "'.", e);
+				failedPoints ++;
 			}
+		}
+		return result.toString();
+	}
+	
+	public HashMap<String, String> getExemptList() {
+		HashMap<String, String> map = new HashMap<String, String>();
+		String filePath = System.getProperty("user.dir") + File.separator 
+				+ TestRobot.ICAUTO_CONFIG_PATH + File.separator
+				+ "appexempt.list";
+		File appExemptList = new File(filePath);
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+			fr = new FileReader(appExemptList);
+			br = new BufferedReader(fr);
 			
-			if (!foundContextRoot) {
-				result.append("Didn't find context root property for application '" + appName + "'.");
-				logger.log(LogLevel.WARNING, "Didn't find context root property for application '" + appName + "'.");
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				line = line.trim();
+				String [] namePair = line.split(",");
+				map.put(namePair[0], namePair[1]);
 			}
 			
 		} catch (Exception e) {
-			logger.log(LogLevel.ERROR, "Got exception while reading file '" + propFilePath + "'", e);
-			failedPoints++;
+			//throw new AutoException(e);
+			logger.log(LogLevel.ERROR, "Can't find file 'appexempt.list', will analyse all apps", e);
 		} finally {
 			try {
 				br.close();
 				fr.close();
-			} catch (Exception e) {
-				logger.log(LogLevel.ERROR, "Got exception when finish reading file '" + propFilePath + "'", e);
-				failedPoints++;
+			} catch (IOException e) {
+				//throw new AutoException(e);
+				logger.log(LogLevel.ERROR, "Got IO Exception while closing File/Buffer reader of file 'index.txt'.", e);
 			}
 		}
-		result.append("Finished the check for the context root of application '" + appName + "'." + System.getProperty("line.separator"));
+		return map;
+	}
+	
+	public String getAppFolderRootPath(HashMap<String, Object> config) {
+		String path = config.get(Configurations.BPMPATH.getKey()) + File.separator
+				+ "profiles" + File.separator
+				+ config.get(Configurations.DMGRPROF.getKey()) + File.separator
+				+ "config" + File.separator + "cells" + File.separator
+				+ config.get(Configurations.CELLNAME.getKey()) + File.separator
+				+ "applications";
 		
-		return result.toString();
+		return path;
+	}
+	
+	public HashMap<String, String> getInstalledAppList(String appFolderPath, String clusterName, StringBuffer result) {
+		HashMap<String, String> apps = new HashMap<String, String>();
+		File appFolder = new File(appFolderPath);
+		if (appFolder.isDirectory()) {
+			File [] subFolders = appFolder.listFiles(new AutoFileFilter("_" + clusterName + "\\.ear"));
+			for (File d : subFolders) {
+				if (d.isDirectory()) {
+					apps.put(d.getName(), "-");
+				}
+			}
+			return apps;
+		}
+		else {
+			logger.log(LogLevel.ERROR, "The specified applications folder is a file, '" + appFolderPath + "'");
+			failedPoints =  getPoints();
+			return null;
+		}
 	}
 
 }

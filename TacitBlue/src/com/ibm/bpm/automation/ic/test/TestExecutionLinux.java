@@ -102,17 +102,17 @@ public class TestExecutionLinux {
 			m.put(ExecutionContext.COLLECTED_NODE_SERVLOGPATH, nodeLogSavePathes);			
 			config.put(Configurations.BPMLOGSAV.getKey(), m);
 			
-			
+			config.put(Configurations.APPCLUSTER.getKey(), "SingleCluster");
 			config.put(Configurations.BPMPATH.getKey(), "/opt/8501");
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");
 			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());
 			config.put(Configurations.DENAME.getKey(), "deicauto");
 			config.put(Configurations.DMGRPROF.getKey(), "Dmgr01");
-			config.put(Configurations.CELLNAME.getKey(), "nodename1Node01Cell");
+			config.put(Configurations.CELLNAME.getKey(), "Cell01");
 			List<String> nodeNames = new ArrayList<String>();
 			nodeNames.add("nodename1");
-			config.put(Configurations.NODENAMES.getKey(), nodeNames);
+			config.put(Configurations.NODES.getKey(), nodeNames);
 			config.put(Configurations.APPSEVNAME.getKey(), "server1");
 			
 			int caseIndex = 0;

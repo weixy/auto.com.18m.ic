@@ -29,6 +29,11 @@ public class TestCase {
 	public static final String TESTCASE_OPERATION_TYPE = "type";
 	public static final String TESTCASE_OPERATION_OPTION = "option";
 	public static final String TESTCASE_OPERATION_DATA = "data";
+	public static final String TESTCASE_OPERATION_SE_HOST = "host"; //proxy or IHS host
+	public static final String TESTCASE_OPERATION_SE_PORT = "port"; //proxy or IHS port
+	public static final String TESTCASE_OPERATION_SE_SECUPORT = "securePort"; //proxy or IHS secure port
+	public static final String TESTCASE_OPERATION_SE_CTXROOT = "contextroot";
+	public static final String TESTCASE_OPERATION_SE_CHECKALLNODE = "checkallnodes";
 	//public static final String TESTCASE_OPERATION_PROPFILE = "propertiesFile";
 	
 	private String title;

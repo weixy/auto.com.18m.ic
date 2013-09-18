@@ -107,6 +107,12 @@ public class CaseXMLHandler extends DefaultHandler {
 				|| TestCase.TESTCASE_OPERATION_OPTION.equals(elemntName)
 				|| TestCase.TESTCASE_OPERATION_DATA.equals(elemntName)) {
 			operationInfo.put(elemntName, txt);
+		} else if (TestCase.TESTCASE_OPERATION_SE_HOST.equals(elemntName)
+				|| TestCase.TESTCASE_OPERATION_SE_PORT.equals(elemntName)
+				|| TestCase.TESTCASE_OPERATION_SE_SECUPORT.equals(elemntName)
+				|| TestCase.TESTCASE_OPERATION_SE_CTXROOT.equals(elemntName)
+				|| TestCase.TESTCASE_OPERATION_SE_CHECKALLNODE.equals(elemntName)) {
+			operationInfo.put(elemntName, txt);
 		} else if (TestCase.TESTCASE_OPERATION.equals(elemntName)) {
 			bActionElementStart = false;
 			String operationName = operationInfo.get(TestCase.TESTCASE_OPERATION_NAME);
@@ -131,7 +137,13 @@ public class CaseXMLHandler extends DefaultHandler {
 						((BaseOperation) anObj).setType(operationInfo.get(TestCase.TESTCASE_OPERATION_TYPE));
 						((BaseOperation) anObj).setOption(operationInfo.get(TestCase.TESTCASE_OPERATION_OPTION));
 						((BaseOperation) anObj).setData(operationInfo.get(TestCase.TESTCASE_OPERATION_DATA));
-						
+						((BaseOperation) anObj).setHost(operationInfo.get(TestCase.TESTCASE_OPERATION_SE_HOST));
+						((BaseOperation) anObj).setPort(operationInfo.get(TestCase.TESTCASE_OPERATION_SE_PORT));
+						((BaseOperation) anObj).setSecurePort(operationInfo.get(TestCase.TESTCASE_OPERATION_SE_SECUPORT));
+						((BaseOperation) anObj).setContextRoot(operationInfo.get(TestCase.TESTCASE_OPERATION_SE_CTXROOT));
+						String chkAllNodes = operationInfo.get(TestCase.TESTCASE_OPERATION_SE_CHECKALLNODE);
+						chkAllNodes = (chkAllNodes == null) ? "false" : chkAllNodes;
+						((BaseOperation) anObj).setCheckAllNodes(Boolean.parseBoolean(chkAllNodes));
 						testCase.addOperations((BaseOperation)anObj);
 					} else {
 						//Error

@@ -1,0 +1,6 @@
+AppScheduler,*
+IBM_BPM_Repository,BPM PROCESS CENTER INTERNAL API
+IBM_BPM_Teamworks,BPM PROCESS SERVER INTERNAL API
+PersistentLkMgr,*
+sca.sib.mediation,*
+WpsFEMgr,*

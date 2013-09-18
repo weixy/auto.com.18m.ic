@@ -7,22 +7,24 @@ package com.ibm.bpm.automation.ic.constants;
 
 public enum Configurations {
 
+	APPCLUSTER("appCluster"),
+	APPSEVNAME("appServerName"),
+	BPMCONFLOG("bpmConfLog"),
+	BPMLOGFDR("bpmLogFolder"), //will also retrieve all BPM server logs under this folder
+	BPMLOGSAV("bpmLogSavePathes"),
 	BPMPATH("bpmPath"),
+	CELLNAME("cellName"),
+	CEUSERNAME("cellUserName"),
+	CEUSERPWD("cellUserPwd"),
+	CONTEXTROOT("contextRoot"),
 	DENAME("deName"),
 	DEUSERNAME("deUserName"), 
 	DEUSERPWD("deUserPwd"), 
-	CEUSERNAME("cellUserName"),
-	CEUSERPWD("cellUserPwd"),
 	DMGRPROF("dmgrProfile"),
-	CELLNAME("cellName"),
-	NODEPROF("nodeProfile"),
-	NODENAMES("nodeNames"),
-	TOPTYPE("topologyType"),
-	APPSEVNAME("appServerName"),
 	LOGFOLDER("autoLogFolder"), //ic auto mation log folder
-	BPMLOGFDR("bpmLogFolder"), //will also retrieve all BPM server logs under this folder
-	BPMLOGSAV("bpmLogSavePathes"),
-	BPMCONFLOG("bpmConfLog");
+	NODEPROF("nodeProfile"),
+	NODES("nodes"),
+	TOPTYPE("topologyType");
 	
 	private Configurations(String k) {
 		key = k;

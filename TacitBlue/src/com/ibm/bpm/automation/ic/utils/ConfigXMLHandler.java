@@ -5,42 +5,64 @@
  */
 package com.ibm.bpm.automation.ic.utils;
 
-import org.xml.sax.Attributes;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.logging.Logger;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ConfigXMLHandler extends DefaultHandler {
 
-	@Override
-	public void characters(char[] arg0, int arg1, int arg2) throws SAXException {
-		// TODO Auto-generated method stub
-		super.characters(arg0, arg1, arg2);
+public class ConfigXMLHandler {
+	
+	private static final String CLASSNAME = ConfigXMLHandler.class.getName();
+	private static Logger logger = LogUtil.getLogger(CLASSNAME);
+	
+	private String xpathString;
+	private String filename;
+	
+	public ConfigXMLHandler(String filename, String xpath) {
+		this.xpathString = xpath;
+		this.filename = filename;
 	}
-
-	@Override
-	public void endDocument() throws SAXException {
-		// TODO Auto-generated method stub
-		super.endDocument();
+	
+	public NodeList evaluate() throws ParserConfigurationException, 
+	IOException, SAXException, XPathExpressionException {
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+		domFactory.setNamespaceAware(false);
+		domFactory.setValidating(false);
+		DocumentBuilder builder = domFactory.newDocumentBuilder();
+		builder.setEntityResolver(
+				new EntityResolver() {
+					 public InputSource resolveEntity(String publicId, String systemId)   
+							 throws SAXException, IOException {
+						 return new InputSource(new StringReader(""));
+					 }
+				}
+		);
+		Document doc = builder.parse(filename);
+		
+		XPathFactory factory = XPathFactory.newInstance();
+	    XPath xpath = factory.newXPath();
+	    XPathExpression expr = xpath.compile(xpathString);
+	    
+	    Object result = expr.evaluate(doc, XPathConstants.NODESET);
+	    NodeList nodes = (NodeList) result;
+	    
+	    return nodes;
 	}
-
-	@Override
-	public void endElement(String arg0, String arg1, String arg2)
-			throws SAXException {
-		// TODO Auto-generated method stub
-		super.endElement(arg0, arg1, arg2);
-	}
-
-	@Override
-	public void startDocument() throws SAXException {
-		// TODO Auto-generated method stub
-		super.startDocument();
-	}
-
-	@Override
-	public void startElement(String arg0, String arg1, String arg2,
-			Attributes arg3) throws SAXException {
-		// TODO Auto-generated method stub
-		super.startElement(arg0, arg1, arg2, arg3);
-	}
+	
 
 }

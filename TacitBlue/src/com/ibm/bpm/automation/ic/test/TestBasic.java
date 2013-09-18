@@ -8,21 +8,70 @@ package com.ibm.bpm.automation.ic.test;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.utils.CommandUtil;
+import com.ibm.bpm.automation.ic.utils.ConfigXMLHandler;
+import com.ibm.bpm.automation.ic.wasconfig.Application;
+import com.ibm.bpm.automation.ic.wasconfig.ServerIndex;
 
 public class TestBasic {
 
-	public static void main(String[] args) {
-		List<String> cmds = new ArrayList<String>();
+	public static void main(String[] args) throws Exception{
+		
+		/*System.out.println(ServerIndex.getWCDefaultHostPort(
+				"D:\\Bkups\\Work\\Automation\\com.18m.auto.ic\\TacitBlue\\outputs\\serverindex.xml", 
+				ServerIndex.XPATH_WCDEFHOST));*/
+		
+		HashMap<String, String> map = Application.getWebModuleCtxRoot("E:/bpm/85/STANDARD/deploy2/AppServer/profiles/StandAloneProfile/config/cells/nodename1Node01Cell/applications/IBM_BPM_Teamworks_nodename1_server1.ear/deployments/IBM_BPM_Teamworks_nodename1_server1/META-INF/application.xml",
+				Application.XPATH_WEBMODULE);
+		Iterator iter = map.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
+			System.out.println(entry.getKey() + ":" + entry.getValue());
+		}
+		
+		/*ConfigXMLHandler cxmlh = new ConfigXMLHandler(
+				"D:\\Bkups\\Work\\Automation\\com.18m.auto.ic\\TacitBlue\\outputs\\application.xml",
+				"//module/web");
+		
+		NodeList nodes = cxmlh.evaluate();
+		for (int i=0; i<nodes.getLength();i++) {
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			System.out.println((String)xpath.evaluate("web-uri", nodes.item(i), XPathConstants.STRING));
+		}*/
+		
+		/*HashMap<String, String> map = new HashMap<String, String>();
+		map.put("aaa", "123");
+		map.put("bbb", "456");
+		map.put("aaa", "999");
+		Iterator iter = map.entrySet().iterator();
+		while(iter.hasNext()) {
+			Map.Entry<String, String> entry = (Map.Entry<String, String>)iter.next();
+			System.out.println("key: " + entry.getKey() + ", value: " + entry.getValue());
+		}*/
+		
+		/*List<String> cmds = new ArrayList<String>();
 		String folder = "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer\\bin";
 		cmds.add("E:\\bpm\\85\\STANDARD\\deploy2\\AppServer\\bin\\wsadmin.bat");
 		cmds.add("-lang");
@@ -57,7 +106,7 @@ public class TestBasic {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 	

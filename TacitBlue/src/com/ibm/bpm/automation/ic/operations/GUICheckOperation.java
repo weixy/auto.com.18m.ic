@@ -13,9 +13,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.LogLevel;
+import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.constants.OperationParameters;
 import com.ibm.bpm.automation.ic.selenium.ProcessCenterVerification;
-import com.ibm.bpm.automation.ic.selenium.RuntimeOptions;
+import com.ibm.bpm.automation.ic.selenium.SeRuntimeOptions;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
@@ -31,25 +32,32 @@ public class GUICheckOperation extends BaseOperation {
 		// TODO Auto-generated method stub
 		super.run(config);
 		
-		RuntimeOptions runOptions = null;
+		//generate runtime option for selenium
+		SeRuntimeOptions runOptions = null;
 		String option = this.getOption();
 		if (null == option) {
-			runOptions = RuntimeOptions.getRuntimeOptions();
+			runOptions = SeRuntimeOptions.getRuntimeOptions();
 		}
 		else {
 			String optFilePath = System.getProperty("user.dir") + File.separator + TestRobot.ICAUTO_TESTCASE_PATH + File.separator + option;
 			if ((new File(optFilePath)).exists()) {
 				try {
-					runOptions = RuntimeOptions.getRuntimeOptions(optFilePath);
+					runOptions = SeRuntimeOptions.getRuntimeOptions(optFilePath);
 				} catch (AutoException e) {
 					logger.log(LogLevel.ERROR, "Failed to load runtime option file '" + optFilePath + "' when preparing for selenium.", e);
 					failedPoints++;
 				}
 			} else {
 				logger.log(LogLevel.WARNING, "The specified selenium runtime option file '" + optFilePath + "' is not existing.");
-				runOptions = RuntimeOptions.getRuntimeOptions();
+				runOptions = SeRuntimeOptions.getRuntimeOptions();
 			}
 		}
+		
+		//get ports
+		String dmgrProfileName = (String)config.get(Configurations.DMGRPROF.getKey());
+		String cellName = (String)config.get(Configurations.CELLNAME.getKey());
+		
+		
 		
 		String target = this.getType();
 		if (target != null) {

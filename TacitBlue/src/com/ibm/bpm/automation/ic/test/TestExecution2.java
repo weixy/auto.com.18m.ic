@@ -25,7 +25,7 @@ import com.ibm.bpm.automation.ic.utils.CaseXMLHandler;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.qa.automation.newobject.type.TopologyType;
 
-public class TestExecution {
+public class TestExecution2 {
 
 	private static final String CLASSNAME = TestRobot.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
@@ -102,16 +102,16 @@ public class TestExecution {
 			m.put(ExecutionContext.COLLECTED_NODE_SERVLOGPATH, nodeLogSavePathes);			
 			config.put(Configurations.BPMLOGSAV.getKey(), m);
 			
-			config.put(Configurations.APPCLUSTER.getKey(), "nodename1_server1");
-			config.put(Configurations.BPMPATH.getKey(), "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer");
+			
+			config.put(Configurations.BPMPATH.getKey(), "C:\\ibm\\bpm");
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");
 			config.put(Configurations.TOPTYPE.getKey(), TopologyType.SingleCluster.toString());
 			config.put(Configurations.DENAME.getKey(), "deicauto");
-			config.put(Configurations.DMGRPROF.getKey(), "StandAloneProfile");
-			config.put(Configurations.CELLNAME.getKey(), "nodename1Node01Cell");
+			config.put(Configurations.DMGRPROF.getKey(), "Dmgr01");
+			config.put(Configurations.CELLNAME.getKey(), "BXV7V691Cell01");
 			HashMap<String, String[]> nodes = new HashMap<String, String[]>();
-			nodes.put("nodename1", new String[] {"127.0.0.1", "localhost"});
+			nodes.put("BXV7V691Node01", new String[] {"127.0.0.1", "localhost"});
 			config.put(Configurations.NODES.getKey(), nodes);
 			//config.put(Configurations.APPSEVNAME.getKey(), "server1");
 			

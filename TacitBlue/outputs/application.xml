@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
+<application id="Application_ID">
+      <display-name>teamworks</display-name>
+      <description>LombardiSoftware Teamworks</description>
+      <module id="EjbModule_1084909887350">
+         <ejb>twcore-ejb.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887351">
+         <ejb>twprocess-ejb.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887352">
+         <ejb>twtask-ejb.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887353">
+         <ejb>office-ejb.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887359">
+         <ejb>SCAStartupBean.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887361">
+         <ejb>PALStartupBean.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887362">
+         <ejb>BPMSearchStartupBean.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887365">
+         <ejb>ServerCommandStartupBean.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887363">
+         <ejb>SharingNotificationBean.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887364">
+         <ejb>EmbeddedECMStartupBean.jar</ejb>
+      </module>
+      <module id="EjbModule_1084909887366">
+         <ejb>AtRiskTrackingBean.jar</ejb>
+      </module>
+      <module id="WebModule_1084909887354">
+         <web>
+            <web-uri>teamworks.war</web-uri>
+            <context-root>teamworks</context-root>
+         </web>
+      </module>
+	  
+      <module id="Module_1339111956277">
+         <web>
+            <web-uri>bpmwebservices.war</web-uri>
+            <context-root>teamworks/webservices</context-root>
+         </web>
+      </module>
+
+      <module id="WebModule_1339111956278">
+         <web>
+            <web-uri>teamworks-legacy.war</web-uri>
+            <context-root>teamworks.legacy</context-root>
+         </web>
+      </module>
+	  
+
+      <module id="WebModule_1084909887355">
+         <web>
+            <web-uri>eventmgr.war</web-uri>
+            <context-root>eventmgr</context-root>
+         </web>
+      </module>
+      
+      <module id="WebModule_1084909887356">
+         <web>
+            <web-uri>bpmrepo-services.war</web-uri>
+            <context-root>bpm/repo</context-root>
+         </web>
+      </module>
+
+      <module id="WebModule_1084909887357">
+         <web>
+            <web-uri>bpmrest.war</web-uri>
+            <context-root>rest/bpm/wle</context-root>
+         </web>
+      </module>
+
+      <module id="WebModule_1084909887358"> 
+         <web>
+            <web-uri>bpmfds-services.war</web-uri>
+            <context-root>bpm/fds</context-root>
+         </web>
+      </module>
+      
+      <module id="WebModule_1084909887360">
+         <web>
+            <web-uri>bpmrest-ui.war</web-uri>
+            <context-root>bpmrest-ui</context-root>
+         </web>
+      </module>
+      
+      <module id="WebModule_1084909887361">
+         <web>
+            <web-uri>webviewer.war</web-uri>
+            <context-root>WebViewer</context-root>
+         </web>
+      </module>      
+      
+      <module id="Module_1339111956276">
+         <web>
+            <web-uri>bpmasset.war</web-uri>
+            <context-root>bpmasset</context-root>
+         </web>
+      </module>
+
+      <security-role id="SecurityRole_1100803585734">
+         <role-name>twuser</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1100803585735">
+         <role-name>user</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1100803585736">
+         <role-name>twauthor</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1100803585737">
+         <role-name>twmisc</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1100803585738">
+         <role-name>twadmins</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1100803585739">
+         <role-name>twauthors</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1100803585740">
+         <role-name>twem</role-name>
+      </security-role>
+      <security-role id="SecurityRole_SDB1111">
+      	<role-name>twinternal</role-name>
+      </security-role>
+      <security-role id="SecurityRole_SDB1112">
+      	<role-name>TWSecurityProviderUsers</role-name>
+      </security-role>
+      <security-role id="SecurityRole_IF1100803585742">
+         <description></description>        
+      	<role-name>httpeventsenders</role-name>
+      </security-role>
+   </application>
