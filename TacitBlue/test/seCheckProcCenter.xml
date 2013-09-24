@@ -6,6 +6,6 @@
 		<name>CheckGUI</name>
 		<points>10</points>
 		<type>ProcessCenter</type>
-		<option>selenium.opt</option>
+		<option>seCheckProcCenter.opt</option>
 	</operation>
 </testCase>

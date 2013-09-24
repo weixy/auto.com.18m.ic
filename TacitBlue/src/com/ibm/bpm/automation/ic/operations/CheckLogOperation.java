@@ -32,7 +32,7 @@ public class CheckLogOperation extends BaseOperation {
 		String confLogPath = null;
 		StringBuffer result = new StringBuffer();
 		
-		if(OperationParameters.BPMCONFLOG.getCommand().equals(this.getType())) { // Check BPMConfig log
+		if(OperationParameters.CHECKLOG_TYP_BPMCONFLOG.getCommand().equalsIgnoreCase(this.getType())) { // Check BPMConfig log
 			if(config.containsKey(Configurations.BPMCONFLOG.getKey())) { //Just completed a BPMConfig
 				confLogPath = (String)config.get(Configurations.BPMCONFLOG.getKey());
 				confLog = new File(confLogPath);
@@ -54,9 +54,18 @@ public class CheckLogOperation extends BaseOperation {
 			result.append(analyseLog(confLog, RegularPatterns.REG_BPM_CONFIG_ERR));
 			System.out.println(result);
 			
-		} else if (OperationParameters.BPMLOG.getCommand().equals(this.getType())) { // Check BPM Server log
+		} else if (OperationParameters.CHECKLOG_TYP_BPMLOG.getCommand().equalsIgnoreCase(this.getType())) { // Check BPM Server log
 			
-			String bpmLogFolder = (String)config.get(Configurations.BPMLOGFDR.getKey());			
+			String bpmLogFolder = (String)config.get(Configurations.BPMLOGFDR.getKey());
+			File folder = new File(bpmLogFolder);
+			if (!folder.exists()) {
+				folder.mkdir();
+			}
+			else if (folder.isFile()){
+				folder.delete();
+				folder.mkdir();
+			}
+			
 			HashMap<String, Object> collectedPathes = (HashMap<String, Object>)config.get(Configurations.BPMLOGSAV.getKey());
 			String option = this.getOption();
 			
@@ -68,7 +77,7 @@ public class CheckLogOperation extends BaseOperation {
 				logger.log(LogLevel.ERROR, "The option '" + option + "' is invalid. Please check the definition in your test case.");
 				result.append("The option '" + option + "' is invalid. Please check the definition in your test case.");
 				result.append(System.getProperty("line.separator"));
-				this.failedPoints++;
+				failedPoints = getPoints();
 			} else {
 				
 				logger.log(LogLevel.INFO, "Start to collect the BPM logs from all machines ...");
@@ -105,7 +114,7 @@ public class CheckLogOperation extends BaseOperation {
 		} else { //Wrong types?
 			logger.log(LogLevel.ERROR, "Unrecognized analysis file type found: '" + this.getType() + "'.");
 			result.append("Unrecognized analysis file type found: '" + this.getType() + "'." + System.getProperty("line.separator"));
-			this.failedPoints++;
+			this.failedPoints = getPoints();
 		}
 		
 		submit(result.toString(), logger);

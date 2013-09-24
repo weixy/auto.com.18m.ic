@@ -25,6 +25,9 @@ public abstract class BaseOperation {
 	private static final String CLASSNAME = BaseOperation.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
+	public static String FAILEDPOINTS = "failedPoints";
+	public static String SUCCESSPOINTS = "successPoints";
+	
 	private String step;
 	private String name;
 	private int points;
@@ -139,10 +142,13 @@ public abstract class BaseOperation {
 		String state = null;
 		if (failedPoints != 0) {
 			state = ExecutionContext.ER_STATUS_FAILED;
-			if (failedPoints < getPoints()) {
-				failedPoints = getPoints();
+			if (failedPoints + successPoints < getPoints()) {
+				successPoints = getPoints() - failedPoints;
 			}
-			logger.log(LogLevel.ERROR, "Step '" + getStep() + "' failed with points [" + (failedPoints + successPoints) +"]!");
+			logger.log(LogLevel.ERROR, "Step '" + getStep() 
+					+ "' failed with points [Total:" + (failedPoints + successPoints) 
+					+ ", Failed:" + failedPoints 
+					+ ", Succeeded:" + successPoints + "]!");
 		}
 		else {
 			state = ExecutionContext.ER_STATUS_SUCCESSFUL;

@@ -34,12 +34,26 @@ public class SeRuntimeOptions {
 	public static String OPTION_BROWSER = "Browser";
 	public static String OPTION_FIREFOXPATH = "FirefoxBin";
 	public static String OPTION_FIREFOXPROFILE = "FirefoxProfile";
+	public static String OPTION_USESECURITY = "UseSecurity";
+	public static String OPTION_HOST = "Host";
+	public static String OPTION_PORT = "Port";
+	public static String OPTION_SEPORT = "SecurePort";
+	public static String OPTION_CTXRTPRE = "ContextRootPrefix";
+	
+	public static String OPTION_USESECURITY_DEFAULT = "true";
+	public static String OPTION_HOST_DEFAULT = "localhost";
+	public static String OPTION_PORT_DEFAULT = "9080";
+	public static String OPTION_SEPORT_DEFAULT = "9443";
+	public static String OPTION_CTXRTPRE_DEFAULT = null;
 	
 	private WebDriver webDriver;
 	private String ip;
 	private String host;
 	private String port;
 	private String securePort;
+	private boolean useSecurity;
+	private String ctxRoot;
+	
 	private SeRuntimeOptions() {}
 	
 	public WebDriver getWebDriver() {	
@@ -78,12 +92,33 @@ public class SeRuntimeOptions {
 		this.securePort = securePort;
 	}
 
+	public boolean isUseSecurity() {
+		return useSecurity;
+	}
+
+	public void setUseSecurity(boolean useSecurity) {
+		this.useSecurity = useSecurity;
+	}
+
+	public String getCtxRoot() {
+		return ctxRoot;
+	}
+
+	public void setCtxRoot(String ctxRoot) {
+		this.ctxRoot = ctxRoot;
+	}
+
 	public static SeRuntimeOptions getRuntimeOptions() {
 		logger.log(LogLevel.INFO, "Load default runtime options for selenium.");
 		if (null == runtimeOptions) {
 			synchronized(SeRuntimeOptions.class) {
 				runtimeOptions = new SeRuntimeOptions();
 				runtimeOptions.webDriver = new FirefoxDriver();
+				runtimeOptions.useSecurity = true;
+				runtimeOptions.host = OPTION_HOST_DEFAULT;
+				runtimeOptions.port = OPTION_PORT_DEFAULT;
+				runtimeOptions.securePort = OPTION_SEPORT_DEFAULT;
+				runtimeOptions.ctxRoot = OPTION_CTXRTPRE_DEFAULT;
 			}
 		}
 		return runtimeOptions;
@@ -116,16 +151,22 @@ public class SeRuntimeOptions {
 		} else if (Browsers.SAFARI.getName().equalsIgnoreCase(browserType)) {
 			runOptions.webDriver = new SafariDriver();
 		} else if (Browsers.FF.getName().equalsIgnoreCase(browserType)) {
-			String ffBinPath = prop.getProperty(OPTION_FIREFOXPATH);
 			String ffProPath = prop.getProperty(OPTION_FIREFOXPROFILE);
-			File proFile = new File(ffProPath);
 			FirefoxProfile profile = null;
-			if (proFile.exists()) {
-				profile = new FirefoxProfile(proFile);
+			if (null != ffProPath) {
+				File proFile = new File(ffProPath);
+				if (proFile.exists()) {
+					profile = new FirefoxProfile(proFile);
+					profile.setEnableNativeEvents(true);
+				}
+			} else {
+				profile = new FirefoxProfile();
 				profile.setEnableNativeEvents(true);
 			}
 			
+			String ffBinPath = prop.getProperty(OPTION_FIREFOXPATH);
 			if (null != ffBinPath) {
+				System.setProperty("webdriver.firefox.bin", "F:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 				FirefoxBinary binary = new FirefoxBinary(new File(ffBinPath));
 				runOptions.webDriver = new FirefoxDriver(binary, profile);
 			} else {
@@ -134,6 +175,22 @@ public class SeRuntimeOptions {
 		} else {
 			throw new AutoException("Unknown browser type '" + browserType + "' specified.");
 		}
+		
+		String useSec = prop.getProperty(OPTION_USESECURITY);
+		runOptions.setUseSecurity(("true".equalsIgnoreCase(useSec)) ? true : false);
+		
+		String host = prop.getProperty(OPTION_HOST);
+		runOptions.setHost((host != null) ? host : OPTION_HOST_DEFAULT);
+		
+		String port = prop.getProperty(OPTION_PORT);
+		runOptions.setPort((port != null) ? port : OPTION_PORT_DEFAULT);
+		
+		String sePort = prop.getProperty(OPTION_SEPORT);
+		runOptions.setSecurePort((sePort != null) ? sePort : OPTION_SEPORT_DEFAULT);
+		
+		String ctxRootPre = prop.getProperty(OPTION_CTXRTPRE);
+		runOptions.setCtxRoot((ctxRootPre != null) ? ctxRootPre : OPTION_CTXRTPRE_DEFAULT);
+		
 		return runOptions;
 	}
 	

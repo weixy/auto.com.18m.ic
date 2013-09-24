@@ -31,6 +31,7 @@ import org.xml.sax.SAXException;
 import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.TestCase;
 import com.ibm.bpm.automation.ic.constants.Configurations;
+import com.ibm.bpm.automation.ic.constants.OperationParameters;
 import com.ibm.bpm.automation.ic.constants.RegularPatterns;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.AutoFileFilter;
@@ -49,60 +50,96 @@ public class ManagerConfigOperation extends BaseOperation {
 		super.run(config);
 		logger.log(LogLevel.INFO, "Invoke operation '" + ManagerConfigOperation.class.getSimpleName() + "'");
 		final StringBuffer result = new StringBuffer();
-		final String contextRoot = getData();
-		final String appsFolder = getAppFolderRootPath(config);
-		System.out.println(appsFolder);
-		System.out.println((String)config.get(Configurations.APPCLUSTER.getKey()));
 		
-		logger.log(LogLevel.INFO, "Get all application names.");
-		final HashMap<String, String> appsMap = getInstalledAppList(appsFolder, (String)config.get(Configurations.APPCLUSTER.getKey()), result);
-		System.out.println(appsMap.size());		
-		
-		logger.log(LogLevel.INFO, "Get and sort application exempt list.");
-		HashMap<String, String> exemptMap = getExemptList();
-		Iterator<Map.Entry<String, String>> iter = exemptMap.entrySet().iterator();
-		while (iter.hasNext()) {
-			Map.Entry<String, String> entry = (Map.Entry<String, String>)iter.next();
-			String appName = (String) entry.getKey() + "_" + (String)config.get(Configurations.APPCLUSTER.getKey()) + ".ear";
-			String filter = (String) entry.getValue();
-			if (appsMap.containsKey(appName)) {
-				if (filter.equals("*")) {
-					appsMap.remove(appName);
-				}
-				else {
-					appsMap.put(appName, filter);
-				}
+		if (OperationParameters.MGRCONF_ACT_VALID.getAction().equalsIgnoreCase(getAction())) {
+			if (OperationParameters.MGRCONF_TYPE_CTXROOT.getType().equalsIgnoreCase(getType())) {
+				
+				result.append(managerConfigValidCtxRoot(config));
+				
+			}
+			else {
+				logger.log(LogLevel.ERROR, "Undefined type '" + getType() + "'.");
+				result.append("Undefined type '" + getType() + "'.");
+				failedPoints = getPoints();
 			}
 		}
-		
-		logger.log(LogLevel.INFO, "Check context root for apps.");
-		ExecutorService exec = Executors.newCachedThreadPool();
-		final CountDownLatch runningThreadNum = new CountDownLatch(appsMap.size());
-		Iterator<Map.Entry<String, String>> it = appsMap.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry<String, String> entry = (Map.Entry<String, String>)it.next();
-			//String appName = (String) entry.getKey();
-			//String filter = (String) entry.getValue();
-			//result.append(checkAppCtxRoots(appsFolder, appName, filter));
-			final String appName = (String) entry.getKey();
-			final String filter = (String) entry.getValue();
-			Runnable run = new Runnable() {
-				public void run() {
-					result.append(checkAppCtxRoots(appsFolder, appName, filter));
-					runningThreadNum.countDown();
-				}
-			};
-			exec.execute(run);
-		}
-		exec.shutdown();
-		try {
-			runningThreadNum.await();
-		} catch (InterruptedException e) {
-			logger.log(LogLevel.ERROR, "Met exception when waiting sub thread complete.", e);
+		else {
+			logger.log(LogLevel.ERROR, "Undefined action '" + getAction() + "'.");
+			result.append("Undefined action '" + getAction() + "'.");
+			failedPoints = getPoints();
 		}
 		
 		System.out.println(result);
 		submit(result.toString(), logger);
+	}
+	
+	public String managerConfigValidCtxRoot(HashMap<String, Object> config) {
+		final StringBuffer result = new StringBuffer();
+		final String appsFolder = Application.getAppFolderRootPath(config);
+		//System.out.println(appsFolder);
+		//System.out.println((String)config.get(Configurations.APPCLUSTER.getKey()));
+		
+		logger.log(LogLevel.INFO, "Get all application names.");
+		final HashMap<String, String> appsMap = Application.getInstalledAppList(appsFolder, (String)config.get(Configurations.APPCLUSTER.getKey()));
+		if (appsMap == null) {
+			result.append("The path of applicaiton folder you specified is wrong:" 
+			+ System.getProperty("line.separator")
+			+ appsFolder
+			+ System.getProperty("line.separator"));
+			failedPoints = getPoints();
+		}
+		else {
+			result.append("Succeed to get application list.");
+			System.out.println(appsMap.size());
+			
+			logger.log(LogLevel.INFO, "Get and sort application exempt list.");
+			HashMap<String, String> exemptMap = getExemptList();
+			Iterator<Map.Entry<String, String>> iter = exemptMap.entrySet().iterator();
+			while (iter.hasNext()) {
+				Map.Entry<String, String> entry = (Map.Entry<String, String>)iter.next();
+				String appName = (String) entry.getKey() + "_" + (String)config.get(Configurations.APPCLUSTER.getKey()) + ".ear";
+				String filter = (String) entry.getValue();
+				if (appsMap.containsKey(appName)) {
+					if (filter.equals("*")) {
+						appsMap.remove(appName);
+						result.append("Applicaiton '" + appName 
+								+ "' will be ignored" + System.getProperty("line.separator"));
+						logger.log(LogLevel.INFO, "Applicaiton '" + appName 
+								+ "' will be ignored" + System.getProperty("line.separator"));
+					}
+					else {
+						appsMap.put(appName, filter);
+					}
+				}
+			}
+			
+			logger.log(LogLevel.INFO, "Check context root for apps.");
+			ExecutorService exec = Executors.newCachedThreadPool();
+			final CountDownLatch runningThreadNum = new CountDownLatch(appsMap.size());
+			Iterator<Map.Entry<String, String>> it = appsMap.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<String, String> entry = (Map.Entry<String, String>)it.next();
+				//String appName = (String) entry.getKey();
+				//String filter = (String) entry.getValue();
+				//result.append(checkAppCtxRoots(appsFolder, appName, filter));
+				final String appName = (String) entry.getKey();
+				final String filter = (String) entry.getValue();
+				Runnable run = new Runnable() {
+					public void run() {
+						result.append(checkAppCtxRoots(appsFolder, appName, filter));
+						runningThreadNum.countDown();
+					}
+				};
+				exec.execute(run);
+			}
+			exec.shutdown();
+			try {
+				runningThreadNum.await();
+			} catch (InterruptedException e) {
+				logger.log(LogLevel.ERROR, "Met exception when waiting sub thread complete.", e);
+			}
+		}
+		return result.toString();
 	}
 	
 	public String checkAppCtxRoots(String appFolderPath, String appName, String filter) {
@@ -118,7 +155,7 @@ public class ManagerConfigOperation extends BaseOperation {
 					+ "META-INF" + File.separator
 					+ "application.xml";
 			try {
-				HashMap<String, String> webModuleMap = Application.getWebModuleCtxRoot(appFileName, Application.XPATH_WEBMODULE);
+				HashMap<String, String> webModuleMap = Application.getWebModuleCtxRoot(appFileName);
 				Iterator<Map.Entry<String, String>> it = webModuleMap.entrySet().iterator();
 				while (it.hasNext()) {
 					Map.Entry<String, String> entry = (Map.Entry<String, String>)it.next();
@@ -126,21 +163,32 @@ public class ManagerConfigOperation extends BaseOperation {
 					if (!webModule.equals(filter)) {
 						String ctxRoot = entry.getValue();
 						if (ctxRoot.startsWith("/" + this.getData() + "/")) {
-							result.append("Correct!" + System.getProperty("line.separator"));
-							logger.log(LogLevel.INFO, "Web Module '" + webModule 
-									+ "', Applicaiton '" + appName 
+							result.append(appName + ":" + webModule 
+									+ "@" + ctxRoot 
+									+ " is correct." + System.getProperty("line.separator"));
+							logger.log(LogLevel.INFO, "Applicaiton '" + appName
+									+ ", Web Module '" + webModule 
 									+ "', ContextRoot '" + ctxRoot 
 									+ "' is correct." + System.getProperty("line.separator"));
 							successPoints++;
 						}
 						else {
-							result.append("Wrong!" + System.getProperty("line.separator"));
-							logger.log(LogLevel.ERROR, "Web Module '" + webModule 
-									+ "', Applicaiton '" + appName 
+							result.append(appName + " : " + webModule 
+									+ " @ " + ctxRoot 
+									+ " is WRONG!" + System.getProperty("line.separator"));
+							logger.log(LogLevel.ERROR, "Applicaiton '" + appName 
+									+ "', Web Module '" + webModule 
 									+ "', ContextRoot '" + ctxRoot 
 									+ "' is WRONG!" + System.getProperty("line.separator"));
 							failedPoints++;
 						}
+					}
+					else {
+						result.append(appName + ":" + webModule
+								+ "' will be ignored" + System.getProperty("line.separator"));
+						logger.log(LogLevel.INFO, "Applicaiton '" + appName 
+								+ "', Web Module '" + webModule 
+								+ "' will be ignored" + System.getProperty("line.separator"));
 					}
 				}
 			} catch (Exception e) {
@@ -166,54 +214,30 @@ public class ManagerConfigOperation extends BaseOperation {
 			
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				line = line.trim();
-				String [] namePair = line.split(",");
-				map.put(namePair[0], namePair[1]);
+				if (!line.startsWith("#") && !line.startsWith("//") && !line.equals("")) {
+					line = line.trim();
+					String [] namePair = line.split(",");
+					map.put(namePair[0], namePair[1]);
+				}
 			}
 			
 		} catch (Exception e) {
 			//throw new AutoException(e);
-			logger.log(LogLevel.ERROR, "Can't find file 'appexempt.list', will analyse all apps", e);
+			logger.log(LogLevel.WARNING, "Can't find file 'appexempt.list', will analyse all apps", e);
 		} finally {
 			try {
 				br.close();
 				fr.close();
 			} catch (IOException e) {
 				//throw new AutoException(e);
-				logger.log(LogLevel.ERROR, "Got IO Exception while closing File/Buffer reader of file 'index.txt'.", e);
+				logger.log(LogLevel.WARNING, "Got IO Exception while closing File/Buffer reader of file 'index.txt'.", e);
 			}
 		}
 		return map;
 	}
 	
-	public String getAppFolderRootPath(HashMap<String, Object> config) {
-		String path = config.get(Configurations.BPMPATH.getKey()) + File.separator
-				+ "profiles" + File.separator
-				+ config.get(Configurations.DMGRPROF.getKey()) + File.separator
-				+ "config" + File.separator + "cells" + File.separator
-				+ config.get(Configurations.CELLNAME.getKey()) + File.separator
-				+ "applications";
-		
-		return path;
-	}
 	
-	public HashMap<String, String> getInstalledAppList(String appFolderPath, String clusterName, StringBuffer result) {
-		HashMap<String, String> apps = new HashMap<String, String>();
-		File appFolder = new File(appFolderPath);
-		if (appFolder.isDirectory()) {
-			File [] subFolders = appFolder.listFiles(new AutoFileFilter("_" + clusterName + "\\.ear"));
-			for (File d : subFolders) {
-				if (d.isDirectory()) {
-					apps.put(d.getName(), "-");
-				}
-			}
-			return apps;
-		}
-		else {
-			logger.log(LogLevel.ERROR, "The specified applications folder is a file, '" + appFolderPath + "'");
-			failedPoints =  getPoints();
-			return null;
-		}
-	}
+	
+	
 
 }

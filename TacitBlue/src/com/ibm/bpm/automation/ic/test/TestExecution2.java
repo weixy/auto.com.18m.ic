@@ -102,7 +102,7 @@ public class TestExecution2 {
 			m.put(ExecutionContext.COLLECTED_NODE_SERVLOGPATH, nodeLogSavePathes);			
 			config.put(Configurations.BPMLOGSAV.getKey(), m);
 			
-			
+			config.put(Configurations.APPCLUSTER.getKey(), "SingleCluster");
 			config.put(Configurations.BPMPATH.getKey(), "C:\\ibm\\bpm");
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");

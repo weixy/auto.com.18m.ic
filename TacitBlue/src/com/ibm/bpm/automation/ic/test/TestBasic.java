@@ -43,8 +43,7 @@ public class TestBasic {
 				"D:\\Bkups\\Work\\Automation\\com.18m.auto.ic\\TacitBlue\\outputs\\serverindex.xml", 
 				ServerIndex.XPATH_WCDEFHOST));*/
 		
-		HashMap<String, String> map = Application.getWebModuleCtxRoot("E:/bpm/85/STANDARD/deploy2/AppServer/profiles/StandAloneProfile/config/cells/nodename1Node01Cell/applications/IBM_BPM_Teamworks_nodename1_server1.ear/deployments/IBM_BPM_Teamworks_nodename1_server1/META-INF/application.xml",
-				Application.XPATH_WEBMODULE);
+		HashMap<String, String> map = Application.getWebModuleCtxRoot("E:/bpm/85/STANDARD/deploy2/AppServer/profiles/StandAloneProfile/config/cells/nodename1Node01Cell/applications/IBM_BPM_Teamworks_nodename1_server1.ear/deployments/IBM_BPM_Teamworks_nodename1_server1/META-INF/application.xml");
 		Iterator iter = map.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();

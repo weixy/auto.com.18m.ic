@@ -15,11 +15,13 @@ public enum OperationParameters {
 	
 	WSADMIN("wsadmin"),
 	
-	BPMCONFLOG("BPMConfigLog"),
 	STARTSERV("startServer"),
 	STOPSERV("stopServer"),
 	
-	BPMLOG("BPMLog"),
+	CHECKLOG("CheckLog"),
+	CHECKLOG_TYP_BPMCONFLOG("BPMConfigLog"),
+	CHECKLOG_TYP_BPMLOG("BPMLog"),
+	
 	//options of BPMLog
 	BPMLOG_OPT_ALL("All"),
 	BPMLOG_OPT_DMGRSERVER("BPMDmgrServerLog"),
@@ -27,6 +29,10 @@ public enum OperationParameters {
 	BPMLOG_OPT_NODESERVER("BPMNodeServerLog"),
 	BPMLOG_OPT_NODEAGENT("BPMNodeAgent"),
 	BPMLOG_OPT_NODEFFDC("BPMNodeFFDCLog"),
+	
+	MGRCONF("ManageConfig"),
+	MGRCONF_ACT_VALID("valid"),
+	MGRCONF_TYPE_CTXROOT("ContextRoot"),
 	
 	CHECKGUI("CheckGUI"),
 	CHECKGUI_TYP_PROCCENTER("ProcessCenter"),

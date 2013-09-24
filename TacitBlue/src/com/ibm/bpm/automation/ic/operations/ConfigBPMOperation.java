@@ -57,10 +57,12 @@ public class ConfigBPMOperation extends BaseOperation {
 				} else {
 					logger.log(LogLevel.WARNING, "Unsupported BPMConfig type found, please check it: '" + type + "'.");
 					result.append("Unsupported BPMConfig type found, please check it: '" + type + "'.");
+					failedPoints = getPoints();
 				}
 			} else {
 				logger.log(LogLevel.WARNING, "Unsupported BPMConfig action found, please check it: '" + action + "'.");
 				result.append("Unsupported BPMConfig action found, please check it: '" + action + "'.");
+				failedPoints = getPoints();
 			}
 			
 			//

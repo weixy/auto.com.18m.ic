@@ -9,13 +9,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import org.openqa.selenium.WebDriver;
-
 import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.LogLevel;
-import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.constants.OperationParameters;
-import com.ibm.bpm.automation.ic.selenium.ProcessCenterVerification;
+import com.ibm.bpm.automation.ic.selenium.SeProcessCenter;
 import com.ibm.bpm.automation.ic.selenium.SeRuntimeOptions;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
@@ -25,13 +22,11 @@ public class GUICheckOperation extends BaseOperation {
 	private static final String CLASSNAME = GUICheckOperation.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
-	
-	
 	@Override
 	public void run(HashMap<String, Object> config) {
 		// TODO Auto-generated method stub
 		super.run(config);
-		
+		StringBuffer result = new StringBuffer();
 		//generate runtime option for selenium
 		SeRuntimeOptions runOptions = null;
 		String option = this.getOption();
@@ -53,16 +48,18 @@ public class GUICheckOperation extends BaseOperation {
 			}
 		}
 		
-		//get ports
-		String dmgrProfileName = (String)config.get(Configurations.DMGRPROF.getKey());
-		String cellName = (String)config.get(Configurations.CELLNAME.getKey());
-		
-		
-		
 		String target = this.getType();
+		SeProcessCenter sepc = new SeProcessCenter(runOptions);
 		if (target != null) {
 			if (OperationParameters.CHECKGUI_TYP_PROCCENTER.getType().equalsIgnoreCase(target)) {
-				ProcessCenterVerification.VerifyProcessCenter(runOptions.getWebDriver());
+				//get target context root
+				try {
+					sepc.verify();
+				} catch (Exception e) {
+					logger.log(LogLevel.ERROR, "Got exception while verifying Process Center console.", e);
+					failedPoints ++;
+				}
+				
 			} else if (OperationParameters.CHECKGUI_TYP_WASADMIN.getType().equalsIgnoreCase(target)) {
 				
 			} else if (OperationParameters.CHECKGUI_TYP_PROCADMIN.getType().equalsIgnoreCase(target)) {
@@ -77,6 +74,11 @@ public class GUICheckOperation extends BaseOperation {
 			logger.log(LogLevel.ERROR, "No target web application specified.");
 			failedPoints++;
 		}
+		
+		failedPoints += sepc.failedPoints;
+		successPoints += sepc.successPoints;
+		System.out.println(result);
+		submit(result.toString(), logger);
 		
 	}
 	
