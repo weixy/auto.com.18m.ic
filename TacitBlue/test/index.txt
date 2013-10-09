@@ -3,4 +3,4 @@
 #abc.xml
 #SampleCase.xml
 #LogAnalysis.xml
-seCheckProcCenter.xml
+seCheckGUI.xml

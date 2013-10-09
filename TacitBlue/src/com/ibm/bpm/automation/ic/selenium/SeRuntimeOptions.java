@@ -38,12 +38,16 @@ public class SeRuntimeOptions {
 	public static String OPTION_HOST = "Host";
 	public static String OPTION_PORT = "Port";
 	public static String OPTION_SEPORT = "SecurePort";
+	public static String OPTION_ADMIN_PORT = "AdminPort";
+	public static String OPTION_ADMIN_SEPORT = "SecureAdminPort";
 	public static String OPTION_CTXRTPRE = "ContextRootPrefix";
 	
 	public static String OPTION_USESECURITY_DEFAULT = "true";
 	public static String OPTION_HOST_DEFAULT = "localhost";
 	public static String OPTION_PORT_DEFAULT = "9080";
 	public static String OPTION_SEPORT_DEFAULT = "9443";
+	public static String OPTION_ADMIN_PORT_DEFAULT = "9060";
+	public static String OPTION_ADMIN_SEPORT_DEFAULT = "9044";
 	public static String OPTION_CTXRTPRE_DEFAULT = null;
 	
 	private WebDriver webDriver;
@@ -51,6 +55,8 @@ public class SeRuntimeOptions {
 	private String host;
 	private String port;
 	private String securePort;
+	private String adminPort;
+	private String secureAdminPort;
 	private boolean useSecurity;
 	private String ctxRoot;
 	
@@ -92,6 +98,22 @@ public class SeRuntimeOptions {
 		this.securePort = securePort;
 	}
 
+	public String getAdminPort() {
+		return adminPort;
+	}
+
+	public void setAdminPort(String adminPort) {
+		this.adminPort = adminPort;
+	}
+
+	public String getSecureAdminPort() {
+		return secureAdminPort;
+	}
+
+	public void setSecureAdminPort(String secureAdminPort) {
+		this.secureAdminPort = secureAdminPort;
+	}
+
 	public boolean isUseSecurity() {
 		return useSecurity;
 	}
@@ -113,12 +135,19 @@ public class SeRuntimeOptions {
 		if (null == runtimeOptions) {
 			synchronized(SeRuntimeOptions.class) {
 				runtimeOptions = new SeRuntimeOptions();
-				runtimeOptions.webDriver = new FirefoxDriver();
-				runtimeOptions.useSecurity = true;
-				runtimeOptions.host = OPTION_HOST_DEFAULT;
-				runtimeOptions.port = OPTION_PORT_DEFAULT;
-				runtimeOptions.securePort = OPTION_SEPORT_DEFAULT;
-				runtimeOptions.ctxRoot = OPTION_CTXRTPRE_DEFAULT;
+				try {
+					runtimeOptions.webDriver = new FirefoxDriver();
+					runtimeOptions.useSecurity = true;
+					runtimeOptions.host = OPTION_HOST_DEFAULT;
+					runtimeOptions.port = OPTION_PORT_DEFAULT;
+					runtimeOptions.securePort = OPTION_SEPORT_DEFAULT;
+					runtimeOptions.adminPort = OPTION_ADMIN_PORT_DEFAULT;
+					runtimeOptions.secureAdminPort = OPTION_ADMIN_SEPORT_DEFAULT;
+					runtimeOptions.ctxRoot = OPTION_CTXRTPRE_DEFAULT;
+				} catch (Exception e) {
+					runtimeOptions = null;
+					logger.log(LogLevel.ERROR, "Failed to create a web driver.", e);
+				}
 			}
 		}
 		return runtimeOptions;
@@ -166,7 +195,7 @@ public class SeRuntimeOptions {
 			
 			String ffBinPath = prop.getProperty(OPTION_FIREFOXPATH);
 			if (null != ffBinPath) {
-				System.setProperty("webdriver.firefox.bin", "F:/Program Files (x86)/Mozilla Firefox/firefox.exe");
+				//System.setProperty("webdriver.firefox.bin", "F:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 				FirefoxBinary binary = new FirefoxBinary(new File(ffBinPath));
 				runOptions.webDriver = new FirefoxDriver(binary, profile);
 			} else {
@@ -187,6 +216,12 @@ public class SeRuntimeOptions {
 		
 		String sePort = prop.getProperty(OPTION_SEPORT);
 		runOptions.setSecurePort((sePort != null) ? sePort : OPTION_SEPORT_DEFAULT);
+		
+		String adminPort = prop.getProperty(OPTION_ADMIN_PORT);
+		runOptions.setAdminPort((adminPort != null) ? adminPort : OPTION_ADMIN_PORT_DEFAULT);
+		
+		String seAdminPort = prop.getProperty(OPTION_ADMIN_SEPORT);
+		runOptions.setSecureAdminPort((seAdminPort != null) ? seAdminPort : OPTION_ADMIN_SEPORT_DEFAULT);
 		
 		String ctxRootPre = prop.getProperty(OPTION_CTXRTPRE);
 		runOptions.setCtxRoot((ctxRootPre != null) ? ctxRootPre : OPTION_CTXRTPRE_DEFAULT);

@@ -18,6 +18,8 @@ public abstract class SeBPMModule {
 		successPoints = 0;
 	}
 	
+	public abstract String verify();
+	
 	public String getURL() {
 		String url = null;
 		

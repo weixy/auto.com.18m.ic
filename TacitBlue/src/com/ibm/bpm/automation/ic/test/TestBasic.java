@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,16 +40,19 @@ public class TestBasic {
 
 	public static void main(String[] args) throws Exception{
 		
+		String filename = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS%1$tL", new Date());
+		System.out.println(filename);
+		
 		/*System.out.println(ServerIndex.getWCDefaultHostPort(
 				"D:\\Bkups\\Work\\Automation\\com.18m.auto.ic\\TacitBlue\\outputs\\serverindex.xml", 
 				ServerIndex.XPATH_WCDEFHOST));*/
 		
-		HashMap<String, String> map = Application.getWebModuleCtxRoot("E:/bpm/85/STANDARD/deploy2/AppServer/profiles/StandAloneProfile/config/cells/nodename1Node01Cell/applications/IBM_BPM_Teamworks_nodename1_server1.ear/deployments/IBM_BPM_Teamworks_nodename1_server1/META-INF/application.xml");
+		/*HashMap<String, String> map = Application.getWebModuleCtxRoot("E:/bpm/85/STANDARD/deploy2/AppServer/profiles/StandAloneProfile/config/cells/nodename1Node01Cell/applications/IBM_BPM_Teamworks_nodename1_server1.ear/deployments/IBM_BPM_Teamworks_nodename1_server1/META-INF/application.xml");
 		Iterator iter = map.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
 			System.out.println(entry.getKey() + ":" + entry.getValue());
-		}
+		}*/
 		
 		/*ConfigXMLHandler cxmlh = new ConfigXMLHandler(
 				"D:\\Bkups\\Work\\Automation\\com.18m.auto.ic\\TacitBlue\\outputs\\application.xml",

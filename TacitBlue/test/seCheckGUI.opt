@@ -1,4 +1,6 @@
 Browser=Firefox
 FirefoxBin=F:/Program Files (x86)/Mozilla Firefox/firefox.exe
 #FirefoxProfile=C:/Users/IBM_ADMIN/AppData/Roaming/Mozilla/Firefox/Profiles/2ziq4yrx.default
+AdminPort=9061
+SecureAdminPort=9044
 UseSecurity=false

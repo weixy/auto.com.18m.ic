@@ -5,7 +5,7 @@
 	<operation step="Verify ProcessControl page">
 		<name>CheckGUI</name>
 		<points>10</points>
-		<type>ProcessCenter</type>
-		<option>seCheckProcCenter.opt</option>
+		<type>WASAdmin</type>
+		<option>seCheckGUI.opt</option>
 	</operation>
 </testCase>

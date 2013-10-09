@@ -12,8 +12,11 @@ import java.util.logging.Logger;
 import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.LogLevel;
 import com.ibm.bpm.automation.ic.constants.OperationParameters;
+import com.ibm.bpm.automation.ic.selenium.SeBPMModule;
+import com.ibm.bpm.automation.ic.selenium.SeProcessAdmin;
 import com.ibm.bpm.automation.ic.selenium.SeProcessCenter;
 import com.ibm.bpm.automation.ic.selenium.SeRuntimeOptions;
+import com.ibm.bpm.automation.ic.selenium.SeWASAdmin;
 import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 
@@ -39,34 +42,51 @@ public class GUICheckOperation extends BaseOperation {
 				try {
 					runOptions = SeRuntimeOptions.getRuntimeOptions(optFilePath);
 				} catch (AutoException e) {
+					result.append("Failed to load runtime option file '" 
+							+ optFilePath + "' when preparing for selenium."
+							+ System.getProperty("line.separator"));
 					logger.log(LogLevel.ERROR, "Failed to load runtime option file '" + optFilePath + "' when preparing for selenium.", e);
-					failedPoints++;
+					failedPoints ++;
 				}
 			} else {
+				result.append("The specified selenium runtime option file '" 
+						+ optFilePath + "' is not existing."
+						+ System.getProperty("line.separator"));
 				logger.log(LogLevel.WARNING, "The specified selenium runtime option file '" + optFilePath + "' is not existing.");
 				runOptions = SeRuntimeOptions.getRuntimeOptions();
 			}
 		}
 		
+		if (null == runOptions) {
+			result.append("Failed to load runtime option." + System.getProperty("line.separator"));
+			logger.log(LogLevel.ERROR, "Failed to load runtime option.");
+			failedPoints ++;
+			submit(result.toString(), logger);
+			return;
+		}
+		
 		String target = this.getType();
-		SeProcessCenter sepc = new SeProcessCenter(runOptions);
 		if (target != null) {
 			if (OperationParameters.CHECKGUI_TYP_PROCCENTER.getType().equalsIgnoreCase(target)) {
-				//get target context root
-				try {
-					sepc.verify();
-				} catch (Exception e) {
-					logger.log(LogLevel.ERROR, "Got exception while verifying Process Center console.", e);
-					failedPoints ++;
-				}
-				
+				SeProcessCenter spc = new SeProcessCenter(runOptions);
+				result.append(spc.verify());
+				failedPoints += spc.failedPoints;
+				successPoints += spc.successPoints;
 			} else if (OperationParameters.CHECKGUI_TYP_WASADMIN.getType().equalsIgnoreCase(target)) {
-				
+				SeWASAdmin swa = new SeWASAdmin(runOptions);
+				result.append(swa.verify());
+				failedPoints += swa.failedPoints;
+				successPoints += swa.successPoints;
 			} else if (OperationParameters.CHECKGUI_TYP_PROCADMIN.getType().equalsIgnoreCase(target)) {
-				
+				SeProcessAdmin spa = new SeProcessAdmin(runOptions);
+				result.append(spa.verify());
+				failedPoints += spa.failedPoints;
+				successPoints += spa.successPoints;
 			} else if (OperationParameters.CHECKGUI_TYP_PROCPORTAL.getType().equalsIgnoreCase(target)) {
 				
 			} else {
+				result.append("Unsupported target web application specified: '" + target + "'" 
+						+ System.getProperty("line.separator"));
 				logger.log(LogLevel.ERROR, "Unsupported target web application specified: '" + target + "'");
 				failedPoints++;
 			}
@@ -75,8 +95,6 @@ public class GUICheckOperation extends BaseOperation {
 			failedPoints++;
 		}
 		
-		failedPoints += sepc.failedPoints;
-		successPoints += sepc.successPoints;
 		System.out.println(result);
 		submit(result.toString(), logger);
 		
