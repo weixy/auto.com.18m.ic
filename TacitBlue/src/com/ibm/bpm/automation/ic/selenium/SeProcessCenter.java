@@ -43,7 +43,7 @@ public class SeProcessCenter extends SeBPMModule {
 			successPoints ++;
 			
 			LoginPanel lgPanel = new LoginPanel(driver);
-			lgPanel.login("celladmin", "celladmin");
+			lgPanel.login(options.getLoginUserName(), options.getLoginUserPwd());
 			result.append("Login Process Center ..." + System.getProperty("line.separator"));
 			successPoints ++;
 			

@@ -7,12 +7,13 @@ package com.ibm.bpm.automation.ic.operations;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.ibm.bpm.automation.ic.AutoException;
 import com.ibm.bpm.automation.ic.LogLevel;
+import com.ibm.bpm.automation.ic.constants.Configurations;
 import com.ibm.bpm.automation.ic.constants.OperationParameters;
-import com.ibm.bpm.automation.ic.selenium.SeBPMModule;
 import com.ibm.bpm.automation.ic.selenium.SeProcessAdmin;
 import com.ibm.bpm.automation.ic.selenium.SeProcessCenter;
 import com.ibm.bpm.automation.ic.selenium.SeRuntimeOptions;
@@ -25,6 +26,7 @@ public class GUICheckOperation extends BaseOperation {
 	private static final String CLASSNAME = GUICheckOperation.class.getName();
 	private static Logger logger = LogUtil.getLogger(CLASSNAME);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run(HashMap<String, Object> config) {
 		// TODO Auto-generated method stub
@@ -64,6 +66,10 @@ public class GUICheckOperation extends BaseOperation {
 			submit(result.toString(), logger);
 			return;
 		}
+		
+		runOptions.setLoginUserName((String)config.get(Configurations.CEUSERNAME.getKey()));
+		runOptions.setLoginUserPwd((String)config.get(Configurations.CEUSERPWD.getKey()));
+		runOptions.setClusterNames((List<String>)config.get(Configurations.CLUSTERS.getKey()));
 		
 		String target = this.getType();
 		if (target != null) {

@@ -109,9 +109,8 @@ public class ConfigBPMOperation extends BaseOperation {
 		}
 		
 		
-		File confLog = BPMConfigUtil.findBPMConfigLog(config);
-		
-		result.append(analyseLog(confLog, RegularPatterns.REG_BPM_CONFIG_ERR));
+		//File confLog = BPMConfigUtil.findBPMConfigLog(config);
+		//result.append(analyseLog(confLog, RegularPatterns.REG_BPM_CONFIG_ERR));
 		System.out.println(result);
 		
 		submit(result.toString(), logger);

@@ -43,6 +43,7 @@ public class TestBasic {
 		String filename = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS%1$tL", new Date());
 		System.out.println(filename);
 		
+		
 		/*System.out.println(ServerIndex.getWCDefaultHostPort(
 				"D:\\Bkups\\Work\\Automation\\com.18m.auto.ic\\TacitBlue\\outputs\\serverindex.xml", 
 				ServerIndex.XPATH_WCDEFHOST));*/

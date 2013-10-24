@@ -23,6 +23,7 @@ import com.ibm.bpm.automation.ic.tap.TestRobot;
 import com.ibm.bpm.automation.ic.utils.LogUtil;
 import com.ibm.bpm.automation.ic.utils.CaseXMLHandler;
 import com.ibm.bpm.automation.tap.adapter.AutomationService;
+import com.ibm.bpm.qa.automation.newobject.Cluster;
 import com.ibm.bpm.qa.automation.newobject.type.TopologyType;
 
 public class TestExecution {
@@ -103,6 +104,14 @@ public class TestExecution {
 			config.put(Configurations.BPMLOGSAV.getKey(), m);
 			
 			config.put(Configurations.APPCLUSTER.getKey(), "nodename1_server1");
+			List<String> clusterNames = new ArrayList<String>();
+			//clusterNames.add("SingleCluster");
+			clusterNames.add("AppCluster");
+			clusterNames.add("MECluster");
+			clusterNames.add("SupCluster");
+			
+			config.put(Configurations.CLUSTERS.getKey(), clusterNames);
+			
 			config.put(Configurations.BPMPATH.getKey(), "E:\\bpm\\85\\STANDARD\\deploy2\\AppServer");
 			config.put(Configurations.CEUSERNAME.getKey(), "admin");
 			config.put(Configurations.CEUSERPWD.getKey(), "admin");

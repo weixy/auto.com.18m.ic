@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -59,6 +60,10 @@ public class SeRuntimeOptions {
 	private String secureAdminPort;
 	private boolean useSecurity;
 	private String ctxRoot;
+	private String loginUserName;
+	private String loginUserPwd;
+	
+	private List<String> clusterNames;
 	
 	private SeRuntimeOptions() {}
 	
@@ -128,6 +133,30 @@ public class SeRuntimeOptions {
 
 	public void setCtxRoot(String ctxRoot) {
 		this.ctxRoot = ctxRoot;
+	}
+
+	public String getLoginUserName() {
+		return loginUserName;
+	}
+
+	public void setLoginUserName(String loginUserName) {
+		this.loginUserName = loginUserName;
+	}
+
+	public String getLoginUserPwd() {
+		return loginUserPwd;
+	}
+
+	public void setLoginUserPwd(String loginUserPwd) {
+		this.loginUserPwd = loginUserPwd;
+	}
+
+	public List<String> getClusterNames() {
+		return clusterNames;
+	}
+
+	public void setClusterNames(List<String> clusterNames) {
+		this.clusterNames = clusterNames;
 	}
 
 	public static SeRuntimeOptions getRuntimeOptions() {

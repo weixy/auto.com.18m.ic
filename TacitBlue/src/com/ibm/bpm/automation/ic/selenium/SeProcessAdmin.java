@@ -43,7 +43,7 @@ public class SeProcessAdmin extends SeBPMModule {
 			successPoints ++;
 			
 			LoginPanel lgPanel = new LoginPanel(driver);
-			lgPanel.login("celladmin", "celladmin");
+			lgPanel.login(options.getLoginUserName(), options.getLoginUserPwd());
 			result.append("Login Process Admin ..." + System.getProperty("line.separator"));
 			successPoints ++;
 			

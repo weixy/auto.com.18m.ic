@@ -16,6 +16,7 @@ public enum Configurations {
 	CELLNAME("cellName"),
 	CEUSERNAME("cellUserName"),
 	CEUSERPWD("cellUserPwd"),
+	CLUSTERS("clusters"),
 	CONTEXTROOT("contextRoot"),
 	DENAME("deName"),
 	DEUSERNAME("deUserName"), 

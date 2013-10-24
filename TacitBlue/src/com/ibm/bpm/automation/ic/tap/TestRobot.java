@@ -26,6 +26,7 @@ import com.ibm.bpm.automation.tap.adapter.AutomationService;
 import com.ibm.bpm.automation.tap.adapter.IScenarioStarter;
 import com.ibm.bpm.automation.tap.automationobjects.Environment;
 import com.ibm.bpm.automation.tap.automationobjects.Machine;
+import com.ibm.bpm.qa.automation.newobject.Cluster;
 import com.ibm.bpm.qa.automation.newobject.Node;
 import com.ibm.bpm.qa.automation.newobject.type.TopologyType;
 
@@ -99,6 +100,13 @@ public class TestRobot implements IScenarioStarter{
 			ExecutionContext.getExecutionContext().setAutomationService(autoService);
 			
 			config.put(Configurations.APPCLUSTER.getKey(), curEnv.getTopology().getAppCluster().getClusterName());
+			Cluster[] clusters = curEnv.getTopology().getClusters();
+			List<String> clusterNames = new ArrayList<String>();
+			for(Cluster c : clusters) {
+				clusterNames.add(c.getClusterName());
+			}
+			config.put(Configurations.CLUSTERS.getKey(), clusterNames);
+			
 			config.put(Configurations.DENAME.getKey(), curEnv.getTopology().getName());
 			config.put(Configurations.DMGRPROF.getKey(), curEnv.getManageProfileName());
 			config.put(Configurations.CELLNAME.getKey(), curEnv.getCellName());
